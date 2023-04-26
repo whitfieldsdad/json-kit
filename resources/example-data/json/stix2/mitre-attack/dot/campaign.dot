@@ -1,0 +1,59 @@
+digraph {
+    graph [rankdir=LR]
+    "id" [label="id"]
+    "objects" [label="objects[]"]
+    "objects.aliases" [label="aliases[]"]
+    "objects.created" [label="created"]
+    "objects.created_by_ref" [label="created_by_ref"]
+    "objects.description" [label="description"]
+    "objects.external_references" [label="external_references[]"]
+    "objects.external_references.description" [label="description"]
+    "objects.external_references.external_id" [label="external_id"]
+    "objects.external_references.source_name" [label="source_name"]
+    "objects.external_references.url" [label="url"]
+    "objects.first_seen" [label="first_seen"]
+    "objects.id" [label="id"]
+    "objects.last_seen" [label="last_seen"]
+    "objects.modified" [label="modified"]
+    "objects.name" [label="name"]
+    "objects.object_marking_refs" [label="object_marking_refs[]"]
+    "objects.revoked" [label="revoked"]
+    "objects.type" [label="type"]
+    "objects.x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"]
+    "objects.x_mitre_deprecated" [label="x_mitre_deprecated"]
+    "objects.x_mitre_domains" [label="x_mitre_domains[]"]
+    "objects.x_mitre_first_seen_citation" [label="x_mitre_first_seen_citation"]
+    "objects.x_mitre_last_seen_citation" [label="x_mitre_last_seen_citation"]
+    "objects.x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"]
+    "objects.x_mitre_version" [label="x_mitre_version"]
+    "spec_version" [label="spec_version"]
+    "type" [label="type"]
+    "properties" -> "type"
+    "properties" -> "id"
+    "properties" -> "spec_version"
+    "properties" -> "objects"
+    "objects" -> "objects.modified"
+    "objects" -> "objects.name"
+    "objects" -> "objects.description"
+    "objects" -> "objects.aliases"
+    "objects" -> "objects.first_seen"
+    "objects" -> "objects.last_seen"
+    "objects" -> "objects.x_mitre_first_seen_citation"
+    "objects" -> "objects.x_mitre_last_seen_citation"
+    "objects" -> "objects.x_mitre_deprecated"
+    "objects" -> "objects.x_mitre_version"
+    "objects" -> "objects.type"
+    "objects" -> "objects.id"
+    "objects" -> "objects.created"
+    "objects" -> "objects.created_by_ref"
+    "objects" -> "objects.revoked"
+    "objects" -> "objects.external_references"
+    "objects" -> "objects.object_marking_refs"
+    "objects" -> "objects.x_mitre_attack_spec_version"
+    "objects" -> "objects.x_mitre_modified_by_ref"
+    "objects" -> "objects.x_mitre_domains"
+    "objects.external_references" -> "objects.external_references.source_name"
+    "objects.external_references" -> "objects.external_references.url"
+    "objects.external_references" -> "objects.external_references.external_id"
+    "objects.external_references" -> "objects.external_references.description"
+}

@@ -1,0 +1,49 @@
+digraph {
+    graph [rankdir=LR]
+    "id" [label="id"]
+    "objects" [label="objects[]"]
+    "objects.created" [label="created"]
+    "objects.created_by_ref" [label="created_by_ref"]
+    "objects.description" [label="description"]
+    "objects.external_references" [label="external_references[]"]
+    "objects.external_references.description" [label="description"]
+    "objects.external_references.external_id" [label="external_id"]
+    "objects.external_references.source_name" [label="source_name"]
+    "objects.external_references.url" [label="url"]
+    "objects.id" [label="id"]
+    "objects.modified" [label="modified"]
+    "objects.name" [label="name"]
+    "objects.object_marking_refs" [label="object_marking_refs[]"]
+    "objects.spec_version" [label="spec_version"]
+    "objects.type" [label="type"]
+    "objects.x_capec_abstraction" [label="x_capec_abstraction"]
+    "objects.x_capec_child_of_refs" [label="x_capec_child_of_refs[]"]
+    "objects.x_capec_domains" [label="x_capec_domains[]"]
+    "objects.x_capec_parent_of_refs" [label="x_capec_parent_of_refs[]"]
+    "objects.x_capec_status" [label="x_capec_status"]
+    "objects.x_capec_version" [label="x_capec_version"]
+    "type" [label="type"]
+    "properties" -> "id"
+    "properties" -> "objects"
+    "properties" -> "type"
+    "objects" -> "objects.created"
+    "objects" -> "objects.created_by_ref"
+    "objects" -> "objects.description"
+    "objects" -> "objects.external_references"
+    "objects" -> "objects.id"
+    "objects" -> "objects.modified"
+    "objects" -> "objects.name"
+    "objects" -> "objects.object_marking_refs"
+    "objects" -> "objects.spec_version"
+    "objects" -> "objects.type"
+    "objects" -> "objects.x_capec_abstraction"
+    "objects" -> "objects.x_capec_child_of_refs"
+    "objects" -> "objects.x_capec_domains"
+    "objects" -> "objects.x_capec_parent_of_refs"
+    "objects" -> "objects.x_capec_status"
+    "objects" -> "objects.x_capec_version"
+    "objects.external_references" -> "objects.external_references.external_id"
+    "objects.external_references" -> "objects.external_references.source_name"
+    "objects.external_references" -> "objects.external_references.url"
+    "objects.external_references" -> "objects.external_references.description"
+}

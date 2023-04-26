@@ -1,0 +1,43 @@
+digraph {
+    graph [rankdir=LR]
+    "id" [label="id"]
+    "objects" [label="objects[]"]
+    "objects.created" [label="created"]
+    "objects.created_by_ref" [label="created_by_ref"]
+    "objects.description" [label="description"]
+    "objects.external_references" [label="external_references[]"]
+    "objects.external_references.external_id" [label="external_id"]
+    "objects.external_references.source_name" [label="source_name"]
+    "objects.external_references.url" [label="url"]
+    "objects.id" [label="id"]
+    "objects.modified" [label="modified"]
+    "objects.name" [label="name"]
+    "objects.object_marking_refs" [label="object_marking_refs[]"]
+    "objects.tactic_refs" [label="tactic_refs[]"]
+    "objects.type" [label="type"]
+    "objects.x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"]
+    "objects.x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"]
+    "objects.x_mitre_version" [label="x_mitre_version"]
+    "spec_version" [label="spec_version"]
+    "type" [label="type"]
+    "properties" -> "type"
+    "properties" -> "id"
+    "properties" -> "spec_version"
+    "properties" -> "objects"
+    "objects" -> "objects.tactic_refs"
+    "objects" -> "objects.object_marking_refs"
+    "objects" -> "objects.id"
+    "objects" -> "objects.type"
+    "objects" -> "objects.created"
+    "objects" -> "objects.created_by_ref"
+    "objects" -> "objects.external_references"
+    "objects" -> "objects.modified"
+    "objects" -> "objects.name"
+    "objects" -> "objects.description"
+    "objects" -> "objects.x_mitre_version"
+    "objects" -> "objects.x_mitre_attack_spec_version"
+    "objects" -> "objects.x_mitre_modified_by_ref"
+    "objects.external_references" -> "objects.external_references.external_id"
+    "objects.external_references" -> "objects.external_references.source_name"
+    "objects.external_references" -> "objects.external_references.url"
+}

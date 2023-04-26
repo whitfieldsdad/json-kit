@@ -1,0 +1,31 @@
+digraph {
+    graph [rankdir=LR]
+    "id" [label="id"]
+    "objects" [label="objects[]"]
+    "objects.created" [label="created"]
+    "objects.created_by_ref" [label="created_by_ref"]
+    "objects.id" [label="id"]
+    "objects.modified" [label="modified"]
+    "objects.object_marking_refs" [label="object_marking_refs[]"]
+    "objects.relationship_type" [label="relationship_type"]
+    "objects.source_ref" [label="source_ref"]
+    "objects.spec_version" [label="spec_version"]
+    "objects.target_ref" [label="target_ref"]
+    "objects.type" [label="type"]
+    "objects.x_capec_version" [label="x_capec_version"]
+    "type" [label="type"]
+    "properties" -> "id"
+    "properties" -> "objects"
+    "properties" -> "type"
+    "objects" -> "objects.created"
+    "objects" -> "objects.created_by_ref"
+    "objects" -> "objects.id"
+    "objects" -> "objects.modified"
+    "objects" -> "objects.object_marking_refs"
+    "objects" -> "objects.relationship_type"
+    "objects" -> "objects.source_ref"
+    "objects" -> "objects.spec_version"
+    "objects" -> "objects.target_ref"
+    "objects" -> "objects.type"
+    "objects" -> "objects.x_capec_version"
+}
