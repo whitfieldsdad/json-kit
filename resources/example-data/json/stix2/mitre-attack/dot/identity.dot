@@ -1,25 +1,17 @@
 digraph {
     graph [rankdir=LR]
+    "created" [label="created"]
     "id" [label="id"]
-    "objects" [label="objects[]"]
-    "objects.created" [label="created"]
-    "objects.id" [label="id"]
-    "objects.identity_class" [label="identity_class"]
-    "objects.modified" [label="modified"]
-    "objects.name" [label="name"]
-    "objects.object_marking_refs" [label="object_marking_refs[]"]
-    "objects.type" [label="type"]
-    "spec_version" [label="spec_version"]
+    "identity_class" [label="identity_class"]
+    "modified" [label="modified"]
+    "name" [label="name"]
+    "object_marking_refs" [label="object_marking_refs[]"]
     "type" [label="type"]
-    "properties" -> "type"
+    "properties" -> "object_marking_refs"
     "properties" -> "id"
-    "properties" -> "spec_version"
-    "properties" -> "objects"
-    "objects" -> "objects.object_marking_refs"
-    "objects" -> "objects.id"
-    "objects" -> "objects.type"
-    "objects" -> "objects.identity_class"
-    "objects" -> "objects.created"
-    "objects" -> "objects.modified"
-    "objects" -> "objects.name"
+    "properties" -> "type"
+    "properties" -> "identity_class"
+    "properties" -> "created"
+    "properties" -> "modified"
+    "properties" -> "name"
 }

@@ -32,6 +32,12 @@ To update the `requirements.txt` file, run:
 make requirements
 ```
 
+To regenerate example data:
+
+```bash
+make example-data
+```
+
 ## Usage
 
 ### JSON to JSON Schema

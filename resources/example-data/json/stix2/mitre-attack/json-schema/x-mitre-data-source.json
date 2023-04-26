@@ -2,136 +2,113 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "modified": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "x_mitre_platforms": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "x_mitre_deprecated": {
+            "type": "boolean"
+        },
+        "x_mitre_domains": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "x_mitre_version": {
+            "type": "string"
+        },
+        "x_mitre_contributors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "x_mitre_collection_layers": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "type": {
             "type": "string"
         },
         "id": {
             "type": "string"
         },
-        "spec_version": {
+        "created": {
             "type": "string"
         },
-        "objects": {
+        "created_by_ref": {
+            "type": "string"
+        },
+        "revoked": {
+            "type": "boolean"
+        },
+        "external_references": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "modified": {
+                    "source_name": {
                         "type": "string"
                     },
-                    "name": {
+                    "url": {
                         "type": "string"
                     },
-                    "description": {
-                        "type": "string"
-                    },
-                    "x_mitre_platforms": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "x_mitre_deprecated": {
-                        "type": "boolean"
-                    },
-                    "x_mitre_domains": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "x_mitre_version": {
-                        "type": "string"
-                    },
-                    "x_mitre_contributors": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "x_mitre_collection_layers": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "created": {
-                        "type": "string"
-                    },
-                    "created_by_ref": {
-                        "type": "string"
-                    },
-                    "revoked": {
-                        "type": "boolean"
-                    },
-                    "external_references": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "source_name": {
-                                    "type": "string"
-                                },
-                                "url": {
-                                    "type": "string"
-                                },
-                                "external_id": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "external_id",
-                                "source_name",
-                                "url"
-                            ]
-                        }
-                    },
-                    "object_marking_refs": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "x_mitre_attack_spec_version": {
-                        "type": "string"
-                    },
-                    "x_mitre_modified_by_ref": {
+                    "external_id": {
                         "type": "string"
                     }
                 },
                 "required": [
-                    "created",
-                    "created_by_ref",
-                    "description",
-                    "external_references",
-                    "id",
-                    "modified",
-                    "name",
-                    "object_marking_refs",
-                    "revoked",
-                    "type",
-                    "x_mitre_attack_spec_version",
-                    "x_mitre_collection_layers",
-                    "x_mitre_contributors",
-                    "x_mitre_deprecated",
-                    "x_mitre_domains",
-                    "x_mitre_modified_by_ref",
-                    "x_mitre_platforms",
-                    "x_mitre_version"
+                    "external_id",
+                    "source_name",
+                    "url"
                 ]
             }
+        },
+        "object_marking_refs": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "x_mitre_attack_spec_version": {
+            "type": "string"
+        },
+        "x_mitre_modified_by_ref": {
+            "type": "string"
         }
     },
     "required": [
+        "created",
+        "created_by_ref",
+        "description",
+        "external_references",
         "id",
-        "objects",
-        "spec_version",
-        "type"
+        "modified",
+        "name",
+        "object_marking_refs",
+        "revoked",
+        "type",
+        "x_mitre_attack_spec_version",
+        "x_mitre_collection_layers",
+        "x_mitre_contributors",
+        "x_mitre_deprecated",
+        "x_mitre_domains",
+        "x_mitre_modified_by_ref",
+        "x_mitre_platforms",
+        "x_mitre_version"
     ]
 }

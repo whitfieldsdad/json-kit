@@ -2,107 +2,84 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "type": {
-            "type": "string"
+        "tactic_refs": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "object_marking_refs": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         },
         "id": {
             "type": "string"
         },
-        "spec_version": {
+        "type": {
             "type": "string"
         },
-        "objects": {
+        "created": {
+            "type": "string"
+        },
+        "created_by_ref": {
+            "type": "string"
+        },
+        "external_references": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "tactic_refs": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "object_marking_refs": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "id": {
+                    "external_id": {
                         "type": "string"
                     },
-                    "type": {
+                    "source_name": {
                         "type": "string"
                     },
-                    "created": {
-                        "type": "string"
-                    },
-                    "created_by_ref": {
-                        "type": "string"
-                    },
-                    "external_references": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "external_id": {
-                                    "type": "string"
-                                },
-                                "source_name": {
-                                    "type": "string"
-                                },
-                                "url": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "external_id",
-                                "source_name",
-                                "url"
-                            ]
-                        }
-                    },
-                    "modified": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "x_mitre_version": {
-                        "type": "string"
-                    },
-                    "x_mitre_attack_spec_version": {
-                        "type": "string"
-                    },
-                    "x_mitre_modified_by_ref": {
+                    "url": {
                         "type": "string"
                     }
                 },
                 "required": [
-                    "created",
-                    "created_by_ref",
-                    "description",
-                    "external_references",
-                    "id",
-                    "modified",
-                    "name",
-                    "object_marking_refs",
-                    "tactic_refs",
-                    "type",
-                    "x_mitre_attack_spec_version",
-                    "x_mitre_modified_by_ref",
-                    "x_mitre_version"
+                    "external_id",
+                    "source_name",
+                    "url"
                 ]
             }
+        },
+        "modified": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "x_mitre_version": {
+            "type": "string"
+        },
+        "x_mitre_attack_spec_version": {
+            "type": "string"
+        },
+        "x_mitre_modified_by_ref": {
+            "type": "string"
         }
     },
     "required": [
+        "created",
+        "created_by_ref",
+        "description",
+        "external_references",
         "id",
-        "objects",
-        "spec_version",
-        "type"
+        "modified",
+        "name",
+        "object_marking_refs",
+        "tactic_refs",
+        "type",
+        "x_mitre_attack_spec_version",
+        "x_mitre_modified_by_ref",
+        "x_mitre_version"
     ]
 }

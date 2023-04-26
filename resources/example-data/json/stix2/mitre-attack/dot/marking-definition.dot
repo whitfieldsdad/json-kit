@@ -1,27 +1,19 @@
 digraph {
     graph [rankdir=LR]
+    "created" [label="created"]
+    "created_by_ref" [label="created_by_ref"]
+    "definition" [label="definition"]
+    "definition.statement" [label="statement"]
+    "definition_type" [label="definition_type"]
     "id" [label="id"]
-    "objects" [label="objects[]"]
-    "objects.created" [label="created"]
-    "objects.created_by_ref" [label="created_by_ref"]
-    "objects.definition" [label="definition"]
-    "objects.definition.statement" [label="statement"]
-    "objects.definition_type" [label="definition_type"]
-    "objects.id" [label="id"]
-    "objects.type" [label="type"]
-    "objects.x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"]
-    "spec_version" [label="spec_version"]
     "type" [label="type"]
-    "properties" -> "type"
+    "x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"]
+    "definition" -> "definition.statement"
+    "properties" -> "definition"
     "properties" -> "id"
-    "properties" -> "spec_version"
-    "properties" -> "objects"
-    "objects" -> "objects.definition"
-    "objects" -> "objects.id"
-    "objects" -> "objects.type"
-    "objects" -> "objects.created"
-    "objects" -> "objects.created_by_ref"
-    "objects" -> "objects.definition_type"
-    "objects" -> "objects.x_mitre_attack_spec_version"
-    "objects.definition" -> "objects.definition.statement"
+    "properties" -> "type"
+    "properties" -> "created"
+    "properties" -> "created_by_ref"
+    "properties" -> "definition_type"
+    "properties" -> "x_mitre_attack_spec_version"
 }
