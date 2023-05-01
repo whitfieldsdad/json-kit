@@ -37,17 +37,52 @@ def generate_schema(
 
 def generate_schema_from_file(path: str):
     """
+    Generate a JSON schema from a JSON or JSONL file.
+
+    :param path: The path to the JSON or JSONL file.
+    :return: The generated JSON schema.
+    """
+    if path.endswith(".jsonl"):
+        return generate_schema_from_jsonl_file(path)
+    elif path.endswith(".json"):
+        return generate_schema_from_json_file(path)
+    else:
+        raise ValueError("Unsupported file extension")
+
+
+def generate_schema_from_json_file(path: str):
+    """
     Generate a JSON schema from a JSON file.
 
     :param path: The path to the JSON file.
     :return: The generated JSON schema.
     """
     try:
-        with open(path) as f:
-            data = json.load(f)
+        with open(path) as file:
+            data = json.load(file)
         return generate_schema(data)
     except json.JSONDecodeError as e:
         raise ValueError("Invalid JSON file") from e
+
+
+def generate_schema_from_jsonl_file(path: str):
+    """
+    Generate a JSON schema from a JSONL file.
+
+    :param path: The path to the JSONL file.
+    :return: The generated JSON schema.
+    """
+    try:
+        rows = []
+        with open(path) as file:
+            for line in file:
+                if line:
+                    row = json.loads(line)
+                    rows.append(row)
+                
+        return generate_schema(rows)
+    except json.JSONDecodeError as e:
+        raise ValueError("Invalid JSONL file") from e
 
 
 def generate_schema_from_files(paths: Union[str, Iterable[str]]) -> dict:
