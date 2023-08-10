@@ -2,12 +2,12 @@
 
 > Yet another toolkit for working with JSON
 
-## Features:
+## Features
 
 - Convert one or more JSON documents into a [JSON Schema](https://json-schema.org/learn/getting-started-step-by-step.html)
 - Convert a JSON Schema into a [directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph) using [NetworkX](https://networkx.github.io/)
   - Serialize DAGs to [DOT format](<https://en.wikipedia.org/wiki/DOT_(graph_description_language)>)
-  - Visualize DAGs using [Matplotlib](https://www.graphviz.org/)
+  - Visualize DAGs using [GraphViz](https://www.graphviz.org/)
 
 ## Requirements
 
