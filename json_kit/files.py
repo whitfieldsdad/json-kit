@@ -2,7 +2,10 @@ import glob
 import gzip
 import json
 import os
-from typing import Any, Iterable, Iterator, TextIO, Union
+from typing import Any, Iterable, Iterator, Union
+from . import logging
+
+logger = logging.logger
 
 
 def find(paths: Union[str, Iterable[str]], files_only: bool = False) -> Iterator[str]:
@@ -28,7 +31,13 @@ def _find(path: str) -> Iterator[str]:
                     yield path
 
 
+def read_files(paths: Iterable[str]) -> Iterator[Any]:
+    for path in paths:
+        yield read_file(path)
+
+
 def read_file(path: str) -> Any:
+    logger.info(f'Reading: {path}')
     if path.endswith((".jsonl", ".jsonl.gz")):
         return read_jsonl_file(path)
     elif path.endswith((".json", ".json.gz")):
@@ -37,33 +46,13 @@ def read_file(path: str) -> Any:
         raise ValueError(f"Unsupported file extension: {path}")
 
 
-def read_files(paths: Iterable[str]) -> Iterator[Any]:
-    for path in paths:
-        yield read_file(path)
-
-
 def read_json_file(path: str) -> Any:
-    file = _open_file_for_reading(path)
-    try:
+    with gzip.open(path) as file:
         return json.load(file)
-    finally:
-        file.close()
 
 
 def read_jsonl_file(path: str) -> Iterator[dict]:
-    file = _open_file_for_reading(path)
-    try:
+    with open(path) as file:
         for line in file:
             if line:
                 yield json.loads(line)
-    finally:
-        file.close()
-
-
-def _open_file_for_reading(path: str) -> TextIO:
-    file = None
-    try:
-        file = gzip.open(path, 'rt')
-    except gzip.BadGzipFile:
-        file = open(path, 'r')
-    return file

@@ -28,7 +28,7 @@ def main(input_files: Tuple[str], output_file: Optional[str], output_type: str, 
         schema = json_schema.generate_schema_from_files(input_files)
         g = digraphs.json_schema_to_g(schema)
 
-        # Write to the current working directory by default.
+        # Write ./schema.[png|svg] by default.
         if not output_file:
             output_file = os.getcwd()
 

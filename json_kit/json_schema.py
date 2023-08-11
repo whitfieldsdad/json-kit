@@ -42,49 +42,19 @@ def generate_schema_from_file(path: str):
     :param path: The path to the JSON or JSONL file.
     :return: The generated JSON schema.
     """
-    if path.endswith(".jsonl"):
-        return generate_schema_from_jsonl_file(path)
-    elif path.endswith(".json"):
-        return generate_schema_from_json_file(path)
-    else:
-        raise ValueError("Unsupported file extension")
+    logger.info(f"Generating JSON schema from: {path}")
+    return generate_schema_from_file(path)
 
 
-# TODO: add support for compressed files
-def generate_schema_from_json_file(path: str):
+def generate_schema_from_file(path: str):
     """
-    Generate a JSON schema from a JSON file.
+    Generate a JSON schema from a JSON or JSONL file.
 
-    :param path: The path to the JSON file.
+    :param path: The path to the input file.
     :return: The generated JSON schema.
     """
-    try:
-        with open(path) as file:
-            data = json.load(file)
-        return generate_schema(data)
-    except json.JSONDecodeError as e:
-        raise ValueError("Invalid JSON file") from e
-
-
-# TODO: add support for compressed files
-def generate_schema_from_jsonl_file(path: str) -> dict:
-    """
-    Generate a JSON schema from a JSONL file.
-
-    :param path: The path to the JSONL file.
-    :return: The generated JSON schema.
-    """
-    try:
-        rows = []
-        with open(path) as file:
-            for line in file:
-                if line:
-                    row = json.loads(line)
-                    rows.append(row)
-                
-        return generate_schema(rows)
-    except json.JSONDecodeError as e:
-        raise ValueError("Invalid JSONL file") from e
+    data = files.read_file(path)
+    return generate_schema(data)
 
 
 def generate_schema_from_files(paths: Union[str, Iterable[str]]) -> dict:
@@ -94,17 +64,20 @@ def generate_schema_from_files(paths: Union[str, Iterable[str]]) -> dict:
     :param paths: The paths to the JSON files.
     :return: The generated JSON schema.
     """
-    paths = files.find(paths, files_only=True)
+    paths = sorted(set(paths)) 
+    logger.info(f"Generating JSON schema from {len(paths)} files: {', '.join(paths)}")
     schemas = {}
     for schema in map(generate_schema_from_file, paths):
         h = hash(json.dumps(schema, sort_keys=True))
         if h not in schemas:
             schemas[h] = schema
+    else:
+        schemas = tuple(schemas.values())
 
     if not schemas:
         raise FileNotFoundError("No valid JSON files found")
     elif len(schemas) == 1:
-        return next(iter(schemas.values()))
+        return next(iter(schemas))
     else:
         return merge_schemas(schemas)
 
@@ -131,7 +104,14 @@ def merge_schemas(schemas: Iterable[dict]) -> dict:
     :param schemas: The schemas to merge.
     :return: The merged schema.
     """
+    schemas = tuple(schemas)
+    logger.info(f"Merging {len(schemas)} JSON schemas...")
+
     builder = genson.SchemaBuilder()
-    for schema in schemas:
+    for i, schema in enumerate(schemas):
+        logger.info(f'JSON schema #{i + 1}/{len(schemas)}: {json.dumps(schema)}')
         builder.add_schema(schema)
-    return builder.to_schema()
+    schema = builder.to_schema()
+
+    logger.info(f"Merged {len(schemas)} JSON schemas!")
+    return schema
