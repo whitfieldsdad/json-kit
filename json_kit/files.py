@@ -1,12 +1,15 @@
 import fnmatch
 import glob
-import gzip
 import json
 import os
 from typing import Any, Iterable, Iterator, Optional, Union
 from . import logging
 
 logger = logging.logger
+
+
+def find_json_files(paths: Union[str, Iterable[str]]) -> Iterator[str]:
+    yield from find(paths, filename_patterns=['*.json', '*.jsonl'], files_only=True)
 
 
 def find(
@@ -46,31 +49,37 @@ def _find(path: str) -> Iterator[str]:
                     yield path
 
 
-def read_files(paths: Iterable[str]) -> Iterator[Any]:
+def read_from_files(paths: Union[str, Iterable[str]]) -> Iterator[Any]:
+    paths = [paths] if isinstance(paths, str) else paths
     for path in paths:
-        yield read_file(path)
+        yield from read_from_file(path)
 
 
-def read_file(path: str) -> Any:
+def read_from_file(path: str, decode: Optional[bool] = True) -> Any:
     logger.info(f'Reading: {path}')
     if path.endswith((".jsonl", ".jsonl.gz")):
-        return read_jsonl_file(path)
+        return _read_from_jsonl_file(path, decode=decode)
     elif path.endswith((".json", ".json.gz")):
-        return read_json_file(path)
+        return _read_from_json_file(path, decode=decode)
     else:
         raise ValueError(f"Unsupported file extension: {path}")
 
 
-def read_json_file(path: str) -> Any:
-    with gzip.open(path) as file:
-        return json.load(file)
-
-
-def read_jsonl_file(path: str) -> Iterator[dict]:
+def _read_from_json_file(path: str, decode: Optional[bool] = True) -> Any:
     with open(path) as file:
-        for line in file:
-            if line:
-                yield json.loads(line)
+        if decode:
+            return json.load(file)
+        else:
+            return file.read()
+
+
+def _read_from_jsonl_file(path: str, decode: Optional[bool] = True) -> Iterator[dict]:
+    with open(path) as file:
+        lines = file.readlines()
+        lines = filter(bool, map(str.strip, lines))
+        if decode:
+            lines = map(json.loads, lines)
+        yield from lines
 
 
 def replace_file_extension(path: str, old_extensions: Iterable[str], new_extension: str) -> str:

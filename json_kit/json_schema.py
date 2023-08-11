@@ -1,6 +1,6 @@
 import json
 import genson
-from typing import Iterable, Any, Optional, Union
+from typing import Iterable, Any, Union
 from . import files
 
 import logging
@@ -10,64 +10,29 @@ logger = logging.getLogger(__name__)
 DEFAULT_INDENT = 4
 
 
-def generate_schema(
-    docs: Union[str, dict, Iterable[Any]], json_cls: Optional[json.JSONDecoder] = None
-) -> dict:
+def generate_json_schema_from_file(path: str) -> dict:
     """
-    Generate a JSON schema from one or more JSON serializable objects. If strings are provided, they will be interpreted as individual JSON documents.
+    Generate a JSON schema from a [JSON|JSONL] file.
 
-    :param doc: The objects to generate a JSON schema from.
-    :param json_cls: An optional JSON decoder class.
-    :return: The generated JSON schema.
+    :param path: path to a [JSON|JSONL] file
+    :return: a JSON schema
     """
-    builder = genson.SchemaBuilder()
-    if isinstance(docs, str):
-        docs = [json.loads(docs, cls=json_cls)]
-    elif isinstance(docs, dict):
-        docs = [docs]
-    else:
-        docs = map(
-            lambda o: json.loads(o, cls=json_cls) if isinstance(o, str) else o, docs
-        )
-
-    for doc in docs:
-        builder.add_object(doc)
-    return builder.to_schema()
+    logger.info(f"Generating JSON schema from file: {path}")
+    blob = files.read_from_file(path, decode=False)
+    return generate_json_schema(blob)
 
 
-def generate_schema_from_file(path: str):
+def generate_json_schema_from_files(paths: Union[str, Iterable[str]]) -> dict:
     """
-    Generate a JSON schema from a JSON or JSONL file.
+    Generate a JSON schema from one or more [JSON|JSONL] files.
 
-    :param path: The path to the JSON or JSONL file.
-    :return: The generated JSON schema.
-    """
-    logger.info(f"Generating JSON schema from: {path}")
-    return generate_schema_from_file(path)
-
-
-def generate_schema_from_file(path: str):
-    """
-    Generate a JSON schema from a JSON or JSONL file.
-
-    :param path: The path to the input file.
-    :return: The generated JSON schema.
-    """
-    data = files.read_file(path)
-    return generate_schema(data)
-
-
-def generate_schema_from_files(paths: Union[str, Iterable[str]]) -> dict:
-    """
-    Generate a JSON schema from one or more JSON files.
-
-    :param paths: The paths to the JSON files.
-    :return: The generated JSON schema.
+    :param paths: one or more paths to [JSON|JSONL] files
+    :return: a JSON schema
     """
     paths = sorted(set(paths)) 
     logger.info(f"Generating JSON schema from {len(paths)} files: {', '.join(paths)}")
     schemas = {}
-    for schema in map(generate_schema_from_file, paths):
+    for schema in map(generate_json_schema_from_file, paths):
         h = hash(json.dumps(schema, sort_keys=True))
         if h not in schemas:
             schemas[h] = schema
@@ -79,30 +44,49 @@ def generate_schema_from_files(paths: Union[str, Iterable[str]]) -> dict:
     elif len(schemas) == 1:
         return next(iter(schemas))
     else:
-        return merge_schemas(schemas)
+        return merge_json_schemas(schemas)
 
 
-def generate_schema_file_from_files(
-    paths: Union[str, Iterable[str]], output_path: str
-) -> dict:
+def generate_json_schema(docs: Union[str, dict, Iterable[Any]]) -> dict:
     """
-    Generate a JSON schema file from one or more JSON files.
+    Generate a JSON schema from one or more JSON documents.
 
-    :param paths: The paths to the JSON files.
-    :return: The generated JSON schema.
+    :param docs: one or more dictionaries or JSON documents
+    :return: a JSON schema
     """
-    schema = generate_schema_from_files(paths)
+    builder = genson.SchemaBuilder()
+    if isinstance(docs, str):
+        docs = [json.loads(docs)]
+    elif isinstance(docs, dict):
+        docs = [docs]
+    else:
+        docs = map(lambda o: json.loads(o) if isinstance(o, str) else o, docs)
+
+    for doc in docs:
+        builder.add_object(doc)
+    return builder.to_schema()
+
+
+def generate_json_schema_file_from_files(paths: Union[str, Iterable[str]], output_path: str) -> dict:
+    """
+    Generate a JSON schema from one or more [JSON|JSONL] files and write it to a file.
+    
+    :param paths: one or more paths to [JSON|JSONL] files
+    :param output_path: path to write the JSON schema to
+    :return: a JSON schema
+    """
+    schema = generate_json_schema_from_files(paths)
     with open(output_path, "w") as f:
         json.dump(schema, f, indent=DEFAULT_INDENT)
     return schema
 
 
-def merge_schemas(schemas: Iterable[dict]) -> dict:
+def merge_json_schemas(schemas: Iterable[dict]) -> dict:
     """
-    Merge multiple JSON schemas into one.
+    Merge one or more JSON schemas into a single JSON schema.
 
-    :param schemas: The schemas to merge.
-    :return: The merged schema.
+    :param schemas: one or more JSON schemas
+    :return: a JSON schema
     """
     schemas = tuple(schemas)
     if len(schemas) == 1:

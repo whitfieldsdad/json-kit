@@ -1,98 +1,136 @@
+"""
+This module supports the following transformations:
+
+| Input | Output      |
+| ----- | ----------- |
+| JSON  | JSON schema |
+| JSON  | DOT         |
+| JSON  | Image       |
+| JSONL | JSON schema |
+| JSONL | DOT         |
+| JSONL | Image       |
+"""
 import json
 import shlex
 import subprocess
 import tempfile
-from typing import Iterable, Iterator, List, Optional, Tuple
+from typing import Any, Iterable, Iterator, List, Optional, Tuple, Union
+from dataclasses import dataclass
 import networkx as nx
-from json_kit import files
-from json_kit.constants import DOT_INDENT
-from . import json_schema
 from json_kit.logging import logger
+from json_kit.constants import DOT_INDENT, JSON_INDENT
+from json_kit import files
+from json_kit import json_schema
 
 PNG = "png"
 SVG = "svg"
 IMAGE_TYPES = [PNG, SVG]
 
 
-def json_file_to_json_schema(path: str) -> dict:
-    blob = files.read_file(path)
-    return json_blob_to_json_schema(blob)
+@dataclass
+class GraphOptions:
+    node_shape: str = 'plaintext'
+    concentrate: bool = False
 
 
-def json_file_to_dot(path: str, indent: int = DOT_INDENT) -> str:
-    schema = json_file_to_json_schema(path)
-    return json_schema_to_dot(schema, indent=indent)
+def json_file_to_json_schema(input_file: str) -> dict:
+    blob = files.read_from_file(input_file, decode=False)
+    return json_to_json_schema(blob)
 
 
-def json_file_to_dot_file(input_file: str, output_file: str) -> None:
+def json_files_to_json_schema(input_files: Iterable[str]) -> dict:
+    schemas = []
+    for input_file in input_files:
+        schema = json_file_to_json_schema(input_file)
+        schemas.append(schema)
+    return json_schema.merge_json_schemas(schemas)
+
+
+def json_file_to_json_schema_file(input_file: str, output_file: str):
     schema = json_file_to_json_schema(input_file)
-    dot = json_schema_to_dot(schema)
+    blob = json.dumps(schema)
+    files.create_file(output_file, blob)
+
+
+def json_file_to_dot(input_file: str, graph_options: Optional[GraphOptions] = None) -> str:
+    schema = json_file_to_json_schema(input_file)
+    return json_schema_to_dot(schema, graph_options=graph_options)
+
+
+def json_file_to_dot_file(input_file: str, output_file: str, graph_options: Optional[GraphOptions] = None):
+    dot = json_file_to_dot(input_file, graph_options=graph_options)
     files.create_file(output_file, dot)
 
 
-def json_files_to_dot_file(input_files: Iterable[str], output_file: str, indent: int = DOT_INDENT) -> None:
+def json_files_to_dot(input_files: Iterable[str], graph_options: Optional[GraphOptions] = None) -> str:
     schema = json_files_to_json_schema(input_files)
-    dot = json_schema_to_dot(schema, indent=indent)
+    return json_schema_to_dot(schema, graph_options=graph_options)
+
+
+def json_files_to_dot_file(input_files: Iterable[str], output_file: str, graph_options: Optional[GraphOptions] = None):
+    schema = json_files_to_json_schema(input_files)
+    dot = json_schema_to_dot(schema, graph_options=graph_options)
     files.create_file(output_file, dot)
 
 
-def json_file_to_image_file(input_file: str, output_file: str) -> None:
-    schema = json_file_to_json_schema(input_file)
-    g = json_schema_to_g(schema)
-    g_to_img(g, output_file)
+def json_file_to_image_file(input_file: str, output_file: str, graph_options: Optional[GraphOptions] = None):
+    dot = json_file_to_dot(input_file, graph_options=graph_options)
+    dot_to_image(dot, output_file)
 
 
-def json_files_to_image_file(input_files: Iterable[str], output_file: str) -> None:
+def json_files_to_image_file(input_files: Iterable[str], output_file: str, graph_options: Optional[GraphOptions] = None):
+    dot = json_files_to_dot(input_files, graph_options=graph_options)
+    dot_to_image(dot, output_file)
+
+
+def json_to_dot(data: Union[dict, str, Iterable[str]], graph_options: Optional[GraphOptions] = None) -> str:
+    schema = json_to_json_schema(data)
+    return json_schema_to_dot(schema, graph_options=graph_options)
+
+
+def json_to_image(output_file: str, data: Union[dict, str, Iterable[str]], graph_options: Optional[GraphOptions] = None):
+    schema = json_to_json_schema(data)
+    json_schema_to_image(output_file, schema, graph_options=graph_options)
+
+
+def json_to_json_schema(data: Union[dict, str, Iterable[str]]) -> dict:
+    return json_schema.generate_json_schema(data)
+
+
+def json_schema_to_dot(schema: Any, graph_options: Optional[GraphOptions] = None) -> str:
+    g = _json_schema_to_digraph(schema)
+    return _digraph_to_dot(g, graph_options=graph_options)
+
+
+def json_schema_file_to_dot_file(input_file: str, output_file: str, graph_options: Optional[GraphOptions] = None):
+    schema = files.read_from_file(input_file)
+    dot = json_schema_to_dot(schema, graph_options=graph_options)
+    files.create_file(output_file, dot)
+
+
+def json_schema_files_to_dot(input_files: Iterable[str], graph_options: Optional[GraphOptions] = None):
+    schemas = files.read_from_files(input_files)
+    schema = json_schema.merge_json_schemas(schemas)
+    return json_schema_to_dot(schema, graph_options=graph_options)
+
+
+def json_schema_files_to_dot_file(input_files: Iterable[str], output_file: str, graph_options: Optional[GraphOptions] = None):
+    dot = json_schema_files_to_dot(input_files, graph_options=graph_options)
+    files.create_file(output_file, dot)
+
+
+def json_schema_to_image(output_file: str, schema: Any, graph_options: Optional[GraphOptions] = None):
+    dot = json_schema_to_dot(schema, graph_options=graph_options)
+    dot_to_image(dot, output_file)
+
+
+def json_schema_files_to_image_file(input_files: Iterable[str], output_file: str, graph_options: Optional[GraphOptions] = None):
     schema = json_files_to_json_schema(input_files)
-    g = json_schema_to_g(schema)
-    g_to_img(g, output_file)
+    json_schema_to_image(output_file, schema, graph_options=graph_options)
 
 
-def json_files_to_dot(input_files: Iterable[str], indent: int = DOT_INDENT) -> str:
-    schema = json_files_to_json_schema(input_files)
-    return json_schema_to_dot(schema, indent=indent)
-
-def json_files_to_json_schema(paths: Iterable[str]) -> dict:
-    blobs = files.read_files(paths)
-    return json_blobs_to_json_schema(blobs)
-
-
-def json_files_to_json_schemas(paths: Iterable[str]) -> Iterator[dict]:
-    blobs = files.read_files(paths)
-    return json_blobs_to_json_schemas(blobs)
-
-
-def json_blobs_to_json_schema(blobs: Iterable[str]) -> dict:
-    schemas = json_blobs_to_json_schemas(blobs)
-    return json_schema.merge_schemas(schemas)
-
-
-def json_blobs_to_json_schemas(blobs: Iterable[str]) -> Iterator[dict]:
-    for blob in blobs:
-        schema = json_schema.generate_schema(blob)
-        yield schema
-
-
-def json_blob_to_json_schema(blob: str) -> dict:
-    return json_schema.generate_schema(blob)
-
-
-def json_schema_files_to_digraph(paths: Iterable[str]) -> nx.DiGraph:
-    schemas = files.read_files(paths)
-    return json_schemas_to_g(schemas)
-
-
-def json_schema_to_dot(schema: dict, indent: int = DOT_INDENT) -> str:
-    g = json_schema_to_g(schema)
-    return g_to_dot(g, indent=indent)
-
-
-def json_schemas_to_g(schemas: Iterable[dict]) -> nx.DiGraph:
-    schema = json_schema.merge_schemas(schemas)
-    return json_schema_to_g(schema)
-
-
-def json_schema_to_g(schema: dict) -> nx.DiGraph:
+# TODO: add support for multiple levels of nesting
+def _json_schema_to_digraph(schema: dict) -> nx.DiGraph:
     g = nx.DiGraph()
     for k, pks in _iter_json_schema_properties(schema):
         if not pks:
@@ -101,7 +139,6 @@ def json_schema_to_g(schema: dict) -> nx.DiGraph:
             h = "_".join(pks) + "_" + k
             g.add_node(h, label=k)
 
-            # TODO: add support for multiple levels of nesting
             if len(pks) > 1:
                 raise NotImplementedError("Multiple levels of nesting is not yet supported")
 
@@ -125,6 +162,7 @@ def _iter_json_schema_properties(schema: dict) -> Iterator[Tuple[str, str]]:
                 elif object_type == 'array' and spec['items']['type'] == 'object':
                     yield from walk(spec['items']['properties'], pks=pks + [k])
                 
+                # Scalars
                 else:
                     yield k, pks
 
@@ -138,10 +176,13 @@ def _iter_json_schema_properties(schema: dict) -> Iterator[Tuple[str, str]]:
     yield from walk(schema['properties'])
 
 
-def g_to_dot(
+# TODO
+def _digraph_to_dot(
     g: nx.DiGraph,
     indent: int = DOT_INDENT,
-    node_shape: str = 'plaintext') -> str:
+    graph_options: Optional[GraphOptions] = None) -> str:
+
+    graph_options = graph_options or GraphOptions()
 
     lines = []
     lines.append("digraph {")
@@ -149,7 +190,10 @@ def g_to_dot(
     # Add graph attributes
     prefix = " " * indent
     lines.append(prefix + "rankdir=LR;")
-    lines.append(prefix + f'node [shape="{node_shape}"]')
+    lines.append(prefix + f'node [shape="{graph_options.node_shape}"]')
+    if graph_options.concentrate:
+        lines.append(prefix + "concentrate=true")
+
     lines.append("")
 
     # Add subgraph
@@ -183,18 +227,17 @@ def g_to_dot(
     return "\n".join(lines)
 
 
-def g_to_img(g: nx.DiGraph, path: str):
+def dot_to_image(dot: str, path: str):
+    logger.info(f'Generating: {path}')
     output_type = path.split(".")[-1].lower()
     if output_type not in IMAGE_TYPES:
         raise ValueError(f"Unsupported output format: {output_type}")
 
     with tempfile.NamedTemporaryFile(mode='w', delete=True) as temp_file:
-        dot = g_to_dot(g)
         temp_file.write(dot)
         temp_file.flush()
     
         cmd = f"dot -T{output_type} -Gdpi=300 {temp_file.name} -o {path}"
-        logger.info(f'Generating: {path}')
         logger.info(f'Running shell command: `{cmd}`')
 
         argv = shlex.split(cmd)

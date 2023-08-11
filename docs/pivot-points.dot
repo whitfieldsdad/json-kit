@@ -1,0 +1,34 @@
+digraph G {
+    rankdir=LR;
+    node [shape=box; style="rounded"; fillcolor="lightblue"];
+    edge [color=black];
+    concentrate=false;
+
+    # Text files
+    dot [label="DOT"];
+    json [label="JSON"];
+    jsonl [label="JSONL"];
+    json_schema [label="JSON Schema"];
+
+    # Image files
+    image [label="Image"];
+    png [label="PNG"];
+    svg [label="SVG"];
+
+    image -> png [style="dotted"];
+    image -> svg [style="dotted"];
+    
+    # Transformations (direct)
+    json -> json_schema;
+    jsonl -> json_schema;
+    json_schema -> dot;
+    dot -> image;
+
+    # Transformations (indirect)
+    json -> dot [color="lightgray"; style="dashed"];
+    json -> image [color="lightgray"; style="dashed"];
+    jsonl -> dot [color="lightgray"; style="dashed"];
+    jsonl -> image [color="lightgray"; style="dashed"];
+    json_schema -> image [color="lightgray"; style="dashed"];
+
+}

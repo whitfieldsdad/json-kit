@@ -15,6 +15,5 @@ def main(input_files: Tuple[str], output_file: str):
     """
     JSON Schema -> DOT -> [PNG|SVG]
     """
-    input_files = files.find(input_files, filename_patterns=['.json', '.jsonl'], files_only=True)
-    g = generator.json_schema_files_to_digraph(input_files)
-    generator.g_to_img(g, output_file)
+    input_files = files.find_json_files(input_files)
+    generator.json_schema_files_to_image_file(input_files)

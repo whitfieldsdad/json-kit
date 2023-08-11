@@ -19,12 +19,12 @@ def main(input_files: Tuple[str], output_file: Optional[str], output_type: str):
     """
     [JSON|JSONL] -> JSON Schema -> DOT -> [PNG|SVG]
     """
-    input_files = files.find(input_files, filename_patterns=['.json', '.jsonl'], files_only=True)
-
+    input_files = files.find_json_files(input_files)
     if os.path.isdir(output_file):
         output_dir = output_file
         for input_file in input_files:
-            output_filename = files.replace_file_extension(os.path.basename(input_file), ['.json', '.jsonl'], f".{output_type.lower()}")
+            output_filename = os.path.basename(input_file)
+            output_filename = files.replace_file_extension(output_filename, ['.json', '.jsonl'], f".{output_type.lower()}")
             output_file = os.path.join(output_dir, output_filename)
             generator.json_file_to_image_file(input_file, output_file)    
     else:

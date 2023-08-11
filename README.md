@@ -1,17 +1,14 @@
-# JSON (tool)kit
+# json-kit
 
-> Yet another toolkit for working with JSON
+A Python3 module for translating JSON and JSONL documents into JSON Schemas, DOT files, and images.
 
-## Features
+![Pivot points](docs/pivot-points.png)
 
-- Convert one or more JSON documents into a [JSON Schema](https://json-schema.org/learn/getting-started-step-by-step.html)
-- Convert a JSON Schema into a [directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph) using [NetworkX](https://networkx.github.io/)
-  - Serialize DAGs to [DOT format](<https://en.wikipedia.org/wiki/DOT_(graph_description_language)>)
-  - Visualize DAGs using [GraphViz](https://www.graphviz.org/)
+> 👷 🚧: this project is experimental, doesn't have a stable API, and is under active development.
 
 ## Requirements
 
-- [Python](https://www.python.org/) 3.10+ (see [pyproject.toml](pyproject.toml)
+- [Python](https://www.python.org/) 3.10+ (see [pyproject.toml](pyproject.toml))
 - [Poetry](https://python-poetry.org/)
 
 ## Installation
@@ -22,45 +19,26 @@ To install this project and its dependencies, run:
 make install
 ```
 
-> **Note:** This project uses [Poetry](https://python-poetry.org/) for dependency management.
-
-## Development
-
-To update the `requirements.txt` file, run:
-
-```bash
-make requirements
-```
-
-To regenerate example data:
-
-```bash
-make example-data
-```
-
 ## Usage
+
+The following examples use a STIX 2.0 representation of the MITRE ATT&CK framework as a sample dataset when generating JSON Schemas, DOT files, and images.
+
+You can download the latest version of the MITRE ATT&CK framework as follows:
+
+```bash
+mkdir -p demo/generated
+git clone https://github.com/mitre/cti --depth=1 demo/cti
+```
 
 ### JSON to JSON Schema
 
-The `json2jsonschema` command can be used to generate a JSON Schema from one or more JSON documents.
+As an example, let's generate a JSON Schema for all `campaign` objects from the MITRE ATT&CK framework and print it to the console:
 
 ```bash
-poetry run json2jsonschema --help
-Usage: json2jsonschema.cmd [OPTIONS] INPUT_FILES...
-
-  Create a JSON Schema from one or more JSON files.
-
-Options:
-  -o, --output-file TEXT  Path to output file
-  --indent INTEGER        Indentation level
-  --help                  Show this message and exit.
+poetry run json2schema demo/cti/enterprise-attack/campaign/*.json | jq
 ```
 
-For example:
-
-```bash
-poetry run json2jsonschema .\resources\example-data\json\stix2\mitre-attack\json\attack-pattern--00d0b012-8a03-410e-95de-5826bf542de6.json
-```
+Yielding:
 
 ```json
 {
@@ -81,28 +59,43 @@ poetry run json2jsonschema .\resources\example-data\json\stix2\mitre-attack\json
       "items": {
         "type": "object",
         "properties": {
-          "x_mitre_platforms": {
+          "modified": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "aliases": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "x_mitre_domains": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "first_seen": {
+            "type": "string"
           },
-          "object_marking_refs": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "last_seen": {
+            "type": "string"
           },
-          "id": {
+          "x_mitre_first_seen_citation": {
+            "type": "string"
+          },
+          "x_mitre_last_seen_citation": {
+            "type": "string"
+          },
+          "x_mitre_deprecated": {
+            "type": "boolean"
+          },
+          "x_mitre_version": {
             "type": "string"
           },
           "type": {
+            "type": "string"
+          },
+          "id": {
             "type": "string"
           },
           "created": {
@@ -127,165 +120,87 @@ poetry run json2jsonschema .\resources\example-data\json\stix2\mitre-attack\json
                 },
                 "external_id": {
                   "type": "string"
-                }
-              },
-              "required": ["external_id", "source_name", "url"]
-            }
-          },
-          "modified": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "kill_chain_phases": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "kill_chain_name": {
-                  "type": "string"
                 },
-                "phase_name": {
+                "description": {
                   "type": "string"
                 }
               },
-              "required": ["kill_chain_name", "phase_name"]
+              "required": [
+                "source_name"
+              ]
             }
           },
-          "x_mitre_detection": {
-            "type": "string"
-          },
-          "x_mitre_version": {
-            "type": "string"
-          },
-          "x_mitre_modified_by_ref": {
-            "type": "string"
-          },
-          "x_mitre_defense_bypassed": {
+          "object_marking_refs": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "x_mitre_is_subtechnique": {
-            "type": "boolean"
+          "x_mitre_attack_spec_version": {
+            "type": "string"
+          },
+          "x_mitre_modified_by_ref": {
+            "type": "string"
+          },
+          "x_mitre_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "x_mitre_contributors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
+          "aliases",
           "created",
           "created_by_ref",
           "description",
           "external_references",
+          "first_seen",
           "id",
-          "kill_chain_phases",
+          "last_seen",
           "modified",
           "name",
           "object_marking_refs",
           "revoked",
           "type",
-          "x_mitre_defense_bypassed",
-          "x_mitre_detection",
+          "x_mitre_attack_spec_version",
+          "x_mitre_deprecated",
           "x_mitre_domains",
-          "x_mitre_is_subtechnique",
+          "x_mitre_first_seen_citation",
+          "x_mitre_last_seen_citation",
           "x_mitre_modified_by_ref",
-          "x_mitre_platforms",
           "x_mitre_version"
         ]
       }
     }
   },
-  "required": ["id", "objects", "spec_version", "type"]
+  "required": [
+    "id",
+    "objects",
+    "spec_version",
+    "type"
+  ]
 }
 ```
 
-### JSON Schema to DAG in DOT format
-
-The `jsonschema2dot` command can be used to generate a DOT file from a JSON Schema.
+You can also save the generated JSON Schema to a file:
 
 ```bash
-poetry run jsonschema2dot --help                                                              Usage: jsonschema2dot.cmd [OPTIONS] INPUT_FILES...
+# Option #1: shell redirection
+poetry run json2schema demo/cti/enterprise-attack/campaign/*.json | jq '.' > demo/generated/campaign.schema.json
 
-  Convert a JSON Schema into a DOT file.
-
-Options:
-  -o, --output-file TEXT  Path to output file
-  --indent INTEGER        Indentation level
-  --help                  Show this message and exit
+# Option #2: use the --output-file/-o flag
+poetry run json2schema demo/cti/enterprise-attack/campaign/*.json -o demo/generated/campaign.schema.json
 ```
 
-For example:
+You can also generate one JSON Schema per input file:
 
+```bash
+poetry run json2schema cti/enterprise-attack/campaign/*.json -o demo/generated
 ```
-poetry run jsonschema2dot .\resources\example-data\json\stix2\mitre-attack\json-schema\attack-pattern.json -o .\resources\example-data\json\stix2\mitre-attack\dot\attack-pattern.dot
-```
-
-```dot
-digraph {
-    "id" [label="id"]
-    "objects" [label="objects[]"]
-    "objects.created" [label="created"]
-    "objects.created_by_ref" [label="created_by_ref"]
-    "objects.description" [label="description"]
-    "objects.external_references" [label="external_references[]"]
-    "objects.external_references.external_id" [label="external_id"]
-    "objects.external_references.source_name" [label="source_name"]
-    "objects.external_references.url" [label="url"]
-    "objects.id" [label="id"]
-    "objects.kill_chain_phases" [label="kill_chain_phases[]"]
-    "objects.kill_chain_phases.kill_chain_name" [label="kill_chain_name"]
-    "objects.kill_chain_phases.phase_name" [label="phase_name"]
-    "objects.modified" [label="modified"]
-    "objects.name" [label="name"]
-    "objects.object_marking_refs" [label="object_marking_refs[]"]
-    "objects.revoked" [label="revoked"]
-    "objects.type" [label="type"]
-    "objects.x_mitre_defense_bypassed" [label="x_mitre_defense_bypassed[]"]
-    "objects.x_mitre_detection" [label="x_mitre_detection"]
-    "objects.x_mitre_domains" [label="x_mitre_domains[]"]
-    "objects.x_mitre_is_subtechnique" [label="x_mitre_is_subtechnique"]
-    "objects.x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"]
-    "objects.x_mitre_platforms" [label="x_mitre_platforms[]"]
-    "objects.x_mitre_version" [label="x_mitre_version"]
-    "spec_version" [label="spec_version"]
-    "type" [label="type"]
-    "properties" -> "type"
-    "properties" -> "id"
-    "properties" -> "spec_version"
-    "properties" -> "objects"
-    "objects" -> "objects.x_mitre_platforms"
-    "objects" -> "objects.x_mitre_domains"
-    "objects" -> "objects.object_marking_refs"
-    "objects" -> "objects.id"
-    "objects" -> "objects.type"
-    "objects" -> "objects.created"
-    "objects" -> "objects.created_by_ref"
-    "objects" -> "objects.revoked"
-    "objects" -> "objects.external_references"
-    "objects" -> "objects.modified"
-    "objects" -> "objects.name"
-    "objects" -> "objects.description"
-    "objects" -> "objects.kill_chain_phases"
-    "objects" -> "objects.x_mitre_detection"
-    "objects" -> "objects.x_mitre_version"
-    "objects" -> "objects.x_mitre_modified_by_ref"
-    "objects" -> "objects.x_mitre_defense_bypassed"
-    "objects" -> "objects.x_mitre_is_subtechnique"
-    "objects.external_references" -> "objects.external_references.source_name"
-    "objects.external_references" -> "objects.external_references.url"
-    "objects.external_references" -> "objects.external_references.external_id"
-    "objects.kill_chain_phases" -> "objects.kill_chain_phases.kill_chain_name"
-    "objects.kill_chain_phases" -> "objects.kill_chain_phases.phase_name"
-}
-```
-
-This DOT file can be converted into an image using `dot`:
-
-```shell
-dot -Tpng ./resources/example-data/json/stix2/mitre-attack/dot/attack-pattern.dot -o resources/example-data/json/stix2/mitre-attack/png/attack-pattern.png
-```
-
-![stix2-attack-pattern.png](resources/example-data/json/stix2/mitre-attack/png/attack-pattern.png)

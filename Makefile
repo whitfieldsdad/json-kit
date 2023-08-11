@@ -1,8 +1,11 @@
 install:
 	poetry install
 
-requirements:
+update:
+	poetry update
 	poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-example-data:
-	poetry run python generate-example-data.py
+docs:
+	cd docs && make
+
+.PHONY: docs
