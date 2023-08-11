@@ -18,6 +18,7 @@ pydot = "^1.4.2"
 [tool.poetry.scripts]
 json2dot = "json_kit.cli.json2dot:main"
 json2img = "json_kit.cli.json2img:main"
+json2schema = "json_kit.cli.json2jsonschema:main"
 json2jsonschema = "json_kit.cli.json2jsonschema:main"
 jsonschema2dot = "json_kit.cli.jsonschema2dot:main"
 jsonschema2img = "json_kit.cli.jsonschema2img:main"

@@ -1,125 +1,134 @@
-from typing import Iterable, Iterator, List, Optional
+import os
+import shlex
+import subprocess
+import tempfile
+from typing import Iterable, Iterator, List, Optional, Tuple
 import networkx as nx
-import pydot
-
+from json_kit import files
 from json_kit.constants import MARKDOWN_INDENT
 from . import json_schema
-from . import json_files
+from json_kit.logging import logger
 
 PNG = "png"
 SVG = "svg"
 IMAGE_TYPES = [PNG, SVG]
 
 
-def schema_to_attribute_digraph(schema: dict) -> nx.DiGraph:
+def json_schema_to_g(schema: dict) -> nx.DiGraph:
     g = nx.DiGraph()
-    for node in _iter_schema_properties(schema):
-        g.add_node(node["key"], label=node["label"])
-        g.add_edge(node["parent_key"], node["key"])
+    for k, pks in _iter_json_schema_properties(schema):
+        if not pks:
+            g.add_node(k)
+        else:
+            h = "_".join(pks) + "_" + k
+            g.add_node(h, label=k)
+
+            # TODO: add support for multiple levels of nesting
+            if len(pks) > 1:
+                raise NotImplementedError("Multiple levels of nesting is not yet supported")
+
+            for pk in pks:
+                g.add_edge(pk, h)            
     return g
 
 
-# TODO: replace with pydot implementation
-def digraph_to_dot(
+# TODO: add support for anyOf
+def _iter_json_schema_properties(schema: dict) -> Iterator[Tuple[str, str]]:
+    def walk(data: dict, parent_keys: Optional[List[str]] = None):    
+        for key, spec in data.items():
+            if 'type' in spec:
+                object_type = spec['type']                
+                if object_type == 'object':
+                    pks = parent_keys or []
+                    pks.append(key)
+
+                    yield from walk(spec['properties'], parent_keys=pks)
+
+                yield key, parent_keys
+            
+            elif 'anyOf' in spec:
+                #spec = [s for s in spec['anyOf'] if s['type'] != 'null'][0]
+                #parent_keys = parent_keys or []
+                #parent_keys.append(key)
+                #yield from walk(spec['properties'], parent_keys=parent_keys)
+                pass
+            else:
+                raise NotImplementedError(f"Unhandled property format: {key} -> {spec}")
+    
+    yield from walk(schema['properties'])
+
+
+def g_to_dot(
     g: nx.DiGraph,
     indent: int = MARKDOWN_INDENT,
-) -> str:
+    node_shape: str = 'plaintext') -> str:
+
     lines = []
     lines.append("digraph {")
-    lines.append(" " * indent + "graph [rankdir=LR]")
 
+    # Add graph attributes
+    prefix = " " * indent
+    lines.append(prefix + "rankdir=LR;")
+    lines.append(prefix + f'node [shape="{node_shape}"]')
+    lines.append("")
+
+    # Add subgraph
+    lines.append(prefix + 'subgraph cluster_0 {')
+    prefix = " " * (indent * 2)
+    lines.append(prefix + 'label="Properties"')
+    lines.append("")
+
+    # Add nodes
     for node, data in sorted(g.nodes(data=True)):
-        if data:
-            label = data.get("label")
-            if label:
-                attrs = ", ".join([f'{k}="{v}"' for k, v in data.items()])
-                line = " " * indent + f'"{node}" [{attrs}]'
-                lines.append(line)
+        label = data.get('label')
+        if label:
+            line = f'{node} [label="{label}"];'
+        else:
+            line = f'{node};'
+        lines.append(prefix + line)    
 
-    for a, b in g.edges:
-        line = " " * indent + f'"{a}" -> "{b}"'
-        lines.append(line)
+    # Add edges
+    if g.edges:
+        lines.append("")
+        for a, b in g.edges:
+            line = prefix + f'{a} -> {b};'
+            lines.append(line)
+
+    # Close subgraph
+    prefix = " " * indent
+    lines.append(prefix + "}")
+
+    # Close graph
     lines.append("}")
     return "\n".join(lines)
 
 
-def _iter_schema_properties(schema: dict) -> Iterator[dict]:
-    def walk(
-        data: dict,
-        parent_key: str,
-        required_fields: List[str],
-        path: List[str],
-    ):
-        for label, metadata in data.items():
-            key = ".".join(path + [label])
-            is_required = required_fields and label in required_fields
-            property_type = metadata["type"]
-
-            if property_type == "object":
-                yield {
-                    "key": key,
-                    "parent_key": parent_key,
-                    "type": property_type,
-                    "label": label,
-                    "required": is_required,
-                }
-                yield from walk(
-                    metadata["properties"],
-                    parent_key=key,
-                    required_fields=metadata["required"],
-                    path=path + [label],
-                )
-            elif property_type == "array":
-                yield {
-                    "key": key,
-                    "parent_key": parent_key,
-                    "type": f'{metadata["items"]["type"]}[]',
-                    "label": f"{label}[]",
-                    "required": is_required,
-                }
-                items = metadata["items"]
-                if "properties" in items:
-                    yield from walk(
-                        items["properties"],
-                        parent_key=key,
-                        required_fields=items.get("required"),
-                        path=path + [label],
-                    )
-            else:
-                yield {
-                    "key": key,
-                    "parent_key": parent_key,
-                    "type": property_type,
-                    "label": label,
-                    "required": is_required,
-                }
-
-    yield from walk(
-        data=schema["properties"],
-        parent_key="properties",
-        required_fields=schema["required"],
-        path=[],
-    )
-
-
-def schema_files_to_attribute_digraph(paths: Iterable[str]) -> nx.DiGraph:
-    schemas = json_files.read_json_files(paths)
+def schema_files_to_g(paths: Iterable[str]) -> nx.DiGraph:
+    schemas = files.read_files(paths)
     schema = json_schema.merge_schemas(schemas)
-    return schema_to_attribute_digraph(schema)
+    return json_schema_to_g(schema)
 
 
 def g_to_img(g: nx.DiGraph, path: str):
-    pydot_graph = nx.drawing.nx_pydot.to_pydot(g)
-    pydot_graph.set_rankdir("LR")
-    pydot_graph.set_size('"8,5"')
-    pydot_graph.set_dpi(300)
+    output_type = path.split(".")[-1].lower()
+    if output_type not in IMAGE_TYPES:
+        raise ValueError(f"Unsupported output format: {output_type}")
 
-    if path.endswith(PNG):
-        pydot_graph.write_png(path)
-    elif path.endswith(SVG):
-        pydot_graph.write_svg(path)
-    else:
-        raise ValueError(f"Unsupported file extension {path}")
+    with tempfile.NamedTemporaryFile(mode='w', delete=True) as temp_file:
+        dot = g_to_dot(g)
+        temp_file.write(dot)
+        temp_file.flush()
+    
+        cmd = f"dot -T{output_type} -Gdpi=300 {temp_file.name} -o {path}"
+        logger.info(f'Generating: {path}')
+        logger.info(f'Running shell command: `{cmd}`')
+
+        argv = shlex.split(cmd)
+        p = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if p.returncode != 0:
+            raise RuntimeError(f"Failed to generate image: {path} (stdout: {p.stdout or None}, stderr: {p.stderr or None})")
+        else:
+            logger.info(f'Generated: {path}')
 
 
 def g_to_png(g: nx.DiGraph, path: str):

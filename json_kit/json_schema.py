@@ -50,6 +50,7 @@ def generate_schema_from_file(path: str):
         raise ValueError("Unsupported file extension")
 
 
+# TODO: add support for compressed files
 def generate_schema_from_json_file(path: str):
     """
     Generate a JSON schema from a JSON file.
@@ -65,7 +66,8 @@ def generate_schema_from_json_file(path: str):
         raise ValueError("Invalid JSON file") from e
 
 
-def generate_schema_from_jsonl_file(path: str):
+# TODO: add support for compressed files
+def generate_schema_from_jsonl_file(path: str) -> dict:
     """
     Generate a JSON schema from a JSONL file.
 

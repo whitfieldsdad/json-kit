@@ -23,8 +23,8 @@ def main(input_files: Tuple[str], output_file: Optional[str], indent: int):
     Convert a JSON Schema into a DOT file.
     """
     paths = files.find(input_files, files_only=True)
-    g = digraphs.schema_files_to_attribute_digraph(paths)
-    dot = digraphs.digraph_to_dot(g, indent=indent)
+    g = digraphs.schema_files_to_g(paths)
+    dot = digraphs.g_to_dot(g, indent=indent)
     if output_file:
         with open(output_file, "w") as f:
             f.write(dot)

@@ -25,8 +25,8 @@ def main(input_files: Tuple[str], output_file: Optional[str], indent: int):
     """
     paths = files.find(input_files, files_only=True)
     schema = json_schema.generate_schema_from_files(paths)
-    g = digraphs.schema_to_attribute_digraph(schema)
-    dot = digraphs.digraph_to_dot(g, indent=indent)
+    g = digraphs.json_schema_to_g(schema)
+    dot = digraphs.g_to_dot(g, indent=indent)
     if output_file:
         with open(output_file, "w") as f:
             f.write(dot)
