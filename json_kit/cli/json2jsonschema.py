@@ -18,10 +18,10 @@ from json_kit.constants import JSON_INDENT
 @click.option("--indent", default=JSON_INDENT, help="Indentation level")
 def main(input_files: Tuple[str], output_file: Optional[str], indent: int):
     """
-    Create a JSON Schema from one or more JSON files.
+    [JSON|JSONL] -> JSON Schema
     """
-    paths = files.find(input_files, files_only=True)
-    schema = json_schema.generate_schema_from_files(paths)
+    input_files = files.find(input_files, filename_patterns=['.json', '.jsonl'], files_only=True)
+    schema = json_schema.generate_schema_from_files(input_files)
     blob = json.dumps(schema, indent=indent)
     if output_file:
         with open(output_file, "w") as f:

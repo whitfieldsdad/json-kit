@@ -2,8 +2,6 @@ import json
 from typing import Optional, Tuple
 import click
 from json_kit import files
-from json_kit import json_files
-from json_kit.constants import MARKDOWN_INDENT
 
 
 @click.command()
@@ -17,10 +15,10 @@ from json_kit.constants import MARKDOWN_INDENT
 @click.option('--key', '-k', help='Key to enumerate', required=False)
 def main(input_files: Tuple[str], output_file: Optional[str], key: Optional[str]):
     """
-    Convert one or more JSON documents into a JSONL file.
+    [JSON|JSONL] -> JSONL
     """
-    input_files = files.find(input_files, files_only=True)
-    docs = json_files.read_json_files(input_files)
+    input_files = files.find(input_files, filename_patterns=['.json', '.jsonl'], files_only=True)
+    docs = files.read_files(input_files)
     if key:
         docs = [doc[key] for doc in docs]
     
@@ -32,4 +30,3 @@ def main(input_files: Tuple[str], output_file: Optional[str], key: Optional[str]
     else:
         for doc in docs:
             print(json.dumps(doc, sort_keys=True))
-

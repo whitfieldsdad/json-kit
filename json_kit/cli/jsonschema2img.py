@@ -1,10 +1,6 @@
-from typing import Optional, Tuple
+from typing import Tuple
 import click
-from json_kit import files
-from json_kit import digraphs
-
-ATTRIBUTE_GRAPH = "attributes"
-GRAPH_TYPES = [ATTRIBUTE_GRAPH]
+from json_kit import files, generator
 
 
 @click.command()
@@ -17,8 +13,8 @@ GRAPH_TYPES = [ATTRIBUTE_GRAPH]
 @click.option("--output-file", "-o", help="Path to output file", required=True)
 def main(input_files: Tuple[str], output_file: str):
     """
-    Draw a directed graph from a JSON Schema file and save it to an image file.
+    JSON Schema -> DOT -> [PNG|SVG]
     """
-    paths = files.find(input_files, files_only=True)
-    g = digraphs.schema_files_to_g(paths)
-    digraphs.g_to_img(g, output_file)
+    input_files = files.find(input_files, filename_patterns=['.json', '.jsonl'], files_only=True)
+    g = generator.json_schema_files_to_digraph(input_files)
+    generator.g_to_img(g, output_file)

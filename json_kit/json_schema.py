@@ -105,11 +105,13 @@ def merge_schemas(schemas: Iterable[dict]) -> dict:
     :return: The merged schema.
     """
     schemas = tuple(schemas)
-    logger.info(f"Merging {len(schemas)} JSON schemas...")
+    if len(schemas) == 1:
+        return next(iter(schemas))
 
+    logger.info(f"Merging {len(schemas)} JSON schemas...")
     builder = genson.SchemaBuilder()
     for i, schema in enumerate(schemas):
-        logger.info(f'JSON schema #{i + 1}/{len(schemas)}: {json.dumps(schema)}')
+        logger.debug(f'JSON schema {i + 1}/{len(schemas)}: {json.dumps(schema)}')
         builder.add_schema(schema)
     schema = builder.to_schema()
 
