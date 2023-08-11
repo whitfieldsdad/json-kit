@@ -189,7 +189,7 @@ Yielding:
 }
 ```
 
-You can also save the generated JSON Schema to a file:
+You can save the output to a file using shell redirection or the `--output-file/-o` option:
 
 ```bash
 # Option #1: shell redirection
@@ -199,7 +199,7 @@ poetry run json2schema demo/cti/enterprise-attack/campaign/*.json | jq '.' > dem
 poetry run json2schema demo/cti/enterprise-attack/campaign/*.json -o demo/generated/campaign.schema.json
 ```
 
-You can also generate one JSON Schema per input file:
+You can also generate one JSON Schema per input file by passing a directory to the `--output-file/-o` option:
 
 ```bash
 poetry run json2schema cti/enterprise-attack/campaign/*.json -o demo/generated
