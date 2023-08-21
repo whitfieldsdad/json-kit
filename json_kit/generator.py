@@ -18,13 +18,20 @@ from typing import Any, Iterable, Iterator, List, Optional, Tuple, Union
 from dataclasses import dataclass
 import networkx as nx
 from json_kit.logging import logger
-from json_kit.constants import DOT_INDENT, JSON_INDENT
+from json_kit.constants import DOT_INDENT
 from json_kit import files
 from json_kit import json_schema
+from dataclasses import dataclass
 
 PNG = "png"
 SVG = "svg"
 IMAGE_TYPES = [PNG, SVG]
+
+
+@dataclass(frozen=True)
+class Field:
+    key: str
+    parent_keys: List[str]
 
 
 @dataclass
@@ -132,49 +139,129 @@ def json_schema_files_to_image_file(input_files: Iterable[str], output_file: str
 # TODO: add support for multiple levels of nesting
 def _json_schema_to_digraph(schema: dict) -> nx.DiGraph:
     g = nx.DiGraph()
-    for k, pks in _iter_json_schema_properties(schema):
-        if not pks:
-            g.add_node(k)
+    for field in _iter_json_schema_fields(schema):
+        key = field.key
+        parent_keys = field.parent_keys
+
+        if not parent_keys:
+            g.add_node(key)
         else:
-            h = "_".join(pks) + "_" + k
-            g.add_node(h, label=k)
+            h = "_".join(parent_keys) + "_" + key
+            g.add_node(h, label=key)
 
-            if len(pks) > 1:
-                raise NotImplementedError("Multiple levels of nesting is not yet supported")
+            if len(field.parent_keys) > 1:
+                logger.warning(f'Field has more than one parent key: {field.key} (parents: {field.parent_keys}))')
 
-            for pk in pks:
-                g.add_edge(pk, h)            
+            for parent_key in field.parent_keys:
+                g.add_edge(parent_key, h)
     return g
 
 
-def _iter_json_schema_properties(schema: dict) -> Iterator[Tuple[str, str]]:
-    def walk(data: dict, pks: Optional[List[str]] = None):
-        pks = pks or []
-        for k, spec in data.items():
-            if 'type' in spec:
-                object_type = spec['type']
+# TODO
+def _iter_json_schema_fields(schema: dict) -> Iterator[Field]:
+    for key, spec in schema['properties'].items():
+        yield from _iter_fields_from_json_schema_field_spec(key, spec)
 
-                # Nested objects
-                if object_type == 'object':
-                    yield from walk(spec['properties'], pks=pks + [k])
-                
-                # Object arrays
-                elif object_type == 'array' and spec['items']['type'] == 'object':
-                    yield from walk(spec['items']['properties'], pks=pks + [k])
-                
-                # Scalars
-                else:
-                    yield k, pks
 
-            elif 'anyOf' in spec:
-                for sub_spec in spec['anyOf']:
-                    if sub_spec['type'] != 'null':
-                        yield from walk(sub_spec['properties'], pks=pks + [k])
-            else:
-                raise NotImplementedError(f"Unhandled property format: {k} -> {spec}")
+def _iter_fields_from_json_schema_field_spec(key: str, spec: dict, parent_keys: Optional[List[str]] = None) -> Iterator[Field]:
+    """
+    Example inputs:
+
+    Scalars:
     
-    yield from walk(schema['properties'])
+    {'type': 'integer'}
+    {'type': 'number'}
+    {'type': 'string'}
+    {'type': 'boolean'}
 
+    Scalar arrays:
+
+    {'type': 'array', 'items': {'type': 'string'}}
+    
+    Multiple types:
+
+    {'type': ['null', 'number']}
+
+    Or:
+
+    {
+        "anyOf": [
+            {
+                "type": "string"
+            },
+            {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        ]
+    }
+
+    Object arrays:
+
+    {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "ref_count": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name",
+                "ref_count",
+                "type"
+            ]
+        }
+    }
+    """
+    parent_keys = parent_keys or []
+
+    if 'type' in spec:
+        value_type = spec['type']
+
+        # Scalars (e.g. integers, nullable integers, etc.)
+        if isinstance(value_type, list):
+            yield Field(key=key, parent_keys=parent_keys)
+        
+        elif isinstance(value_type, str):
+
+            # Objects
+            if value_type == 'object':
+                for property_key, property_spec in spec['properties'].items():
+                    yield from _iter_fields_from_json_schema_field_spec(property_key, property_spec, parent_keys + [key])
+
+            # Arrays
+            elif value_type == 'array':
+
+                # Object arrays
+                if spec['type'] == 'object':
+                    raise NotImplementedError("Object arrays not implemented")
+                
+                # Scalar arrays (i.e. arrays of integers, strings, etc.)
+                else:
+                    yield Field(key=key, parent_keys=parent_keys)
+            
+            # Scalar fields (i.e. integers, strings, etc.)
+            else:
+                yield Field(key=key, parent_keys=parent_keys)
+        else:
+            raise NotImplementedError(f'Key: `{key}` - spec: {spec}')
+    
+    # Multiple types
+    elif 'anyOf' in spec:
+        for sub_spec in spec['anyOf']:
+            yield from _iter_fields_from_json_schema_field_spec(key, sub_spec, parent_keys=parent_keys)
+    else:
+        raise NotImplementedError(f'Key: `{key}` - spec: {spec}')
 
 # TODO
 def _digraph_to_dot(
