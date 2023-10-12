@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "json-kit"
-version = "0.1.0"
+version = "1.0.0"
 description = "One man's attempt to conquer JSON once and for all"
 authors = ["Tyler Fisher <tylerfisher@tylerfisher.ca>"]
 license = "MIT"
@@ -16,12 +16,7 @@ matplotlib = "^3.7.1"
 pydot = "^1.4.2"
 
 [tool.poetry.scripts]
-json2dot = "json_kit.cli.json2dot:main"
-json2img = "json_kit.cli.json2img:main"
-json2schema = "json_kit.cli.json2jsonschema:main"
-json2jsonschema = "json_kit.cli.json2jsonschema:main"
-jsonschema2dot = "json_kit.cli.jsonschema2dot:main"
-jsonschema2img = "json_kit.cli.jsonschema2img:main"
+jsonkit = "json_kit.cli:main"
 
 [build-system]
 requires = ["poetry-core"]
