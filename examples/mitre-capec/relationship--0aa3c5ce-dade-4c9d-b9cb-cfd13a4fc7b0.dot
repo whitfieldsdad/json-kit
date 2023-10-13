@@ -1,0 +1,32 @@
+strict digraph  {
+rankdir=LR;
+id [shape=box, style=rounded];
+"." [shape=box, style=rounded];
+"objects[]" [shape=box, style=rounded];
+"objects[].created" [label=created, shape=box, style=rounded];
+"objects[].created_by_ref" [label=created_by_ref, shape=box, style=rounded];
+"objects[].id" [label=id, shape=box, style=rounded];
+"objects[].modified" [label=modified, shape=box, style=rounded];
+"objects[].object_marking_refs[]" [label="object_marking_refs[]", shape=box, style=rounded];
+"objects[].relationship_type" [label=relationship_type, shape=box, style=rounded];
+"objects[].source_ref" [label=source_ref, shape=box, style=rounded];
+"objects[].spec_version" [label=spec_version, shape=box, style=rounded];
+"objects[].target_ref" [label=target_ref, shape=box, style=rounded];
+"objects[].type" [label=type, shape=box, style=rounded];
+"objects[].x_capec_version" [label=x_capec_version, shape=box, style=rounded];
+type [shape=box, style=rounded];
+"." -> id;
+"." -> "objects[]";
+"." -> type;
+"objects[]" -> "objects[].created";
+"objects[]" -> "objects[].created_by_ref";
+"objects[]" -> "objects[].id";
+"objects[]" -> "objects[].modified";
+"objects[]" -> "objects[].object_marking_refs[]";
+"objects[]" -> "objects[].relationship_type";
+"objects[]" -> "objects[].source_ref";
+"objects[]" -> "objects[].spec_version";
+"objects[]" -> "objects[].target_ref";
+"objects[]" -> "objects[].type";
+"objects[]" -> "objects[].x_capec_version";
+}

@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string"
+        },
+        "spec_version": {
+            "type": "string"
+        },
+        "objects": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "definition": {
+                        "type": "object",
+                        "properties": {
+                            "statement": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "statement"
+                        ]
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "created": {
+                        "type": "string"
+                    },
+                    "created_by_ref": {
+                        "type": "string"
+                    },
+                    "definition_type": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "created",
+                    "created_by_ref",
+                    "definition",
+                    "definition_type",
+                    "id",
+                    "type"
+                ]
+            }
+        }
+    },
+    "required": [
+        "id",
+        "objects",
+        "spec_version",
+        "type"
+    ]
+}

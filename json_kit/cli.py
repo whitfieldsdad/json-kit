@@ -46,5 +46,14 @@ def json_to_dot(input_files: Iterable[str], output_file: Optional[str]):
 
 
 
+@main.command('json-to-image')
+@click.argument('input-files', nargs=1, required=True)
+@click.option('--output-file', '-o', required=True)
+def json_to_image(input_files: Iterable[str], output_file: str):
+    input_files = tuple(files.find(input_files, files_only=True))
+    schema = converter.generate_json_schema_from_files(input_files)
+    converter.json_schema_to_image(schema, output_file)
+
+
 if __name__ == "__main__":
     main()

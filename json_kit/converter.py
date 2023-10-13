@@ -1,3 +1,6 @@
+import os
+import subprocess
+import tempfile
 from networkx import DiGraph
 import json
 import sys
@@ -14,7 +17,6 @@ logger = logging.getLogger(__name__)
 DEFAULT_INDENT = 4
 
 
-# TODO
 def generate_json_schema(
         docs: Iterable[Any], 
         json_encoder_cls: Optional[json.JSONEncoder] = None) -> dict:
@@ -26,6 +28,8 @@ def generate_json_schema(
     """
     builder = genson.SchemaBuilder()
     for doc in docs:
+        doc = json.dumps(doc, cls=json_encoder_cls)
+        doc = json.loads(doc)
         builder.add_object(doc)
     return builder.to_schema()
 
@@ -44,6 +48,7 @@ def generate_json_schema_from_files(
 
 
 def _read_json_documents(path: str) -> Iterator[Any]:
+    logger.info(f"Reading JSON documents from {path}")
     if path.endswith('.json'):
         with open(path) as file:
             doc = json.load(file)
@@ -105,6 +110,25 @@ def json_schema_to_dot(schema: dict) -> str:
     return d.to_string()
 
 
+def json_schema_to_image(schema: dict, output_file: str):
+    """
+    Convert a JSON schema to an image.
+
+    :param schema: a JSON schema
+    :param output_file: the output file
+    """
+    output_filename = os.path.basename(output_file)
+    output_format = output_filename.split('.')[-1]
+    if output_format not in ['png', 'svg']:
+        raise ValueError(f"Unsupported output format: {output_format}")
+
+    dot = json_schema_to_dot(schema)
+    with tempfile.NamedTemporaryFile() as fp:
+        fp.write(dot.encode())
+        fp.flush()
+        subprocess.run(['dot', f'-T{output_format}', '-Gdpi=300', fp.name, '-o', output_file])
+
+
 def json_schema_to_nx_digraph(schema: dict) -> DiGraph:
     keys = sorted(iter_keys_from_json_schema(schema))
     
@@ -141,16 +165,20 @@ def iter_keys_from_json_schema(schema: dict) -> Iterator[str]:
 
         for key, value in o['properties'].items():
             value_type = value['type']
+
             if value_type == 'array':
                 key = f'{key}[]'
                 keys.add('.'.join(parent_keys + [key]))
-                subtype = value['items']['type']
-                if subtype == 'object':
-                    yield from generator(value['items'], parent_keys + [key], keys)
+                
+                if 'items' in value:
+                    subtype = value['items']['type']
+                    if subtype == 'object':
+                        yield from generator(value['items'], parent_keys + [key], keys)
 
             elif value_type == 'object':
                 keys.add('.'.join(parent_keys + [key]))
                 yield from generator(value, parent_keys + [key], keys)
+            
             else:
                 keys.add('.'.join(parent_keys + [key]))
 

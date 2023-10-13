@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string"
+        },
+        "spec_version": {
+            "type": "string"
+        },
+        "objects": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "object_marking_refs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "x_mitre_version": {
+                        "type": "string"
+                    },
+                    "modified": {
+                        "type": "string"
+                    },
+                    "created": {
+                        "type": "string"
+                    },
+                    "external_references": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "url": {
+                                    "type": "string"
+                                },
+                                "external_id": {
+                                    "type": "string"
+                                },
+                                "source_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "source_name",
+                                "url"
+                            ]
+                        }
+                    },
+                    "x_mitre_deprecated": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "created_by_ref": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "created",
+                    "created_by_ref",
+                    "description",
+                    "external_references",
+                    "id",
+                    "modified",
+                    "name",
+                    "object_marking_refs",
+                    "type",
+                    "x_mitre_deprecated",
+                    "x_mitre_version"
+                ]
+            }
+        }
+    },
+    "required": [
+        "id",
+        "objects",
+        "spec_version",
+        "type"
+    ]
+}

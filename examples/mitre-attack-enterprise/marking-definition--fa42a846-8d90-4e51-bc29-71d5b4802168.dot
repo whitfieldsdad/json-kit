@@ -1,0 +1,26 @@
+strict digraph  {
+rankdir=LR;
+id [shape=box, style=rounded];
+"." [shape=box, style=rounded];
+"objects[]" [shape=box, style=rounded];
+"objects[].created" [label=created, shape=box, style=rounded];
+"objects[].created_by_ref" [label=created_by_ref, shape=box, style=rounded];
+"objects[].definition" [label=definition, shape=box, style=rounded];
+"objects[].definition.statement" [label=statement, shape=box, style=rounded];
+"objects[].definition_type" [label=definition_type, shape=box, style=rounded];
+"objects[].id" [label=id, shape=box, style=rounded];
+"objects[].type" [label=type, shape=box, style=rounded];
+spec_version [shape=box, style=rounded];
+type [shape=box, style=rounded];
+"." -> id;
+"." -> "objects[]";
+"." -> spec_version;
+"." -> type;
+"objects[]" -> "objects[].created";
+"objects[]" -> "objects[].created_by_ref";
+"objects[]" -> "objects[].definition";
+"objects[]" -> "objects[].definition_type";
+"objects[]" -> "objects[].id";
+"objects[]" -> "objects[].type";
+"objects[].definition" -> "objects[].definition.statement";
+}

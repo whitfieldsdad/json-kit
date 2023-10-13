@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "objects": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "created": {
+                        "type": "string"
+                    },
+                    "created_by_ref": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "modified": {
+                        "type": "string"
+                    },
+                    "object_marking_refs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "relationship_type": {
+                        "type": "string"
+                    },
+                    "source_ref": {
+                        "type": "string"
+                    },
+                    "spec_version": {
+                        "type": "string"
+                    },
+                    "target_ref": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "x_capec_version": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "created",
+                    "created_by_ref",
+                    "id",
+                    "modified",
+                    "object_marking_refs",
+                    "relationship_type",
+                    "source_ref",
+                    "spec_version",
+                    "target_ref",
+                    "type",
+                    "x_capec_version"
+                ]
+            }
+        },
+        "type": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "id",
+        "objects",
+        "type"
+    ]
+}

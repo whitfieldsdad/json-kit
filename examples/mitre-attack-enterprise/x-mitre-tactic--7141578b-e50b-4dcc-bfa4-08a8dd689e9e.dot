@@ -1,0 +1,38 @@
+strict digraph  {
+rankdir=LR;
+id [shape=box, style=rounded];
+"." [shape=box, style=rounded];
+"objects[]" [shape=box, style=rounded];
+"objects[].created" [label=created, shape=box, style=rounded];
+"objects[].created_by_ref" [label=created_by_ref, shape=box, style=rounded];
+"objects[].description" [label=description, shape=box, style=rounded];
+"objects[].external_references[]" [label="external_references[]", shape=box, style=rounded];
+"objects[].external_references[].external_id" [label=external_id, shape=box, style=rounded];
+"objects[].external_references[].source_name" [label=source_name, shape=box, style=rounded];
+"objects[].external_references[].url" [label=url, shape=box, style=rounded];
+"objects[].id" [label=id, shape=box, style=rounded];
+"objects[].modified" [label=modified, shape=box, style=rounded];
+"objects[].name" [label=name, shape=box, style=rounded];
+"objects[].object_marking_refs[]" [label="object_marking_refs[]", shape=box, style=rounded];
+"objects[].type" [label=type, shape=box, style=rounded];
+"objects[].x_mitre_shortname" [label=x_mitre_shortname, shape=box, style=rounded];
+spec_version [shape=box, style=rounded];
+type [shape=box, style=rounded];
+"." -> id;
+"." -> "objects[]";
+"." -> spec_version;
+"." -> type;
+"objects[]" -> "objects[].created";
+"objects[]" -> "objects[].created_by_ref";
+"objects[]" -> "objects[].description";
+"objects[]" -> "objects[].external_references[]";
+"objects[]" -> "objects[].id";
+"objects[]" -> "objects[].modified";
+"objects[]" -> "objects[].name";
+"objects[]" -> "objects[].object_marking_refs[]";
+"objects[]" -> "objects[].type";
+"objects[]" -> "objects[].x_mitre_shortname";
+"objects[].external_references[]" -> "objects[].external_references[].external_id";
+"objects[].external_references[]" -> "objects[].external_references[].source_name";
+"objects[].external_references[]" -> "objects[].external_references[].url";
+}
