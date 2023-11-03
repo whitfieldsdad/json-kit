@@ -3,11 +3,9 @@ import subprocess
 import tempfile
 from networkx import DiGraph
 import json
-import sys
-import collections
 import time
 import genson
-from typing import Any, Iterable, Iterator, List, Optional, Set, Union
+from typing import Any, Iterable, Iterator, List, Optional, Set
 
 import networkx.drawing.nx_pydot
 import logging
@@ -158,6 +156,16 @@ def json_schema_to_nx_digraph(schema: dict) -> DiGraph:
     return g
 
 
+def iter_keys_from_json_files(paths: Iterable[str]) -> Iterator[str]:
+    schema = generate_json_schema_from_files(paths)
+    yield from iter_keys_from_json_schema(schema)
+
+
+def iter_keys_from_json_documents(docs: Iterable[Any]) -> Iterator[str]:
+    schema = generate_json_schema(docs)
+    yield from iter_keys_from_json_schema(schema)
+
+
 def iter_keys_from_json_schema(schema: dict) -> Iterator[str]:
     def generator(o: Any, parent_keys: Optional[List[str]] = None, keys: Optional[Set[str]] = None) -> Iterator[str]:
         keys = keys or set()
@@ -185,5 +193,3 @@ def iter_keys_from_json_schema(schema: dict) -> Iterator[str]:
         yield from keys
 
     yield from sorted(set(generator(schema)))
-
-    

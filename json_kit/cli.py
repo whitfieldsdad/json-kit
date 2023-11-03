@@ -14,6 +14,23 @@ def main():
     pass
 
 
+@main.command('json-keys')
+@click.argument('input-files', nargs=-1, required=True)
+@click.option('--output-file', '-o', required=False)
+def json_keys(input_files: Iterable[str], output_file: Optional[str]):
+    """
+    JSON[L] -> keys (one per line)
+    """
+    input_files = tuple(files.find(input_files, files_only=True))
+    keys = converter.iter_keys_from_json_files(input_files)
+    if output_file:
+        with open(output_file, 'w') as fp:
+            fp.write('\n'.join(keys))
+    else:
+        for key in keys:
+            print(key)
+
+
 @main.command('json-to-json-schema')
 @click.argument('input-files', nargs=-1, required=True)
 @click.option('--output-file', '-o', required=False)
@@ -43,7 +60,6 @@ def json_to_dot(input_files: Iterable[str], output_file: Optional[str]):
             fp.write(dot)
     else:
         print(dot)
-
 
 
 @main.command('json-to-image')

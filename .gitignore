@@ -1,2 +1,11 @@
-*.pyc
+# Python build and enviromental artifacts
+*.py[cod]
 __pycache__/
+venv/
+build/
+dist/
+
+# macOS
+.DS_Store
+
+examples
