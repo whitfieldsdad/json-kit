@@ -17,6 +17,7 @@ pydot = "^1.4.2"
 pyinstaller = "^6.1.0"
 
 [tool.poetry.scripts]
+jk = "json_kit.cli:main"
 jsonkit = "json_kit.cli:main"
 json-kit = "json_kit.cli:main"
 

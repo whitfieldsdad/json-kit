@@ -46,7 +46,7 @@ def generate_json_schema_from_files(
 
 
 def _read_json_documents(path: str) -> Iterator[Any]:
-    logger.info(f"Reading JSON documents from {path}")
+    logger.debug(f"Reading JSON documents from {path}")
     if path.endswith('.json'):
         with open(path) as file:
             doc = json.load(file)
@@ -74,7 +74,7 @@ def merge_json_schemas(schemas: Iterable[dict]) -> dict:
     elif n == 1:
         return next(iter(schemas))
 
-    logger.info(f"Merging {n} JSON schemas...")
+    logger.debug(f"Merging {n} JSON schemas...")
     start_time = time.time()
 
     builder = genson.SchemaBuilder()
@@ -83,7 +83,7 @@ def merge_json_schemas(schemas: Iterable[dict]) -> dict:
     schema = builder.to_schema()
 
     duration = time.time() - start_time
-    logger.info(f"Merged {n} JSON schemas in %.2f seconds", duration)
+    logger.debug(f"Merged {n} JSON schemas in %.2f seconds", duration)
     return schema
         
 
@@ -98,13 +98,12 @@ def json_schema_to_dot(schema: dict) -> str:
     
     # Convert the graph to DOT format.
     d = networkx.drawing.nx_pydot.to_pydot(g)
-    d.set_rankdir('LR')
+    d.set_rankdir('LR')    
 
     # Set the node and edge styles.
     for node in d.get_nodes():
         node.set_shape('box')
         node.set_style('rounded')
-    
     return d.to_string()
 
 
@@ -121,10 +120,24 @@ def json_schema_to_image(schema: dict, output_file: str):
         raise ValueError(f"Unsupported output format: {output_format}")
 
     dot = json_schema_to_dot(schema)
+    dot_to_image(dot, output_file)
+
+
+def dot_to_image(dot: str, path: str):
+    output_format = path.split('.')[-1]
+    if output_format not in ['png', 'svg']:
+        raise ValueError(f"Unsupported output format: {output_format}")
+
     with tempfile.NamedTemporaryFile() as fp:
         fp.write(dot.encode())
         fp.flush()
-        subprocess.run(['dot', f'-T{output_format}', '-Gdpi=300', fp.name, '-o', output_file])
+        subprocess.run(['dot', f'-T{output_format}', '-Gdpi=300', fp.name, '-o', path])
+
+
+def dot_file_to_image_file(dot_file: str, image_file: str):
+    with open(dot_file) as fp:
+        dot = fp.read()
+    dot_to_image(dot, image_file)
 
 
 def json_schema_to_nx_digraph(schema: dict) -> DiGraph:
@@ -152,7 +165,7 @@ def json_schema_to_nx_digraph(schema: dict) -> DiGraph:
                 if not g.has_edge(source, target):
                     g.add_edge(source, target)
 
-    logger.info(f"Generated graph with {len(g.nodes)} nodes and {len(g.edges)} edges")
+    logger.debug(f"Generated graph with {len(g.nodes)} nodes and {len(g.edges)} edges")
     return g
 
 

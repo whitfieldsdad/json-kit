@@ -21,4 +21,7 @@ executable:
 docs:
 	cd docs && make
 
-.PHONY: bin dist docs
+examples:
+	make -C examples
+
+.PHONY: bin dist docs examples

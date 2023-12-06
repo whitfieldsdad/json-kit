@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 from typing import Iterable, Optional
 from json_kit.constants import JSON_INDENT
 import json_kit.converter as converter
@@ -62,8 +63,50 @@ def json_to_dot(input_files: Iterable[str], output_file: Optional[str]):
         print(dot)
 
 
+@main.command('dot-to-png')
+@click.argument('input-file', required=True)
+@click.option('--output-file', '-o', required=False)
+@click.pass_context
+def dot_to_png(ctx: click.Context, input_file: str, output_file: Optional[str]):
+    if not output_file:
+        input_filename = os.path.basename(input_file)
+        output_filename = input_filename.replace('.dot', '.png')
+        output_file = os.path.join(os.path.dirname(input_file), output_filename)
+    ctx.invoke(dot_to_image, input_file=input_file, output_file=output_file)
+
+
+@main.command('dot-to-svg')
+@click.argument('input-file', required=True)
+@click.option('--output-file', '-o', required=False)
+@click.pass_context
+def dot_to_svg(ctx: click.Context, input_file: str, output_file: Optional[str]):
+    if not output_file:
+        input_filename = os.path.basename(input_file)
+        output_filename = input_filename.replace('.dot', '.svg')
+        output_file = os.path.join(os.path.dirname(input_file), output_filename)
+    ctx.invoke(dot_to_image, input_file=input_file, output_file=output_file)
+
+
+@main.command('dot-to-image')
+@click.argument('input-file', required=True)
+@click.option('--output-file', '-o', required=True)
+def dot_to_image(input_file: str, output_file: str):
+    converter.dot_file_to_image_file(input_file, output_file)
+
+
+@main.command('json-to-png')
+@click.argument('input-file', required=True)
+@click.option('--output-file', '-o', required=False)
+def json_to_png(input_file: str, output_file: Optional[str]):
+    if not output_file:
+        input_filename = os.path.basename(input_file)
+        output_filename = input_filename.replace('.json', '.png')
+        output_file = os.path.join(os.path.dirname(input_file), output_filename)
+    json_to_image([input_file], output_file)
+
+
 @main.command('json-to-image')
-@click.argument('input-files', nargs=1, required=True)
+@click.argument('input-files', required=True)
 @click.option('--output-file', '-o', required=True)
 def json_to_image(input_files: Iterable[str], output_file: str):
     input_files = tuple(files.find(input_files, files_only=True))
