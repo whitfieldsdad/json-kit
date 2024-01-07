@@ -1,72 +1,209 @@
-import os
-import subprocess
-import tempfile
-from networkx import DiGraph
 import json
-import time
+import os
 import genson
-from typing import Any, Iterable, Iterator, List, Optional, Set
+from typing import Any, Iterable, Iterator, Set, Union
 
-import networkx.drawing.nx_pydot
+import pandas as pd
 import logging
+import tempfile
+import functools
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_INDENT = 4
+JSON = "json"
+JSON_SCHEMA = "json_schema"
+JSONL = "jsonl"
+DOT = "dot"
+PNG = "png"
+SVG = "svg"
+
+IMAGE_TYPES = {PNG, SVG}
+DEFAULT_IMAGE_TYPE = PNG
 
 
-def generate_json_schema(
-        docs: Iterable[Any], 
-        json_encoder_cls: Optional[json.JSONEncoder] = None) -> dict:
-    """
-    Generate a JSON schema from one or more JSON documents.
-
-    :param docs: one or more dictionaries or JSON documents
-    :return: a JSON schema
-    """
-    builder = genson.SchemaBuilder()
-    for doc in docs:
-        doc = json.dumps(doc, cls=json_encoder_cls)
-        doc = json.loads(doc)
-        builder.add_object(doc)
-    return builder.to_schema()
+def convert_json_to_dot(input_data: str) -> str:
+    raise NotImplementedError()
 
 
-def generate_json_schema_from_files(
-        paths: Iterable[str],
-        json_encoder_cls: Optional[json.JSONEncoder] = None) -> dict:    
-    
+def convert_json_to_image(
+    input_data: str, output_file: str, image_type: str = DEFAULT_IMAGE_TYPE
+) -> bytes:
+    raise NotImplementedError()
+
+
+def convert_json_to_json_schema(input_data: str) -> dict:
+    raise NotImplementedError()
+
+
+def convert_json_schema_to_dot(input_data: str) -> str:
+    raise NotImplementedError()
+
+
+def convert_json_schema_to_image(
+    input_data: str, output_file: str, image_type: str = DEFAULT_IMAGE_TYPE
+) -> bytes:
+    raise NotImplementedError()
+
+
+def convert_dot_to_image(
+    input_data: str, output_file: str, image_type: str = DEFAULT_IMAGE_TYPE
+) -> bytes:
+    raise NotImplementedError()
+
+
+def convert_dot_file_to_image_file(
+    input_file: str, output_file: str, image_type: str = DEFAULT_IMAGE_TYPE
+):
+    raise NotImplementedError()
+
+
+def convert_json_file_to_dot_file(
+    input_file: str, output_file: str, lines: bool = False
+):
+    raise NotImplementedError()
+
+
+def convert_json_file_to_image_file(
+    input_file: str,
+    output_file: str,
+    lines: bool = False,
+    image_type: str = DEFAULT_IMAGE_TYPE,
+):
+    raise NotImplementedError()
+
+
+def convert_json_file_to_json_schema_file(
+    input_file: str, output_file: str, lines: bool = False
+):
+    raise NotImplementedError()
+
+
+def convert_json_schema_file_to_dot_file(input_file: str, output_file: str):
+    raise NotImplementedError()
+
+
+def convert_json_schema_file_to_image_file(
+    input_file: str, output_file: str, image_type: str = DEFAULT_IMAGE_TYPE
+):
+    raise NotImplementedError()
+
+
+def convert_json_to_image_file(
+    input_data: str, image_type: str = DEFAULT_IMAGE_TYPE
+) -> str:
+    raise NotImplementedError()
+
+
+DATA_CONVERTERS = {}
+
+
+FILE_CONVERTERS = {
+    (DOT, PNG): functools.partial(convert_dot_file_to_image_file, image_type=PNG),
+    (DOT, SVG): functools.partial(convert_dot_file_to_image_file, image_type=SVG),
+    (JSON, DOT): convert_json_file_to_dot_file,
+    (JSON, JSON_SCHEMA): convert_json_file_to_json_schema_file,
+    (JSON, PNG): functools.partial(convert_json_file_to_image_file, image_type=PNG),
+    (JSON, SVG): functools.partial(convert_json_file_to_image_file, image_type=SVG),
+    (JSONL, DOT): functools.partial(convert_json_file_to_dot_file, lines=True),
+    (JSONL, JSON_SCHEMA): functools.partial(
+        convert_json_file_to_json_schema_file, lines=True
+    ),
+    (JSONL, PNG): functools.partial(
+        convert_json_file_to_image_file, lines=True, image_type=PNG
+    ),
+    (JSONL, SVG): functools.partial(
+        convert_json_file_to_image_file, lines=True, image_type=SVG
+    ),
+    (JSON_SCHEMA, DOT): convert_json_schema_file_to_dot_file,
+    (JSON_SCHEMA, PNG): functools.partial(
+        convert_json_schema_file_to_image_file, image_type=PNG
+    ),
+    (JSON_SCHEMA, SVG): functools.partial(
+        convert_json_schema_file_to_image_file, image_type=SVG
+    ),
+}
+
+
+def generate_png_file_from_json_files(input_files: Iterable[str], output_file: str):
+    dot = generate_dot_from_json_files(input_files)
+    generate_png_file_from_dot(dot, output_file)
+
+
+def generate_png_file_from_dot(dot: str, output_file: str):
+    with tempfile.NamedTemporaryFile() as file:
+        file.write(dot.encode("utf-8"))
+        file.flush()
+
+        cmd = f"dot -Tpng {file.name} -Gdpi=300 -Gsize=3,4\! -o {output_file}"
+        os.system(cmd)
+
+
+def generate_dot_from_json_files(paths: Iterable[str]) -> str:
+    keys = iter_keys_from_json_files(paths)
+    return generate_dot_from_dotted_keys(keys)
+
+
+def generate_dot_from_dotted_keys(keys: Iterable[str]) -> str:
+    lines = []
+    lines.append("digraph {")
+    lines.append("  rankdir=LR;")
+    lines.append("  concentrate=true;")
+    lines.append("  node [shape=record];")
+    lines.append("  edge [arrowhead=none];")
+    lines.append("  splines=false;")
+    lines.append("")
+
+    for key in sorted(set(keys)):
+        if "." not in key and key not in lines:
+            lines.append(f"  {key};")
+
+        parts = key.split(".")
+        for i in range(1, len(parts)):
+            parent = ".".join(parts[:i])
+            child = ".".join(parts[: i + 1])
+
+            lines.append(f'  {child.replace(".", "_")} [label={child.split(".")[-1]}];')
+            lines.append(f'  {parent.replace(".", "_")} -> {child.replace(".", "_")};')
+
+    lines.append("}")
+    return "\n".join(lines)
+
+
+def iter_keys_from_json_files(paths: Iterable[str]) -> Iterator[str]:
+    keys = set()
+    for path in paths:
+        docs = read_json_file(path)
+        for key in get_dotted_dict_keys(docs):
+            if key not in keys:
+                keys.add(key)
+                yield key
+
+
+def get_dotted_dict_keys(data: Union[dict, Iterable[dict]]) -> Set[str]:
+    df = pd.json_normalize(data, sep=".")
+    return set(df.columns)
+
+
+def generate_json_schema_from_json_files(paths: Iterable[str]) -> dict:
     schemas = []
     for path in paths:
-        docs = _read_json_documents(path)
-        schema = generate_json_schema(docs, json_encoder_cls=json_encoder_cls)
+        docs = read_json_file(path)
+        schema = generate_json_schema_from_json_file(docs)
         if schema not in schemas:
             schemas.append(schema)
     return merge_json_schemas(schemas)
 
 
-def _read_json_documents(path: str) -> Iterator[Any]:
-    logger.debug(f"Reading JSON documents from {path}")
-    if path.endswith('.json'):
-        with open(path) as file:
-            doc = json.load(file)
-        yield doc
-
-    elif path.endswith('.jsonl'):
-        with open(path) as file:
-            lines = filter(bool, map(lambda line: line.strip(), file))
-            yield from map(json.loads, lines)
-    else:
-        raise ValueError(f"Unsupported file extension: {path}")
+def generate_json_schema_from_json_file(docs: Iterable[Any]) -> dict:
+    builder = genson.SchemaBuilder()
+    for doc in docs:
+        doc = json.dumps(doc)
+        doc = json.loads(doc)
+        builder.add_object(doc)
+    return builder.to_schema()
 
 
 def merge_json_schemas(schemas: Iterable[dict]) -> dict:
-    """
-    Merge one or more JSON schemas into a single JSON schema.
-
-    :param schemas: one or more JSON schemas
-    :return: a JSON schema
-    """
     schemas = tuple(schemas)
     n = len(schemas)
     if n == 0:
@@ -74,135 +211,21 @@ def merge_json_schemas(schemas: Iterable[dict]) -> dict:
     elif n == 1:
         return next(iter(schemas))
 
-    logger.debug(f"Merging {n} JSON schemas...")
-    start_time = time.time()
-
     builder = genson.SchemaBuilder()
     for schema in schemas:
         builder.add_schema(schema)
     schema = builder.to_schema()
-
-    duration = time.time() - start_time
-    logger.debug(f"Merged {n} JSON schemas in %.2f seconds", duration)
     return schema
-        
-
-def json_schema_to_dot(schema: dict) -> str:
-    """
-    Convert a JSON schema to a DOT graph.
-
-    :param schema: a JSON schema
-    :return: a DOT graph
-    """
-    g = json_schema_to_nx_digraph(schema)
-    
-    # Convert the graph to DOT format.
-    d = networkx.drawing.nx_pydot.to_pydot(g)
-    d.set_rankdir('LR')    
-
-    # Set the node and edge styles.
-    for node in d.get_nodes():
-        node.set_shape('box')
-        node.set_style('rounded')
-    return d.to_string()
 
 
-def json_schema_to_image(schema: dict, output_file: str):
-    """
-    Convert a JSON schema to an image.
-
-    :param schema: a JSON schema
-    :param output_file: the output file
-    """
-    output_filename = os.path.basename(output_file)
-    output_format = output_filename.split('.')[-1]
-    if output_format not in ['png', 'svg']:
-        raise ValueError(f"Unsupported output format: {output_format}")
-
-    dot = json_schema_to_dot(schema)
-    dot_to_image(dot, output_file)
-
-
-def dot_to_image(dot: str, path: str):
-    output_format = path.split('.')[-1]
-    if output_format not in ['png', 'svg']:
-        raise ValueError(f"Unsupported output format: {output_format}")
-
-    with tempfile.NamedTemporaryFile() as fp:
-        fp.write(dot.encode())
-        fp.flush()
-        subprocess.run(['dot', f'-T{output_format}', '-Gdpi=300', fp.name, '-o', path])
-
-
-def dot_file_to_image_file(dot_file: str, image_file: str):
-    with open(dot_file) as fp:
-        dot = fp.read()
-    dot_to_image(dot, image_file)
-
-
-def json_schema_to_nx_digraph(schema: dict) -> DiGraph:
-    keys = sorted(iter_keys_from_json_schema(schema))
-    
-    g = DiGraph()
-    for key in keys:
-        if '.' not in key:
-            g.add_node(key)
-            g.add_edge('.', key)
-        else:
-            parts = key.split('.')
-
-            # Add nodes for each part of the key
-            for i in range(len(parts)):
-                node = '.'.join(parts[:i + 1])
-                if node not in g.nodes:
-                    label = parts[i]
-                    g.add_node(node, label=label)
-
-            # Add edges between each part of the key
-            for i in range(len(parts) - 1):
-                source = '.'.join(parts[:i + 1])
-                target = '.'.join(parts[:i + 2])
-                if not g.has_edge(source, target):
-                    g.add_edge(source, target)
-
-    logger.debug(f"Generated graph with {len(g.nodes)} nodes and {len(g.edges)} edges")
-    return g
-
-
-def iter_keys_from_json_files(paths: Iterable[str]) -> Iterator[str]:
-    schema = generate_json_schema_from_files(paths)
-    yield from iter_keys_from_json_schema(schema)
-
-
-def iter_keys_from_json_documents(docs: Iterable[Any]) -> Iterator[str]:
-    schema = generate_json_schema(docs)
-    yield from iter_keys_from_json_schema(schema)
-
-
-def iter_keys_from_json_schema(schema: dict) -> Iterator[str]:
-    def generator(o: Any, parent_keys: Optional[List[str]] = None, keys: Optional[Set[str]] = None) -> Iterator[str]:
-        keys = keys or set()
-        parent_keys = parent_keys or []
-
-        for key, value in o['properties'].items():
-            value_type = value['type']
-
-            if value_type == 'array':
-                key = f'{key}[]'
-                keys.add('.'.join(parent_keys + [key]))
-                
-                if 'items' in value:
-                    subtype = value['items']['type']
-                    if subtype == 'object':
-                        yield from generator(value['items'], parent_keys + [key], keys)
-
-            elif value_type == 'object':
-                keys.add('.'.join(parent_keys + [key]))
-                yield from generator(value, parent_keys + [key], keys)
-            
-            else:
-                keys.add('.'.join(parent_keys + [key]))
-
-        yield from keys
-
-    yield from sorted(set(generator(schema)))
+def read_json_file(path: str) -> Iterator[Any]:
+    if path.endswith(".json"):
+        with open(path) as file:
+            doc = json.load(file)
+        yield doc
+    elif path.endswith(".jsonl"):
+        with open(path) as file:
+            lines = filter(bool, map(lambda line: line.strip(), file))
+            yield from map(json.loads, lines)
+    else:
+        raise ValueError(f"Unsupported file extension: {path}")

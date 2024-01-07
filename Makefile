@@ -1,27 +1,15 @@
-all: requirements
+default: update lock requirements.txt
 
-install:
-	poetry install
-
-update: requirements
+update:
 	poetry update
 
-requirements:
+lock:
+	poetry lock
+
+requirements.txt:
 	poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-build: wheel
-compile: executable
-
-wheel:
-	poetry build
-
-executable:
-	poetry run pyinstaller json_kit/cli.py --onefile --name json-kit
-
 docs:
-	cd docs && make
+	make -C docs
 
-examples:
-	make -C examples
-
-.PHONY: bin dist docs examples
+.PHONY: requirements.txt docs
