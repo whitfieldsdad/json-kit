@@ -1,0 +1,113 @@
+digraph G {
+    node [shape=box, style=rounded]
+    layout=dot
+    rankdir=LR
+    splines=true
+    ranksep=0.5
+    nodesep=0.1
+
+    "atomic_tests[]"
+    "."
+    "atomic_tests[].auto_generated_guid" [label="auto_generated_guid"]
+    "atomic_tests[].dependencies[]" [label="dependencies[]"]
+    "atomic_tests[].dependencies[].description" [label="description"]
+    "atomic_tests[].dependencies[].get_prereq_command" [label="get_prereq_command"]
+    "atomic_tests[].dependencies[].prereq_command" [label="prereq_command"]
+    "atomic_tests[].dependency_executor_name" [label="dependency_executor_name"]
+    "atomic_tests[].description" [label="description"]
+    "atomic_tests[].executor" [label="executor"]
+    "atomic_tests[].executor.cleanup_command" [label="cleanup_command"]
+    "atomic_tests[].executor.command" [label="command"]
+    "atomic_tests[].executor.elevation_required" [label="elevation_required"]
+    "atomic_tests[].executor.name" [label="name"]
+    "atomic_tests[].executor.steps" [label="steps"]
+    "atomic_tests[].input_arguments" [label="input_arguments"]
+    "atomic_tests[].input_arguments.dumpert_exe" [label="dumpert_exe"]
+    "atomic_tests[].input_arguments.dumpert_exe.default" [label="default"]
+    "atomic_tests[].input_arguments.dumpert_exe.description" [label="description"]
+    "atomic_tests[].input_arguments.dumpert_exe.type" [label="type"]
+    "atomic_tests[].input_arguments.input_file" [label="input_file"]
+    "atomic_tests[].input_arguments.input_file.default" [label="default"]
+    "atomic_tests[].input_arguments.input_file.description" [label="description"]
+    "atomic_tests[].input_arguments.input_file.type" [label="type"]
+    "atomic_tests[].input_arguments.mimikatz_exe" [label="mimikatz_exe"]
+    "atomic_tests[].input_arguments.mimikatz_exe.default" [label="default"]
+    "atomic_tests[].input_arguments.mimikatz_exe.description" [label="description"]
+    "atomic_tests[].input_arguments.mimikatz_exe.type" [label="type"]
+    "atomic_tests[].input_arguments.output_file" [label="output_file"]
+    "atomic_tests[].input_arguments.output_file.default" [label="default"]
+    "atomic_tests[].input_arguments.output_file.description" [label="description"]
+    "atomic_tests[].input_arguments.output_file.type" [label="type"]
+    "atomic_tests[].input_arguments.output_folder" [label="output_folder"]
+    "atomic_tests[].input_arguments.output_folder.default" [label="default"]
+    "atomic_tests[].input_arguments.output_folder.description" [label="description"]
+    "atomic_tests[].input_arguments.output_folder.type" [label="type"]
+    "atomic_tests[].input_arguments.procdump_exe" [label="procdump_exe"]
+    "atomic_tests[].input_arguments.procdump_exe.default" [label="default"]
+    "atomic_tests[].input_arguments.procdump_exe.description" [label="description"]
+    "atomic_tests[].input_arguments.procdump_exe.type" [label="type"]
+    "atomic_tests[].input_arguments.remote_script" [label="remote_script"]
+    "atomic_tests[].input_arguments.remote_script.default" [label="default"]
+    "atomic_tests[].input_arguments.remote_script.description" [label="description"]
+    "atomic_tests[].input_arguments.remote_script.type" [label="type"]
+    "atomic_tests[].input_arguments.xordump_exe" [label="xordump_exe"]
+    "atomic_tests[].input_arguments.xordump_exe.default" [label="default"]
+    "atomic_tests[].input_arguments.xordump_exe.description" [label="description"]
+    "atomic_tests[].input_arguments.xordump_exe.type" [label="type"]
+    "atomic_tests[].name" [label="name"]
+    "atomic_tests[].supported_platforms[]" [label="supported_platforms[]"]
+    "attack_technique"
+    "display_name"
+
+    "atomic_tests[]" -> "atomic_tests[].auto_generated_guid"
+    "atomic_tests[]" -> "atomic_tests[].dependencies[]"
+    "atomic_tests[]" -> "atomic_tests[].dependency_executor_name"
+    "atomic_tests[]" -> "atomic_tests[].description"
+    "atomic_tests[]" -> "atomic_tests[].executor"
+    "atomic_tests[]" -> "atomic_tests[].input_arguments"
+    "atomic_tests[]" -> "atomic_tests[].name"
+    "atomic_tests[]" -> "atomic_tests[].supported_platforms[]"
+    "." -> "atomic_tests[]"
+    "." -> "attack_technique"
+    "." -> "display_name"
+    "atomic_tests[].dependencies[]" -> "atomic_tests[].dependencies[].description"
+    "atomic_tests[].dependencies[]" -> "atomic_tests[].dependencies[].get_prereq_command"
+    "atomic_tests[].dependencies[]" -> "atomic_tests[].dependencies[].prereq_command"
+    "atomic_tests[].executor" -> "atomic_tests[].executor.cleanup_command"
+    "atomic_tests[].executor" -> "atomic_tests[].executor.command"
+    "atomic_tests[].executor" -> "atomic_tests[].executor.elevation_required"
+    "atomic_tests[].executor" -> "atomic_tests[].executor.name"
+    "atomic_tests[].executor" -> "atomic_tests[].executor.steps"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.dumpert_exe"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.input_file"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.mimikatz_exe"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.output_file"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.output_folder"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.procdump_exe"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.remote_script"
+    "atomic_tests[].input_arguments" -> "atomic_tests[].input_arguments.xordump_exe"
+    "atomic_tests[].input_arguments.dumpert_exe" -> "atomic_tests[].input_arguments.dumpert_exe.default"
+    "atomic_tests[].input_arguments.dumpert_exe" -> "atomic_tests[].input_arguments.dumpert_exe.description"
+    "atomic_tests[].input_arguments.dumpert_exe" -> "atomic_tests[].input_arguments.dumpert_exe.type"
+    "atomic_tests[].input_arguments.input_file" -> "atomic_tests[].input_arguments.input_file.default"
+    "atomic_tests[].input_arguments.input_file" -> "atomic_tests[].input_arguments.input_file.description"
+    "atomic_tests[].input_arguments.input_file" -> "atomic_tests[].input_arguments.input_file.type"
+    "atomic_tests[].input_arguments.mimikatz_exe" -> "atomic_tests[].input_arguments.mimikatz_exe.default"
+    "atomic_tests[].input_arguments.mimikatz_exe" -> "atomic_tests[].input_arguments.mimikatz_exe.description"
+    "atomic_tests[].input_arguments.mimikatz_exe" -> "atomic_tests[].input_arguments.mimikatz_exe.type"
+    "atomic_tests[].input_arguments.output_file" -> "atomic_tests[].input_arguments.output_file.default"
+    "atomic_tests[].input_arguments.output_file" -> "atomic_tests[].input_arguments.output_file.description"
+    "atomic_tests[].input_arguments.output_file" -> "atomic_tests[].input_arguments.output_file.type"
+    "atomic_tests[].input_arguments.output_folder" -> "atomic_tests[].input_arguments.output_folder.default"
+    "atomic_tests[].input_arguments.output_folder" -> "atomic_tests[].input_arguments.output_folder.description"
+    "atomic_tests[].input_arguments.output_folder" -> "atomic_tests[].input_arguments.output_folder.type"
+    "atomic_tests[].input_arguments.procdump_exe" -> "atomic_tests[].input_arguments.procdump_exe.default"
+    "atomic_tests[].input_arguments.procdump_exe" -> "atomic_tests[].input_arguments.procdump_exe.description"
+    "atomic_tests[].input_arguments.procdump_exe" -> "atomic_tests[].input_arguments.procdump_exe.type"
+    "atomic_tests[].input_arguments.remote_script" -> "atomic_tests[].input_arguments.remote_script.default"
+    "atomic_tests[].input_arguments.remote_script" -> "atomic_tests[].input_arguments.remote_script.description"
+    "atomic_tests[].input_arguments.remote_script" -> "atomic_tests[].input_arguments.remote_script.type"
+    "atomic_tests[].input_arguments.xordump_exe" -> "atomic_tests[].input_arguments.xordump_exe.default"
+    "atomic_tests[].input_arguments.xordump_exe" -> "atomic_tests[].input_arguments.xordump_exe.description"
+    "atomic_tests[].input_arguments.xordump_exe" -> "atomic_tests[].input_arguments.xordump_exe.type"
+}

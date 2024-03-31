@@ -1,0 +1,281 @@
+digraph G {
+    node [shape=box, style=rounded]
+    layout=dot
+    rankdir=LR
+    splines=true
+    ranksep=0.5
+    nodesep=0.1
+
+    "$schema"
+    "."
+    "properties"
+    "properties.atomic_tests" [label="atomic_tests"]
+    "properties.atomic_tests.items" [label="items"]
+    "properties.atomic_tests.items.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.auto_generated_guid" [label="auto_generated_guid"]
+    "properties.atomic_tests.items.properties.auto_generated_guid.type" [label="type"]
+    "properties.atomic_tests.items.properties.dependencies" [label="dependencies"]
+    "properties.atomic_tests.items.properties.dependencies.items" [label="items"]
+    "properties.atomic_tests.items.properties.dependencies.items.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.dependencies.items.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.dependencies.items.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.dependencies.items.properties.get_prereq_command" [label="get_prereq_command"]
+    "properties.atomic_tests.items.properties.dependencies.items.properties.get_prereq_command.type" [label="type"]
+    "properties.atomic_tests.items.properties.dependencies.items.properties.prereq_command" [label="prereq_command"]
+    "properties.atomic_tests.items.properties.dependencies.items.properties.prereq_command.type" [label="type"]
+    "properties.atomic_tests.items.properties.dependencies.items.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.dependencies.items.type" [label="type"]
+    "properties.atomic_tests.items.properties.dependencies.type" [label="type"]
+    "properties.atomic_tests.items.properties.dependency_executor_name" [label="dependency_executor_name"]
+    "properties.atomic_tests.items.properties.dependency_executor_name.type" [label="type"]
+    "properties.atomic_tests.items.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.executor" [label="executor"]
+    "properties.atomic_tests.items.properties.executor.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.executor.properties.cleanup_command" [label="cleanup_command"]
+    "properties.atomic_tests.items.properties.executor.properties.cleanup_command.type" [label="type"]
+    "properties.atomic_tests.items.properties.executor.properties.command" [label="command"]
+    "properties.atomic_tests.items.properties.executor.properties.command.type" [label="type"]
+    "properties.atomic_tests.items.properties.executor.properties.elevation_required" [label="elevation_required"]
+    "properties.atomic_tests.items.properties.executor.properties.elevation_required.type" [label="type"]
+    "properties.atomic_tests.items.properties.executor.properties.name" [label="name"]
+    "properties.atomic_tests.items.properties.executor.properties.name.type" [label="type"]
+    "properties.atomic_tests.items.properties.executor.properties.steps" [label="steps"]
+    "properties.atomic_tests.items.properties.executor.properties.steps.type" [label="type"]
+    "properties.atomic_tests.items.properties.executor.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.executor.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments" [label="input_arguments"]
+    "properties.atomic_tests.items.properties.input_arguments.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe" [label="dumpert_exe"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file" [label="input_file"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe" [label="mimikatz_exe"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file" [label="output_file"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder" [label="output_folder"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe" [label="procdump_exe"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script" [label="remote_script"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe" [label="xordump_exe"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties" [label="properties"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.default" [label="default"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.default.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.description" [label="description"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.description.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.type.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.required[]" [label="required[]"]
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.type" [label="type"]
+    "properties.atomic_tests.items.properties.input_arguments.type" [label="type"]
+    "properties.atomic_tests.items.properties.name" [label="name"]
+    "properties.atomic_tests.items.properties.name.type" [label="type"]
+    "properties.atomic_tests.items.properties.supported_platforms" [label="supported_platforms"]
+    "properties.atomic_tests.items.properties.supported_platforms.items" [label="items"]
+    "properties.atomic_tests.items.properties.supported_platforms.items.type" [label="type"]
+    "properties.atomic_tests.items.properties.supported_platforms.type" [label="type"]
+    "properties.atomic_tests.items.required[]" [label="required[]"]
+    "properties.atomic_tests.items.type" [label="type"]
+    "properties.atomic_tests.type" [label="type"]
+    "properties.attack_technique" [label="attack_technique"]
+    "properties.attack_technique.type" [label="type"]
+    "properties.display_name" [label="display_name"]
+    "properties.display_name.type" [label="type"]
+    "required[]"
+    "type"
+
+    "." -> "$schema"
+    "." -> "properties"
+    "." -> "required[]"
+    "." -> "type"
+    "properties" -> "properties.atomic_tests"
+    "properties" -> "properties.attack_technique"
+    "properties" -> "properties.display_name"
+    "properties.atomic_tests" -> "properties.atomic_tests.items"
+    "properties.atomic_tests" -> "properties.atomic_tests.type"
+    "properties.atomic_tests.items" -> "properties.atomic_tests.items.properties"
+    "properties.atomic_tests.items" -> "properties.atomic_tests.items.required[]"
+    "properties.atomic_tests.items" -> "properties.atomic_tests.items.type"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.auto_generated_guid"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.dependencies"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.dependency_executor_name"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.description"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.executor"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.input_arguments"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.name"
+    "properties.atomic_tests.items.properties" -> "properties.atomic_tests.items.properties.supported_platforms"
+    "properties.atomic_tests.items.properties.auto_generated_guid" -> "properties.atomic_tests.items.properties.auto_generated_guid.type"
+    "properties.atomic_tests.items.properties.dependencies" -> "properties.atomic_tests.items.properties.dependencies.items"
+    "properties.atomic_tests.items.properties.dependencies" -> "properties.atomic_tests.items.properties.dependencies.type"
+    "properties.atomic_tests.items.properties.dependencies.items" -> "properties.atomic_tests.items.properties.dependencies.items.properties"
+    "properties.atomic_tests.items.properties.dependencies.items" -> "properties.atomic_tests.items.properties.dependencies.items.required[]"
+    "properties.atomic_tests.items.properties.dependencies.items" -> "properties.atomic_tests.items.properties.dependencies.items.type"
+    "properties.atomic_tests.items.properties.dependencies.items.properties" -> "properties.atomic_tests.items.properties.dependencies.items.properties.description"
+    "properties.atomic_tests.items.properties.dependencies.items.properties" -> "properties.atomic_tests.items.properties.dependencies.items.properties.get_prereq_command"
+    "properties.atomic_tests.items.properties.dependencies.items.properties" -> "properties.atomic_tests.items.properties.dependencies.items.properties.prereq_command"
+    "properties.atomic_tests.items.properties.dependencies.items.properties.description" -> "properties.atomic_tests.items.properties.dependencies.items.properties.description.type"
+    "properties.atomic_tests.items.properties.dependencies.items.properties.get_prereq_command" -> "properties.atomic_tests.items.properties.dependencies.items.properties.get_prereq_command.type"
+    "properties.atomic_tests.items.properties.dependencies.items.properties.prereq_command" -> "properties.atomic_tests.items.properties.dependencies.items.properties.prereq_command.type"
+    "properties.atomic_tests.items.properties.dependency_executor_name" -> "properties.atomic_tests.items.properties.dependency_executor_name.type"
+    "properties.atomic_tests.items.properties.description" -> "properties.atomic_tests.items.properties.description.type"
+    "properties.atomic_tests.items.properties.executor" -> "properties.atomic_tests.items.properties.executor.properties"
+    "properties.atomic_tests.items.properties.executor" -> "properties.atomic_tests.items.properties.executor.required[]"
+    "properties.atomic_tests.items.properties.executor" -> "properties.atomic_tests.items.properties.executor.type"
+    "properties.atomic_tests.items.properties.executor.properties" -> "properties.atomic_tests.items.properties.executor.properties.cleanup_command"
+    "properties.atomic_tests.items.properties.executor.properties" -> "properties.atomic_tests.items.properties.executor.properties.command"
+    "properties.atomic_tests.items.properties.executor.properties" -> "properties.atomic_tests.items.properties.executor.properties.elevation_required"
+    "properties.atomic_tests.items.properties.executor.properties" -> "properties.atomic_tests.items.properties.executor.properties.name"
+    "properties.atomic_tests.items.properties.executor.properties" -> "properties.atomic_tests.items.properties.executor.properties.steps"
+    "properties.atomic_tests.items.properties.executor.properties.cleanup_command" -> "properties.atomic_tests.items.properties.executor.properties.cleanup_command.type"
+    "properties.atomic_tests.items.properties.executor.properties.command" -> "properties.atomic_tests.items.properties.executor.properties.command.type"
+    "properties.atomic_tests.items.properties.executor.properties.elevation_required" -> "properties.atomic_tests.items.properties.executor.properties.elevation_required.type"
+    "properties.atomic_tests.items.properties.executor.properties.name" -> "properties.atomic_tests.items.properties.executor.properties.name.type"
+    "properties.atomic_tests.items.properties.executor.properties.steps" -> "properties.atomic_tests.items.properties.executor.properties.steps.type"
+    "properties.atomic_tests.items.properties.input_arguments" -> "properties.atomic_tests.items.properties.input_arguments.properties"
+    "properties.atomic_tests.items.properties.input_arguments" -> "properties.atomic_tests.items.properties.input_arguments.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script"
+    "properties.atomic_tests.items.properties.input_arguments.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.dumpert_exe.properties.type.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.input_file.properties.type.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.mimikatz_exe.properties.type.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_file.properties.type.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.output_folder.properties.type.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.procdump_exe.properties.type.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.remote_script.properties.type.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.required[]"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.default"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.description"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.default" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.default.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.description" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.description.type"
+    "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.type" -> "properties.atomic_tests.items.properties.input_arguments.properties.xordump_exe.properties.type.type"
+    "properties.atomic_tests.items.properties.name" -> "properties.atomic_tests.items.properties.name.type"
+    "properties.atomic_tests.items.properties.supported_platforms" -> "properties.atomic_tests.items.properties.supported_platforms.items"
+    "properties.atomic_tests.items.properties.supported_platforms" -> "properties.atomic_tests.items.properties.supported_platforms.type"
+    "properties.atomic_tests.items.properties.supported_platforms.items" -> "properties.atomic_tests.items.properties.supported_platforms.items.type"
+    "properties.attack_technique" -> "properties.attack_technique.type"
+    "properties.display_name" -> "properties.display_name.type"
+}

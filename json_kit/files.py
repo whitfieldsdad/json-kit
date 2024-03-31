@@ -1,9 +1,10 @@
 import glob
 import os
 from typing import Iterable, Iterator, Union
-from . import logging
+import logging
 
-logger = logging.logger
+
+logger = logging.getLogger(__name__)
 
 
 def find(
@@ -30,3 +31,8 @@ def _find(path: str) -> Iterator[str]:
                 for filename in filenames:
                     path = os.path.join(directory, filename)
                     yield path
+
+
+def get_file_extension(path: str) -> str:
+    filename = os.path.basename(path)
+    return filename.split(".")[-1]
