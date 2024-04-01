@@ -1,8 +1,36 @@
 # json-kit
 
+## Features
+
+- [List the keys in one or more JSON files](#list-keys-in-a-json-file)
+- [Generate a JSON Schema from one or more JSON files](#generate-a-json-schema-from-a-json-file)
+- [Render JSON documents as directed graphs with NetworkX and GraphViz](#visualize-json-files-as-directed-graphs-with-graphviz)
+
 ## Usage
 
 ### Command line
+
+#### List keys in a JSON file
+
+To list the keys in a particular JSON file:
+
+```bash
+poetry run json-kit keys ~/src/atomic-red-team/atomics/T1003.001/T1003.001.json
+```
+
+```
+atomic_tests[]
+atomic_tests[].auto_generated_guid
+atomic_tests[].dependencies[]
+atomic_tests[].dependencies[].description
+atomic_tests[].dependencies[].get_prereq_command
+...
+atomic_tests[].input_arguments.xordump_exe.type
+atomic_tests[].name
+atomic_tests[].supported_platforms[]
+attack_technique
+display_name
+```
 
 #### Generate a JSON Schema from a JSON file
 
@@ -267,69 +295,7 @@ poetry run json-kit json-schema ~/src/atomic-red-team/atomics/T1003.001/T1003.00
 }
 ```
 
-#### List keys in a JSON file
-
-To list the keys in a particular JSON file:
-
-```bash
-poetry run json-kit keys ~/src/atomic-red-team/atomics/T1003.001/T1003.001.json
-```
-
-```
-atomic_tests[]
-atomic_tests[].auto_generated_guid
-atomic_tests[].dependencies[]
-atomic_tests[].dependencies[].description
-atomic_tests[].dependencies[].get_prereq_command
-atomic_tests[].dependencies[].prereq_command
-atomic_tests[].dependency_executor_name
-atomic_tests[].description
-atomic_tests[].executor
-atomic_tests[].executor.cleanup_command
-atomic_tests[].executor.command
-atomic_tests[].executor.elevation_required
-atomic_tests[].executor.name
-atomic_tests[].executor.steps
-atomic_tests[].input_arguments
-atomic_tests[].input_arguments.dumpert_exe
-atomic_tests[].input_arguments.dumpert_exe.default
-atomic_tests[].input_arguments.dumpert_exe.description
-atomic_tests[].input_arguments.dumpert_exe.type
-atomic_tests[].input_arguments.input_file
-atomic_tests[].input_arguments.input_file.default
-atomic_tests[].input_arguments.input_file.description
-atomic_tests[].input_arguments.input_file.type
-atomic_tests[].input_arguments.mimikatz_exe
-atomic_tests[].input_arguments.mimikatz_exe.default
-atomic_tests[].input_arguments.mimikatz_exe.description
-atomic_tests[].input_arguments.mimikatz_exe.type
-atomic_tests[].input_arguments.output_file
-atomic_tests[].input_arguments.output_file.default
-atomic_tests[].input_arguments.output_file.description
-atomic_tests[].input_arguments.output_file.type
-atomic_tests[].input_arguments.output_folder
-atomic_tests[].input_arguments.output_folder.default
-atomic_tests[].input_arguments.output_folder.description
-atomic_tests[].input_arguments.output_folder.type
-atomic_tests[].input_arguments.procdump_exe
-atomic_tests[].input_arguments.procdump_exe.default
-atomic_tests[].input_arguments.procdump_exe.description
-atomic_tests[].input_arguments.procdump_exe.type
-atomic_tests[].input_arguments.remote_script
-atomic_tests[].input_arguments.remote_script.default
-atomic_tests[].input_arguments.remote_script.description
-atomic_tests[].input_arguments.remote_script.type
-atomic_tests[].input_arguments.xordump_exe
-atomic_tests[].input_arguments.xordump_exe.default
-atomic_tests[].input_arguments.xordump_exe.description
-atomic_tests[].input_arguments.xordump_exe.type
-atomic_tests[].name
-atomic_tests[].supported_platforms[]
-attack_technique
-display_name
-```
-
-#### Visualize a JSON file as a directed graph with GraphViz
+#### Visualize JSON files as directed graphs with GraphViz
 
 To convert a JSON file to DOT format:
 
@@ -350,3 +316,5 @@ To convert a JSON file to an [image in SVG format](examples/atomic-red-team/T100
 ```bash
 poetry run json-kit draw examples/atomic-red-team/T1003.001.json -o examples/atomic-red-team/T1003.001.svg
 ```
+
+> Note: requires `dot` from GraphViz to be installed and available in the PATH.
