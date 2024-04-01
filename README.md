@@ -1,12 +1,28 @@
 # json-kit
 
+`json-kit` is a Python 3 package for working with JSON files.
+
+> **Note**: This project is in the early stages of development and is subject to change at any time.
+
 ## Features
+
+One of the main features of `json-kit` is the ability to visualize the structure of JSON files as directed graphs with [NetworkX](https://networkx.org/) and [GraphViz](https://graphviz.org/).
+
+This is useful when writing parsers, or when simply trying to better understand the structure of a given JSON file.
+
+For example, we can visualize the [structure](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json) of the [CISA Known Exploited Vulnerabilities (KEV) Catalog](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) as follows:
+
+![CISA KEV](examples/cisa-kev/known_exploited_vulnerabilities.png)
+
+Comparatively, the JSON Schema can be visualized as follows:
+
+![CISA KEV JSON Schema](examples/cisa-kev/known_exploited_vulnerabilities_schema.png)
+
+## Usage
 
 - [List the keys in one or more JSON files](#list-keys-in-a-json-file)
 - [Generate a JSON Schema from one or more JSON files](#generate-a-json-schema-from-a-json-file)
 - [Render JSON documents as directed graphs with NetworkX and GraphViz](#visualize-json-files-as-directed-graphs-with-graphviz)
-
-## Usage
 
 ### Command line
 
@@ -15,29 +31,33 @@
 To list the keys in a particular JSON file:
 
 ```bash
-poetry run json-kit keys ~/src/atomic-red-team/atomics/T1003.001/T1003.001.json
+poetry run json-kit keys examples/cisa-kev/known_exploited_vulnerabilities.json
 ```
 
 ```
-atomic_tests[]
-atomic_tests[].auto_generated_guid
-atomic_tests[].dependencies[]
-atomic_tests[].dependencies[].description
-atomic_tests[].dependencies[].get_prereq_command
-...
-atomic_tests[].input_arguments.xordump_exe.type
-atomic_tests[].name
-atomic_tests[].supported_platforms[]
-attack_technique
-display_name
+catalogVersion
+count
+dateReleased
+title
+vulnerabilities[]
+vulnerabilities[].cveID
+vulnerabilities[].dateAdded
+vulnerabilities[].dueDate
+vulnerabilities[].knownRansomwareCampaignUse
+vulnerabilities[].notes
+vulnerabilities[].product
+vulnerabilities[].requiredAction
+vulnerabilities[].shortDescription
+vulnerabilities[].vendorProject
+vulnerabilities[].vulnerabilityName
 ```
 
 #### Generate a JSON Schema from a JSON file
 
-To generate a [JSON Schema](examples/atomic-red-team/T1003.001.json_schema.json) from a [JSON file](examples/atomic-red-team/T1003.001.json):
+To generate a [JSON Schema](examples/cisa-kev/known_exploited_vulnerabilities_schema.json) from a [JSON file](examples/cisa-kev/known_exploited_vulnerabilities.json):
 
 ```bash
-poetry run json-kit json-schema ~/src/atomic-red-team/atomics/T1003.001/T1003.001.json
+poetry run json-kit json-schema examples/cisa-kev/known_exploited_vulnerabilities.json
 ```
 
 ```json
@@ -45,276 +65,95 @@ poetry run json-kit json-schema ~/src/atomic-red-team/atomics/T1003.001/T1003.00
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "attack_technique": {
+        "title": {
             "type": "string"
         },
-        "display_name": {
+        "catalogVersion": {
             "type": "string"
         },
-        "atomic_tests": {
+        "dateReleased": {
+            "type": "string"
+        },
+        "count": {
+            "type": "integer"
+        },
+        "vulnerabilities": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "cveID": {
                         "type": "string"
                     },
-                    "auto_generated_guid": {
+                    "vendorProject": {
                         "type": "string"
                     },
-                    "description": {
+                    "product": {
                         "type": "string"
                     },
-                    "supported_platforms": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "input_arguments": {
-                        "type": "object",
-                        "properties": {
-                            "output_file": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            },
-                            "procdump_exe": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            },
-                            "dumpert_exe": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            },
-                            "input_file": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            },
-                            "mimikatz_exe": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            },
-                            "remote_script": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            },
-                            "xordump_exe": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            },
-                            "output_folder": {
-                                "type": "object",
-                                "properties": {
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "default": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "default",
-                                    "description",
-                                    "type"
-                                ]
-                            }
-                        }
-                    },
-                    "dependency_executor_name": {
+                    "vulnerabilityName": {
                         "type": "string"
                     },
-                    "dependencies": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "description": {
-                                    "type": "string"
-                                },
-                                "prereq_command": {
-                                    "type": "string"
-                                },
-                                "get_prereq_command": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "description",
-                                "get_prereq_command",
-                                "prereq_command"
-                            ]
-                        }
+                    "dateAdded": {
+                        "type": "string"
                     },
-                    "executor": {
-                        "type": "object",
-                        "properties": {
-                            "command": {
-                                "type": "string"
-                            },
-                            "cleanup_command": {
-                                "type": "string"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "elevation_required": {
-                                "type": "boolean"
-                            },
-                            "steps": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "name"
-                        ]
+                    "shortDescription": {
+                        "type": "string"
+                    },
+                    "requiredAction": {
+                        "type": "string"
+                    },
+                    "dueDate": {
+                        "type": "string"
+                    },
+                    "knownRansomwareCampaignUse": {
+                        "type": "string"
+                    },
+                    "notes": {
+                        "type": "string"
                     }
                 },
                 "required": [
-                    "auto_generated_guid",
-                    "description",
-                    "executor",
-                    "name",
-                    "supported_platforms"
+                    "cveID",
+                    "dateAdded",
+                    "dueDate",
+                    "knownRansomwareCampaignUse",
+                    "notes",
+                    "product",
+                    "requiredAction",
+                    "shortDescription",
+                    "vendorProject",
+                    "vulnerabilityName"
                 ]
             }
         }
     },
     "required": [
-        "atomic_tests",
-        "attack_technique",
-        "display_name"
+        "catalogVersion",
+        "count",
+        "dateReleased",
+        "title",
+        "vulnerabilities"
     ]
 }
 ```
 
 #### Visualize JSON files as directed graphs with GraphViz
 
-To convert a JSON file to DOT format:
+To convert a JSON file to [DOT format](examples/cisa-kev/known_exploited_vulnerabilities.dot):
 
 ```bash
-poetry run json-kit draw examples/atomic-red-team/T1003.001.json -o examples/atomic-red-team/T1003.001.dot
+poetry run json-kit draw examples/cisa-kev/known_exploited_vulnerabilities.json -o examples/cisa-kev/known_exploited_vulnerabilities.dot
 ```
 
-To convert a JSON file to an image in PNG format:
+To convert a JSON file to an [image in PNG format](examples/cisa-kev/known_exploited_vulnerabilities.png):
 
 ```bash
-poetry run json-kit draw examples/atomic-red-team/T1003.001.json -o examples/atomic-red-team/T1003.001.png
+poetry run json-kit draw examples/cisa-kev/known_exploited_vulnerabilities.json -o examples/cisa-kev/known_exploited_vulnerabilities.png
 ```
 
-![T1003.001](examples/atomic-red-team/T1003.001.png)
-
-To convert a JSON file to an [image in SVG format](examples/atomic-red-team/T1003.001.svg):
+To convert a JSON file to an [image in SVG format](examples/cisa-kev/known_exploited_vulnerabilities.svg):
 
 ```bash
-poetry run json-kit draw examples/atomic-red-team/T1003.001.json -o examples/atomic-red-team/T1003.001.svg
+poetry run json-kit draw examples/cisa-kev/known_exploited_vulnerabilities.json -o examples/cisa-kev/known_exploited_vulnerabilities.svg
 ```
-
-> Note: requires `dot` from GraphViz to be installed and available in the PATH.
