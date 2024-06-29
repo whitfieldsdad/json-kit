@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": [
+    "plugin--00d0b012-8a03-410e-95de-5826bf542de6",
+    "plugin--00d7d21b-69d6-4797-88a2-c86f3fc97651"
+  ]
+}

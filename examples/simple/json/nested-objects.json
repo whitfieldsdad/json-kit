@@ -1,0 +1,9 @@
+{
+  "id": "dog--00d0b012-8a03-410e-95de-5826bf542de6",
+  "type": "dog",
+  "name": "Whitfield",
+  "action": {
+    "type": "bark",
+    "volume": "loud"
+  }
+}

@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "dependencies": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "kill_chain": {
+                        "type": "object",
+                        "properties": {
+                            "kill_chain_name": {
+                                "type": "string"
+                            },
+                            "phase_name": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "phase_name"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "kill_chain",
+                    "name"
+                ]
+            }
+        }
+    },
+    "required": [
+        "dependencies",
+        "name",
+        "type"
+    ]
+}

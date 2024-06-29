@@ -1,0 +1,22 @@
+{
+  "name": "shark-laser",
+  "type": "module",
+  "dependencies": [
+    {
+      "id": "plugin--00d0b012-8a03-410e-95de-5826bf542de6",
+      "name": "shark",
+      "kill_chain": {
+        "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+        "phase_name": "weaponization"
+      }
+    },
+    {
+      "id": "plugin--00d7d21b-69d6-4797-88a2-c86f3fc97651",
+      "name": "laser",
+      "kill_chain": {
+        "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+        "phase_name": "actions-on-objectives"
+      }
+    }
+  ]
+}
