@@ -21,7 +21,7 @@ def main():
 @click.option('--output-file', '-o', required=False)
 def list_keys(input_files: Iterable[str], output_file: Optional[str]):
     """
-    List keys in dotted notation (i.e. "a.b.c")
+    Enumerate keys across multiple JSON or JSONL files in dotted notation (i.e. "a.b.c")
     """
     input_files = tuple(files.find(input_files, files_only=True))
     keys = sorted(set(converter.get_keys_from_json_files(input_files)))
@@ -53,9 +53,9 @@ def generate_schema(input_files: Iterable[str], output_file: Optional[str]):
 @click.argument('input-files', nargs=-1, required=True)
 @click.option('--output-file', '-o', required=False)
 @click.option('--output-format', '-f', type=click.Choice(['dot', 'png', 'svg']), required=False)
-def draw_graph(input_files: Iterable[str], output_file: Optional[str], output_format: Optional[str]):
+def draw_graph(input_files: Iterable[str], output_file: Optional[str], output_format: Optional[str], auto: bool):
     """
-    Visualize the structure of a JSON file as a directed graph.
+    Visualize JSON and JSONL files as DAGs with GraphViz.
     """    
     input_files = tuple(files.find(input_files, files_only=True))
     schema = converter.get_json_schema_from_json_files(input_files)
@@ -80,8 +80,11 @@ def draw_graph(input_files: Iterable[str], output_file: Optional[str], output_fo
                 output = output.encode()
             fp.write(output)
     else:
-        print(output)
-    
+        if output_format == 'dot':
+            print(output)
+        elif output_format in ['png', 'svg']:
+            sys.stdout.buffer.write(output)
+
 
 if __name__ == "__main__":
     main()

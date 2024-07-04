@@ -15,8 +15,7 @@ pandas = "^2.1.4"
 networkx = "^3.2.1"
 
 [tool.poetry.scripts]
-jk = "json_kit.cli:main"
-jsonkit = "json_kit.cli:main"
+tool = "json_kit.cli:main"
 json-kit = "json_kit.cli:main"
 
 [build-system]

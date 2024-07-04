@@ -26,7 +26,6 @@ def get_json_schema_from_dicts(docs: Iterable[Any]) -> dict:
 
 def get_json_schema_from_json_files(paths: Iterable[str]) -> dict:
     schemas = []
-
     for path in paths:
         docs = read_docs_from_json_file(path)
         schema = get_json_schema_from_dicts(docs)
@@ -123,7 +122,6 @@ def json_schema_to_image(schema: dict, output_format: str) -> bytes:
         fp.flush()
         p = subprocess.run(['dot', f'-T{output_format}', '-Gdpi=300', fp.name], capture_output=True)
         return p.stdout
-
 
 
 def json_schema_to_nx_digraph(schema: dict) -> DiGraph:
