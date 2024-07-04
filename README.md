@@ -2,8 +2,6 @@
 
 `json-kit` is a Python 3 package for working with JSON files.
 
-> **Note**: This project is in the early stages of development and is subject to change at any time.
-
 ## Features
 
 One of the main features of `json-kit` is the ability to visualize the structure of JSON files as directed graphs with [NetworkX](https://networkx.org/) and [GraphViz](https://graphviz.org/).
@@ -20,9 +18,13 @@ Comparatively, the JSON Schema can be visualized as follows:
 
 ## Usage
 
-- [List the keys in one or more JSON files](#list-keys-in-a-json-file)
-- [Generate a JSON Schema from one or more JSON files](#generate-a-json-schema-from-a-json-file)
-- [Render JSON documents as directed graphs with NetworkX and GraphViz](#visualize-json-files-as-directed-graphs-with-graphviz)
+- [json-kit](#json-kit)
+  - [Features](#features)
+  - [Usage](#usage)
+    - [Command line](#command-line)
+      - [List keys in a JSON file](#list-keys-in-a-json-file)
+      - [Generate a JSON Schema from a JSON file](#generate-a-json-schema-from-a-json-file)
+      - [Visualize JSON files as directed graphs with GraphViz](#visualize-json-files-as-directed-graphs-with-graphviz)
 
 ### Command line
 

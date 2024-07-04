@@ -11,12 +11,13 @@ packages = [{include = "json_kit"}]
 python = ">=3.10,<3.13"
 genson = "^1.2.2"
 click = "^8.1.7"
-pandas = "^2.1.4"
 networkx = "^3.2.1"
+pyinstaller = "^6.8.0"
 
 [tool.poetry.scripts]
 tool = "json_kit.cli:main"
 json-kit = "json_kit.cli:main"
+build = "json_kit.pyinstaller:install"
 
 [build-system]
 requires = ["poetry-core"]

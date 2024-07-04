@@ -7,6 +7,7 @@ path_to_main = str(HERE / "cli.py")
 def install():
     PyInstaller.__main__.run([
         path_to_main,
+        '--name=json-kit',
         '--onefile',
         '--windowed',
     ])

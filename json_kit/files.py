@@ -1,10 +1,6 @@
 import glob
 import os
 from typing import Iterable, Iterator, Union
-import logging
-
-
-logger = logging.getLogger(__name__)
 
 
 def find(
