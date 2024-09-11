@@ -1,0 +1,43 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "description" [label="description"];
+    "external_references[]" [label="external_references[]"];
+    "external_references[].description" [label="description"];
+    "external_references[].external_id" [label="external_id"];
+    "external_references[].source_name" [label="source_name"];
+    "external_references[].url" [label="url"];
+    "id" [label="id"];
+    "modified" [label="modified"];
+    "name" [label="name"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "type" [label="type"];
+    "x_mitre_deprecated" [label="x_mitre_deprecated"];
+    "x_mitre_domains" [label="x_mitre_domains"];
+    "x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"];
+    "x_mitre_version" [label="x_mitre_version"];
+
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "created";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "created_by_ref";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "description";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "external_references[]";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "id";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "modified";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "name";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "object_marking_refs";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "type";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "x_mitre_deprecated";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "x_mitre_domains";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "x_mitre_modified_by_ref";
+    "565cb00d-c100-485f-8dc6-4a77b41d42c7" -> "x_mitre_version";
+
+    "external_references[]" -> "external_references[].description";
+    "external_references[]" -> "external_references[].external_id";
+    "external_references[]" -> "external_references[].source_name";
+    "external_references[]" -> "external_references[].url";
+}

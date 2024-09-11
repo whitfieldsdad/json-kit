@@ -1,4 +1,4 @@
-default: update lock requirements.txt
+default: update lock requirements.txt	
 
 compile:
 	poetry run build
@@ -19,4 +19,7 @@ release:
 docs:
 	make -C docs
 
-.PHONY: requirements.txt docs
+examples:
+	make -C examples
+
+.PHONY: requirements.txt docs examples

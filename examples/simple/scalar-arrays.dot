@@ -1,0 +1,13 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "f7621639-6b76-46c6-8e8c-0d1fb05f968e" [label="."];
+    "dependencies" [label="dependencies"];
+    "type" [label="type"];
+
+    "f7621639-6b76-46c6-8e8c-0d1fb05f968e" -> "dependencies";
+    "f7621639-6b76-46c6-8e8c-0d1fb05f968e" -> "type";
+
+}

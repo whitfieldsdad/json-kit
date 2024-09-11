@@ -1,0 +1,23 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "058b8c64-434e-444e-9904-ca2d8edfb304" [label="."];
+    "created" [label="created"];
+    "id" [label="id"];
+    "identity_class" [label="identity_class"];
+    "modified" [label="modified"];
+    "name" [label="name"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "type" [label="type"];
+
+    "058b8c64-434e-444e-9904-ca2d8edfb304" -> "created";
+    "058b8c64-434e-444e-9904-ca2d8edfb304" -> "id";
+    "058b8c64-434e-444e-9904-ca2d8edfb304" -> "identity_class";
+    "058b8c64-434e-444e-9904-ca2d8edfb304" -> "modified";
+    "058b8c64-434e-444e-9904-ca2d8edfb304" -> "name";
+    "058b8c64-434e-444e-9904-ca2d8edfb304" -> "object_marking_refs";
+    "058b8c64-434e-444e-9904-ca2d8edfb304" -> "type";
+
+}

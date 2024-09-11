@@ -1,0 +1,25 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "47f10867-8425-4db3-8069-d1a3631d7622" [label="."];
+    "dependencies[]" [label="dependencies[]"];
+    "dependencies[].id" [label="id"];
+    "dependencies[].kill_chain" [label="kill_chain"];
+    "dependencies[].kill_chain.kill_chain_name" [label="kill_chain_name"];
+    "dependencies[].kill_chain.phase_name" [label="phase_name"];
+    "dependencies[].name" [label="name"];
+    "name" [label="name"];
+    "type" [label="type"];
+
+    "47f10867-8425-4db3-8069-d1a3631d7622" -> "dependencies[]";
+    "47f10867-8425-4db3-8069-d1a3631d7622" -> "name";
+    "47f10867-8425-4db3-8069-d1a3631d7622" -> "type";
+
+    "dependencies[]" -> "dependencies[].id";
+    "dependencies[]" -> "dependencies[].kill_chain";
+    "dependencies[]" -> "dependencies[].name";
+    "dependencies[].kill_chain" -> "dependencies[].kill_chain.kill_chain_name";
+    "dependencies[].kill_chain" -> "dependencies[].kill_chain.phase_name";
+}

@@ -1,0 +1,25 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "28074113-3601-4b09-a790-8ad0d0f86bba" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "definition" [label="definition"];
+    "definition.statement" [label="statement"];
+    "definition_type" [label="definition_type"];
+    "id" [label="id"];
+    "type" [label="type"];
+    "x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"];
+
+    "28074113-3601-4b09-a790-8ad0d0f86bba" -> "created";
+    "28074113-3601-4b09-a790-8ad0d0f86bba" -> "created_by_ref";
+    "28074113-3601-4b09-a790-8ad0d0f86bba" -> "definition";
+    "28074113-3601-4b09-a790-8ad0d0f86bba" -> "definition_type";
+    "28074113-3601-4b09-a790-8ad0d0f86bba" -> "id";
+    "28074113-3601-4b09-a790-8ad0d0f86bba" -> "type";
+    "28074113-3601-4b09-a790-8ad0d0f86bba" -> "x_mitre_attack_spec_version";
+
+    "definition" -> "definition.statement";
+}

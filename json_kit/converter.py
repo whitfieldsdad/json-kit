@@ -1,189 +1,150 @@
-import itertools
-import os
-import subprocess
-import tempfile
-from networkx import DiGraph
+import glob
 import json
+import logging
+import os
+from typing import Any, Iterable, Iterator, Optional, Set
+import uuid
+import networkx as nx
 import concurrent.futures
 import genson
-from typing import Any, Iterable, Iterator, List, Optional, Set, Union
-
-import logging
+import tempfile
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_INDENT = 4
+
+DOT_INDENT = 4
 
 
-def get_json_schema_from_dicts(docs: Iterable[Any]) -> dict:
-    builder = genson.SchemaBuilder()
-    for doc in docs:
-        doc = json.dumps(doc)
-        doc = json.loads(doc)
-        builder.add_object(doc)
-    return builder.to_schema()
+def get_json_schema(doc: dict) -> dict:
+    """
+    Generate a JSON Schema from a JSON document.
+    """
+    schema = genson.Schema()
+    schema.add_object(doc)
+    return schema.to_dict()
 
 
 def get_json_schema_from_json_files(paths: Iterable[str]) -> dict:
-    schemas = []
-    for path in paths:
-        docs = read_docs_from_json_file(path)
-        schema = get_json_schema_from_dicts(docs)
-        if schema not in schemas:
-            schemas.append(schema)
-    return merge_json_schemas(schemas)
-
-
-def read_docs_from_json_files(paths: Iterable[str]) -> Iterator[Any]:
+    """
+    Generate a JSON Schema from multiple JSON files.
+    """
+    schema = genson.Schema()
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        yield from itertools.chain.from_iterable(executor.map(read_docs_from_json_file, paths))
+        for doc in executor.map(read_json_file, paths):
+            schema.add_object(doc)
+    return schema.to_dict()
 
 
-def read_docs_from_json_file(path: str) -> Iterator[Any]:
-    if path.endswith('.jsonl'):
-        with open(path) as file:
-            lines = filter(bool, map(lambda line: line.strip(), file))
-            yield from map(json.loads, lines)
-    else:
-        with open(path) as file:
-            doc = json.load(file)
-        yield doc
+def get_keys_from_json_files(paths: Iterable[str]) -> Set[str]:
+    """
+    List unique keys across multiple JSON files.
+    """
+    keys = set()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        for doc in executor.map(read_json_file, paths):
+            keys |= get_keys(doc)
+
+    return keys
 
 
-def merge_json_schemas(schemas: Iterable[dict]) -> dict:
-    schemas = tuple(schemas)
-    n = len(schemas)
-    if n == 0:
-        raise ValueError("No JSON schemas provided")
-    elif n == 1:
-        return next(iter(schemas))
+def convert_keys_to_digraph(keys: Set[str]) -> nx.DiGraph:
+    """
+    Convert a list of keys into a directed graph.
 
-    builder = genson.SchemaBuilder()
-    for schema in schemas:
-        builder.add_schema(schema)
-    return builder.to_schema()
+    Example keys:
+
+    - id
+    - kill_chain_phases[]
+    - kill_chain_phases[].kill_chain_name
+    """
+    g = nx.DiGraph()
         
-
-def json_schema_to_dot(schema: dict, indent: int = DEFAULT_INDENT) -> str:
-    g = json_schema_to_nx_digraph(schema)
-
-    # Build the DOT file line-by-line.
-    sep = ' ' * indent
-    lines = [
-        'digraph G {',
-        f'{sep}node [shape=box, style=rounded]',
-        f'{sep}layout=dot',
-        f'{sep}rankdir=LR',
-        f'{sep}splines=true',
-        f'{sep}ranksep=0.5',
-        f'{sep}nodesep=0.1',
-        '',
-    ]
-
-    # Add all nodes
-    for node, data in g.nodes(data=True):
-        label = data.get('label')
-        if label:
-            lines.append(f'{sep}"{node}" [label="{label}"]')
-        else:
-            lines.append(f'{sep}"{node}"')
-    
-    # Add all edges
-    if g.number_of_edges() > 0:
-        lines.append('')
-        for a, b in g.edges:
-            lines.append(f'{sep}"{a}" -> "{b}"')
-
-    lines.append('}')
-
-    return '\n'.join(lines)
-
-
-def json_schema_to_image_file(schema: dict, output_file: str):
-    output_filename = os.path.basename(output_file)
-    output_format = output_filename.split('.')[-1]
-    if output_format not in ['png', 'svg']:
-        raise ValueError(f"Unsupported output format: {output_format}")
-
-    dot = json_schema_to_dot(schema)
-    with tempfile.NamedTemporaryFile() as fp:
-        fp.write(dot.encode())
-        fp.flush()
-        subprocess.run(['dot', f'-T{output_format}', '-Gdpi=300', fp.name, '-o', output_file])
-
-
-def json_schema_to_image(schema: dict, output_format: str) -> bytes:
-    if output_format not in ['png', 'svg']:
-        raise ValueError(f"Unsupported output format: {output_format}")
-
-    dot = json_schema_to_dot(schema)
-    with tempfile.NamedTemporaryFile() as fp:
-        fp.write(dot.encode())
-        fp.flush()
-        p = subprocess.run(['dot', f'-T{output_format}', '-Gdpi=300', fp.name], capture_output=True)
-        return p.stdout
-
-
-def json_schema_to_nx_digraph(schema: dict) -> DiGraph:
-    keys = sorted(get_keys_from_json_schema(schema))
-    
-    g = DiGraph()
     for key in keys:
-        if '.' not in key:
-            g.add_node(key)
-            g.add_edge('.', key)
-        else:
-            parts = key.split('.')
+        g.add_node(key)
 
-            # Add nodes for each part of the key
-            for i in range(len(parts)):
-                node = '.'.join(parts[:i + 1])
-                if node not in g.nodes:
-                    label = parts[i]
-                    g.add_node(node, label=label)
+        parts = key.split('.')
+        for i in range(1, len(parts)):
+            parent = ".".join(parts[:i])
+            child = ".".join(parts[:i+1])
 
-            # Add edges between each part of the key
-            for i in range(len(parts) - 1):
-                source = '.'.join(parts[:i + 1])
-                target = '.'.join(parts[:i + 2])
-                if not g.has_edge(source, target):
-                    g.add_edge(source, target)
-
+            g.add_edge(parent, child)
+    
     return g
 
 
-def get_keys_from_json_files(paths: Union[str, Iterable[str]]) -> List[str]:
-    if isinstance(paths, str):
-        paths = [paths]
+def convert_keys_to_dot(keys: Set[str], indent: int = DOT_INDENT) -> str:
+    """
+    Convert a list of keys into a DAG, and serialize the DAG to DOT format.
+    """
+    root_key = str(uuid.uuid4())
+ 
+    lines = [
+        "digraph G {",
+        f'{" " * indent}node [shape=box];',
+        f'{" " * indent}edge [dir=forward];',
+        f'{" " * indent}rankdir=LR;',
+        '',
+        f'{" " * indent}"{root_key}" [label="."];', # Root node
+    ]
+    g = convert_keys_to_digraph(keys)
+
+    for a in sorted(g.nodes()):
+        label = a.split('.')[-1]
+        lines.append(f'{" " * indent}"{a}" [label="{label}"];')
     
-    docs = read_docs_from_json_files(paths)
-    schema = get_json_schema_from_dicts(docs)
-    return get_keys_from_json_schema(schema)
+    lines.append("")
+    for a in sorted(g.nodes()):
+        if '.' not in a:
+            lines.append(f'{" " * indent}"{root_key}" -> "{a}";')
+
+    lines.append("")
+    for a, b in sorted(g.edges()):
+        lines.append(f'{" " * indent}"{a}" -> "{b}";')
+    
+    lines.append("}")
+
+    return "\n".join(lines)
 
 
-def get_keys_from_json_schema(schema: dict) -> Iterator[str]:
-    def generator(o: Any, parent_keys: Optional[List[str]] = None, keys: Optional[Set[str]] = None) -> Iterator[str]:
-        keys = keys or set()
-        parent_keys = parent_keys or []
+def render_dot_file(input_file: str, output_file: str, output_format: str = 'dot'):
+    cmd = f"dot -T{output_format} -Gdpi=300 {input_file} -o {output_file}"
+    os.system(cmd)
 
-        for key, value in o['properties'].items():
-            value_type = value['type']
-            
-            if value_type == 'array':
-                key = f'{key}[]'
-                keys.add('.'.join(parent_keys + [key]))
-                if 'items' in value:
-                    subtype = value['items']['type']
-                    if subtype == 'object':
-                        yield from generator(value['items'], parent_keys + [key], keys)
-            
-            elif value_type == 'object':
-                keys.add('.'.join(parent_keys + [key]))
-                yield from generator(value, parent_keys + [key], keys)
-            
+
+def get_keys(doc: dict, recursive: bool = True) -> Set[str]:
+    """
+    List unique keys in a JSON document.
+
+    Example keys:   
+
+    - id
+    - kill_chain_phases[]
+    - kill_chain_phases[].kill_chain_name
+    """
+    if not recursive:
+        return set(doc.keys())
+    
+    def gen(o: dict, parent_key: Optional[str] = None) -> Iterator[str]:
+        for k, v in o.items():
+            if parent_key:
+                k = f"{parent_key}.{k}"
+
+            if isinstance(v, dict):
+                yield from gen(v, parent_key=k)
+            elif isinstance(v, list) and all(isinstance(i, dict) for i in v):
+                k = f"{k}[]"
+                yield k
+                for i in v:
+                    yield from gen(i, parent_key=k)
             else:
-                keys.add('.'.join(parent_keys + [key]))
+                yield k
+                
+    return set(gen(doc))
 
-        yield from keys
 
-    return sorted(set(generator(schema)))
+def read_json_file(path: str) -> Any:
+    """
+    Read a JSON file.
+    """
+    with open(path, 'r') as f:
+        return json.load(f)

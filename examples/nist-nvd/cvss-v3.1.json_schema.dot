@@ -1,261 +1,259 @@
 digraph G {
-    node [shape=box, style=rounded]
-    layout=dot
-    rankdir=LR
-    splines=true
-    ranksep=0.5
-    nodesep=0.1
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
 
-    "$schema"
-    "."
-    "definitions"
-    "definitions.attackComplexityType" [label="attackComplexityType"]
-    "definitions.attackComplexityType.enum[]" [label="enum[]"]
-    "definitions.attackComplexityType.type" [label="type"]
-    "definitions.attackVectorType" [label="attackVectorType"]
-    "definitions.attackVectorType.enum[]" [label="enum[]"]
-    "definitions.attackVectorType.type" [label="type"]
-    "definitions.ciaRequirementType" [label="ciaRequirementType"]
-    "definitions.ciaRequirementType.enum[]" [label="enum[]"]
-    "definitions.ciaRequirementType.type" [label="type"]
-    "definitions.ciaType" [label="ciaType"]
-    "definitions.ciaType.enum[]" [label="enum[]"]
-    "definitions.ciaType.type" [label="type"]
-    "definitions.confidenceType" [label="confidenceType"]
-    "definitions.confidenceType.enum[]" [label="enum[]"]
-    "definitions.confidenceType.type" [label="type"]
-    "definitions.exploitCodeMaturityType" [label="exploitCodeMaturityType"]
-    "definitions.exploitCodeMaturityType.enum[]" [label="enum[]"]
-    "definitions.exploitCodeMaturityType.type" [label="type"]
-    "definitions.modifiedAttackComplexityType" [label="modifiedAttackComplexityType"]
-    "definitions.modifiedAttackComplexityType.enum[]" [label="enum[]"]
-    "definitions.modifiedAttackComplexityType.type" [label="type"]
-    "definitions.modifiedAttackVectorType" [label="modifiedAttackVectorType"]
-    "definitions.modifiedAttackVectorType.enum[]" [label="enum[]"]
-    "definitions.modifiedAttackVectorType.type" [label="type"]
-    "definitions.modifiedCiaType" [label="modifiedCiaType"]
-    "definitions.modifiedCiaType.enum[]" [label="enum[]"]
-    "definitions.modifiedCiaType.type" [label="type"]
-    "definitions.modifiedPrivilegesRequiredType" [label="modifiedPrivilegesRequiredType"]
-    "definitions.modifiedPrivilegesRequiredType.enum[]" [label="enum[]"]
-    "definitions.modifiedPrivilegesRequiredType.type" [label="type"]
-    "definitions.modifiedScopeType" [label="modifiedScopeType"]
-    "definitions.modifiedScopeType.enum[]" [label="enum[]"]
-    "definitions.modifiedScopeType.type" [label="type"]
-    "definitions.modifiedUserInteractionType" [label="modifiedUserInteractionType"]
-    "definitions.modifiedUserInteractionType.enum[]" [label="enum[]"]
-    "definitions.modifiedUserInteractionType.type" [label="type"]
-    "definitions.privilegesRequiredType" [label="privilegesRequiredType"]
-    "definitions.privilegesRequiredType.enum[]" [label="enum[]"]
-    "definitions.privilegesRequiredType.type" [label="type"]
-    "definitions.remediationLevelType" [label="remediationLevelType"]
-    "definitions.remediationLevelType.enum[]" [label="enum[]"]
-    "definitions.remediationLevelType.type" [label="type"]
-    "definitions.scopeType" [label="scopeType"]
-    "definitions.scopeType.enum[]" [label="enum[]"]
-    "definitions.scopeType.type" [label="type"]
-    "definitions.scoreType" [label="scoreType"]
-    "definitions.scoreType.maximum" [label="maximum"]
-    "definitions.scoreType.minimum" [label="minimum"]
-    "definitions.scoreType.type" [label="type"]
-    "definitions.severityType" [label="severityType"]
-    "definitions.severityType.enum[]" [label="enum[]"]
-    "definitions.severityType.type" [label="type"]
-    "definitions.userInteractionType" [label="userInteractionType"]
-    "definitions.userInteractionType.enum[]" [label="enum[]"]
-    "definitions.userInteractionType.type" [label="type"]
-    "license[]"
-    "properties"
-    "properties.attackComplexity" [label="attackComplexity"]
-    "properties.attackComplexity.$ref" [label="$ref"]
-    "properties.attackVector" [label="attackVector"]
-    "properties.attackVector.$ref" [label="$ref"]
-    "properties.availabilityImpact" [label="availabilityImpact"]
-    "properties.availabilityImpact.$ref" [label="$ref"]
-    "properties.availabilityRequirement" [label="availabilityRequirement"]
-    "properties.availabilityRequirement.$ref" [label="$ref"]
-    "properties.baseScore" [label="baseScore"]
-    "properties.baseScore.$ref" [label="$ref"]
-    "properties.baseSeverity" [label="baseSeverity"]
-    "properties.baseSeverity.$ref" [label="$ref"]
-    "properties.confidentialityImpact" [label="confidentialityImpact"]
-    "properties.confidentialityImpact.$ref" [label="$ref"]
-    "properties.confidentialityRequirement" [label="confidentialityRequirement"]
-    "properties.confidentialityRequirement.$ref" [label="$ref"]
-    "properties.environmentalScore" [label="environmentalScore"]
-    "properties.environmentalScore.$ref" [label="$ref"]
-    "properties.environmentalSeverity" [label="environmentalSeverity"]
-    "properties.environmentalSeverity.$ref" [label="$ref"]
-    "properties.exploitCodeMaturity" [label="exploitCodeMaturity"]
-    "properties.exploitCodeMaturity.$ref" [label="$ref"]
-    "properties.integrityImpact" [label="integrityImpact"]
-    "properties.integrityImpact.$ref" [label="$ref"]
-    "properties.integrityRequirement" [label="integrityRequirement"]
-    "properties.integrityRequirement.$ref" [label="$ref"]
-    "properties.modifiedAttackComplexity" [label="modifiedAttackComplexity"]
-    "properties.modifiedAttackComplexity.$ref" [label="$ref"]
-    "properties.modifiedAttackVector" [label="modifiedAttackVector"]
-    "properties.modifiedAttackVector.$ref" [label="$ref"]
-    "properties.modifiedAvailabilityImpact" [label="modifiedAvailabilityImpact"]
-    "properties.modifiedAvailabilityImpact.$ref" [label="$ref"]
-    "properties.modifiedConfidentialityImpact" [label="modifiedConfidentialityImpact"]
-    "properties.modifiedConfidentialityImpact.$ref" [label="$ref"]
-    "properties.modifiedIntegrityImpact" [label="modifiedIntegrityImpact"]
-    "properties.modifiedIntegrityImpact.$ref" [label="$ref"]
-    "properties.modifiedPrivilegesRequired" [label="modifiedPrivilegesRequired"]
-    "properties.modifiedPrivilegesRequired.$ref" [label="$ref"]
-    "properties.modifiedScope" [label="modifiedScope"]
-    "properties.modifiedScope.$ref" [label="$ref"]
-    "properties.modifiedUserInteraction" [label="modifiedUserInteraction"]
-    "properties.modifiedUserInteraction.$ref" [label="$ref"]
-    "properties.privilegesRequired" [label="privilegesRequired"]
-    "properties.privilegesRequired.$ref" [label="$ref"]
-    "properties.remediationLevel" [label="remediationLevel"]
-    "properties.remediationLevel.$ref" [label="$ref"]
-    "properties.reportConfidence" [label="reportConfidence"]
-    "properties.reportConfidence.$ref" [label="$ref"]
-    "properties.scope" [label="scope"]
-    "properties.scope.$ref" [label="$ref"]
-    "properties.temporalScore" [label="temporalScore"]
-    "properties.temporalScore.$ref" [label="$ref"]
-    "properties.temporalSeverity" [label="temporalSeverity"]
-    "properties.temporalSeverity.$ref" [label="$ref"]
-    "properties.userInteraction" [label="userInteraction"]
-    "properties.userInteraction.$ref" [label="$ref"]
-    "properties.vectorString" [label="vectorString"]
-    "properties.vectorString.pattern" [label="pattern"]
-    "properties.vectorString.type" [label="type"]
-    "properties.version" [label="version"]
-    "properties.version.description" [label="description"]
-    "properties.version.enum[]" [label="enum[]"]
-    "properties.version.type" [label="type"]
-    "required[]"
-    "title"
-    "type"
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" [label="."];
+    "$schema" [label="$schema"];
+    "definitions" [label="definitions"];
+    "definitions.attackComplexityType" [label="attackComplexityType"];
+    "definitions.attackComplexityType.enum" [label="enum"];
+    "definitions.attackComplexityType.type" [label="type"];
+    "definitions.attackVectorType" [label="attackVectorType"];
+    "definitions.attackVectorType.enum" [label="enum"];
+    "definitions.attackVectorType.type" [label="type"];
+    "definitions.ciaRequirementType" [label="ciaRequirementType"];
+    "definitions.ciaRequirementType.enum" [label="enum"];
+    "definitions.ciaRequirementType.type" [label="type"];
+    "definitions.ciaType" [label="ciaType"];
+    "definitions.ciaType.enum" [label="enum"];
+    "definitions.ciaType.type" [label="type"];
+    "definitions.confidenceType" [label="confidenceType"];
+    "definitions.confidenceType.enum" [label="enum"];
+    "definitions.confidenceType.type" [label="type"];
+    "definitions.exploitCodeMaturityType" [label="exploitCodeMaturityType"];
+    "definitions.exploitCodeMaturityType.enum" [label="enum"];
+    "definitions.exploitCodeMaturityType.type" [label="type"];
+    "definitions.modifiedAttackComplexityType" [label="modifiedAttackComplexityType"];
+    "definitions.modifiedAttackComplexityType.enum" [label="enum"];
+    "definitions.modifiedAttackComplexityType.type" [label="type"];
+    "definitions.modifiedAttackVectorType" [label="modifiedAttackVectorType"];
+    "definitions.modifiedAttackVectorType.enum" [label="enum"];
+    "definitions.modifiedAttackVectorType.type" [label="type"];
+    "definitions.modifiedCiaType" [label="modifiedCiaType"];
+    "definitions.modifiedCiaType.enum" [label="enum"];
+    "definitions.modifiedCiaType.type" [label="type"];
+    "definitions.modifiedPrivilegesRequiredType" [label="modifiedPrivilegesRequiredType"];
+    "definitions.modifiedPrivilegesRequiredType.enum" [label="enum"];
+    "definitions.modifiedPrivilegesRequiredType.type" [label="type"];
+    "definitions.modifiedScopeType" [label="modifiedScopeType"];
+    "definitions.modifiedScopeType.enum" [label="enum"];
+    "definitions.modifiedScopeType.type" [label="type"];
+    "definitions.modifiedUserInteractionType" [label="modifiedUserInteractionType"];
+    "definitions.modifiedUserInteractionType.enum" [label="enum"];
+    "definitions.modifiedUserInteractionType.type" [label="type"];
+    "definitions.privilegesRequiredType" [label="privilegesRequiredType"];
+    "definitions.privilegesRequiredType.enum" [label="enum"];
+    "definitions.privilegesRequiredType.type" [label="type"];
+    "definitions.remediationLevelType" [label="remediationLevelType"];
+    "definitions.remediationLevelType.enum" [label="enum"];
+    "definitions.remediationLevelType.type" [label="type"];
+    "definitions.scopeType" [label="scopeType"];
+    "definitions.scopeType.enum" [label="enum"];
+    "definitions.scopeType.type" [label="type"];
+    "definitions.scoreType" [label="scoreType"];
+    "definitions.scoreType.maximum" [label="maximum"];
+    "definitions.scoreType.minimum" [label="minimum"];
+    "definitions.scoreType.type" [label="type"];
+    "definitions.severityType" [label="severityType"];
+    "definitions.severityType.enum" [label="enum"];
+    "definitions.severityType.type" [label="type"];
+    "definitions.userInteractionType" [label="userInteractionType"];
+    "definitions.userInteractionType.enum" [label="enum"];
+    "definitions.userInteractionType.type" [label="type"];
+    "license" [label="license"];
+    "properties" [label="properties"];
+    "properties.attackComplexity" [label="attackComplexity"];
+    "properties.attackComplexity.$ref" [label="$ref"];
+    "properties.attackVector" [label="attackVector"];
+    "properties.attackVector.$ref" [label="$ref"];
+    "properties.availabilityImpact" [label="availabilityImpact"];
+    "properties.availabilityImpact.$ref" [label="$ref"];
+    "properties.availabilityRequirement" [label="availabilityRequirement"];
+    "properties.availabilityRequirement.$ref" [label="$ref"];
+    "properties.baseScore" [label="baseScore"];
+    "properties.baseScore.$ref" [label="$ref"];
+    "properties.baseSeverity" [label="baseSeverity"];
+    "properties.baseSeverity.$ref" [label="$ref"];
+    "properties.confidentialityImpact" [label="confidentialityImpact"];
+    "properties.confidentialityImpact.$ref" [label="$ref"];
+    "properties.confidentialityRequirement" [label="confidentialityRequirement"];
+    "properties.confidentialityRequirement.$ref" [label="$ref"];
+    "properties.environmentalScore" [label="environmentalScore"];
+    "properties.environmentalScore.$ref" [label="$ref"];
+    "properties.environmentalSeverity" [label="environmentalSeverity"];
+    "properties.environmentalSeverity.$ref" [label="$ref"];
+    "properties.exploitCodeMaturity" [label="exploitCodeMaturity"];
+    "properties.exploitCodeMaturity.$ref" [label="$ref"];
+    "properties.integrityImpact" [label="integrityImpact"];
+    "properties.integrityImpact.$ref" [label="$ref"];
+    "properties.integrityRequirement" [label="integrityRequirement"];
+    "properties.integrityRequirement.$ref" [label="$ref"];
+    "properties.modifiedAttackComplexity" [label="modifiedAttackComplexity"];
+    "properties.modifiedAttackComplexity.$ref" [label="$ref"];
+    "properties.modifiedAttackVector" [label="modifiedAttackVector"];
+    "properties.modifiedAttackVector.$ref" [label="$ref"];
+    "properties.modifiedAvailabilityImpact" [label="modifiedAvailabilityImpact"];
+    "properties.modifiedAvailabilityImpact.$ref" [label="$ref"];
+    "properties.modifiedConfidentialityImpact" [label="modifiedConfidentialityImpact"];
+    "properties.modifiedConfidentialityImpact.$ref" [label="$ref"];
+    "properties.modifiedIntegrityImpact" [label="modifiedIntegrityImpact"];
+    "properties.modifiedIntegrityImpact.$ref" [label="$ref"];
+    "properties.modifiedPrivilegesRequired" [label="modifiedPrivilegesRequired"];
+    "properties.modifiedPrivilegesRequired.$ref" [label="$ref"];
+    "properties.modifiedScope" [label="modifiedScope"];
+    "properties.modifiedScope.$ref" [label="$ref"];
+    "properties.modifiedUserInteraction" [label="modifiedUserInteraction"];
+    "properties.modifiedUserInteraction.$ref" [label="$ref"];
+    "properties.privilegesRequired" [label="privilegesRequired"];
+    "properties.privilegesRequired.$ref" [label="$ref"];
+    "properties.remediationLevel" [label="remediationLevel"];
+    "properties.remediationLevel.$ref" [label="$ref"];
+    "properties.reportConfidence" [label="reportConfidence"];
+    "properties.reportConfidence.$ref" [label="$ref"];
+    "properties.scope" [label="scope"];
+    "properties.scope.$ref" [label="$ref"];
+    "properties.temporalScore" [label="temporalScore"];
+    "properties.temporalScore.$ref" [label="$ref"];
+    "properties.temporalSeverity" [label="temporalSeverity"];
+    "properties.temporalSeverity.$ref" [label="$ref"];
+    "properties.userInteraction" [label="userInteraction"];
+    "properties.userInteraction.$ref" [label="$ref"];
+    "properties.vectorString" [label="vectorString"];
+    "properties.vectorString.pattern" [label="pattern"];
+    "properties.vectorString.type" [label="type"];
+    "properties.version" [label="version"];
+    "properties.version.description" [label="description"];
+    "properties.version.enum" [label="enum"];
+    "properties.version.type" [label="type"];
+    "required" [label="required"];
+    "title" [label="title"];
+    "type" [label="type"];
 
-    "." -> "$schema"
-    "." -> "definitions"
-    "." -> "license[]"
-    "." -> "properties"
-    "." -> "required[]"
-    "." -> "title"
-    "." -> "type"
-    "definitions" -> "definitions.attackComplexityType"
-    "definitions" -> "definitions.attackVectorType"
-    "definitions" -> "definitions.ciaRequirementType"
-    "definitions" -> "definitions.ciaType"
-    "definitions" -> "definitions.confidenceType"
-    "definitions" -> "definitions.exploitCodeMaturityType"
-    "definitions" -> "definitions.modifiedAttackComplexityType"
-    "definitions" -> "definitions.modifiedAttackVectorType"
-    "definitions" -> "definitions.modifiedCiaType"
-    "definitions" -> "definitions.modifiedPrivilegesRequiredType"
-    "definitions" -> "definitions.modifiedScopeType"
-    "definitions" -> "definitions.modifiedUserInteractionType"
-    "definitions" -> "definitions.privilegesRequiredType"
-    "definitions" -> "definitions.remediationLevelType"
-    "definitions" -> "definitions.scopeType"
-    "definitions" -> "definitions.scoreType"
-    "definitions" -> "definitions.severityType"
-    "definitions" -> "definitions.userInteractionType"
-    "definitions.attackComplexityType" -> "definitions.attackComplexityType.enum[]"
-    "definitions.attackComplexityType" -> "definitions.attackComplexityType.type"
-    "definitions.attackVectorType" -> "definitions.attackVectorType.enum[]"
-    "definitions.attackVectorType" -> "definitions.attackVectorType.type"
-    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.enum[]"
-    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.type"
-    "definitions.ciaType" -> "definitions.ciaType.enum[]"
-    "definitions.ciaType" -> "definitions.ciaType.type"
-    "definitions.confidenceType" -> "definitions.confidenceType.enum[]"
-    "definitions.confidenceType" -> "definitions.confidenceType.type"
-    "definitions.exploitCodeMaturityType" -> "definitions.exploitCodeMaturityType.enum[]"
-    "definitions.exploitCodeMaturityType" -> "definitions.exploitCodeMaturityType.type"
-    "definitions.modifiedAttackComplexityType" -> "definitions.modifiedAttackComplexityType.enum[]"
-    "definitions.modifiedAttackComplexityType" -> "definitions.modifiedAttackComplexityType.type"
-    "definitions.modifiedAttackVectorType" -> "definitions.modifiedAttackVectorType.enum[]"
-    "definitions.modifiedAttackVectorType" -> "definitions.modifiedAttackVectorType.type"
-    "definitions.modifiedCiaType" -> "definitions.modifiedCiaType.enum[]"
-    "definitions.modifiedCiaType" -> "definitions.modifiedCiaType.type"
-    "definitions.modifiedPrivilegesRequiredType" -> "definitions.modifiedPrivilegesRequiredType.enum[]"
-    "definitions.modifiedPrivilegesRequiredType" -> "definitions.modifiedPrivilegesRequiredType.type"
-    "definitions.modifiedScopeType" -> "definitions.modifiedScopeType.enum[]"
-    "definitions.modifiedScopeType" -> "definitions.modifiedScopeType.type"
-    "definitions.modifiedUserInteractionType" -> "definitions.modifiedUserInteractionType.enum[]"
-    "definitions.modifiedUserInteractionType" -> "definitions.modifiedUserInteractionType.type"
-    "definitions.privilegesRequiredType" -> "definitions.privilegesRequiredType.enum[]"
-    "definitions.privilegesRequiredType" -> "definitions.privilegesRequiredType.type"
-    "definitions.remediationLevelType" -> "definitions.remediationLevelType.enum[]"
-    "definitions.remediationLevelType" -> "definitions.remediationLevelType.type"
-    "definitions.scopeType" -> "definitions.scopeType.enum[]"
-    "definitions.scopeType" -> "definitions.scopeType.type"
-    "definitions.scoreType" -> "definitions.scoreType.maximum"
-    "definitions.scoreType" -> "definitions.scoreType.minimum"
-    "definitions.scoreType" -> "definitions.scoreType.type"
-    "definitions.severityType" -> "definitions.severityType.enum[]"
-    "definitions.severityType" -> "definitions.severityType.type"
-    "definitions.userInteractionType" -> "definitions.userInteractionType.enum[]"
-    "definitions.userInteractionType" -> "definitions.userInteractionType.type"
-    "properties" -> "properties.attackComplexity"
-    "properties" -> "properties.attackVector"
-    "properties" -> "properties.availabilityImpact"
-    "properties" -> "properties.availabilityRequirement"
-    "properties" -> "properties.baseScore"
-    "properties" -> "properties.baseSeverity"
-    "properties" -> "properties.confidentialityImpact"
-    "properties" -> "properties.confidentialityRequirement"
-    "properties" -> "properties.environmentalScore"
-    "properties" -> "properties.environmentalSeverity"
-    "properties" -> "properties.exploitCodeMaturity"
-    "properties" -> "properties.integrityImpact"
-    "properties" -> "properties.integrityRequirement"
-    "properties" -> "properties.modifiedAttackComplexity"
-    "properties" -> "properties.modifiedAttackVector"
-    "properties" -> "properties.modifiedAvailabilityImpact"
-    "properties" -> "properties.modifiedConfidentialityImpact"
-    "properties" -> "properties.modifiedIntegrityImpact"
-    "properties" -> "properties.modifiedPrivilegesRequired"
-    "properties" -> "properties.modifiedScope"
-    "properties" -> "properties.modifiedUserInteraction"
-    "properties" -> "properties.privilegesRequired"
-    "properties" -> "properties.remediationLevel"
-    "properties" -> "properties.reportConfidence"
-    "properties" -> "properties.scope"
-    "properties" -> "properties.temporalScore"
-    "properties" -> "properties.temporalSeverity"
-    "properties" -> "properties.userInteraction"
-    "properties" -> "properties.vectorString"
-    "properties" -> "properties.version"
-    "properties.attackComplexity" -> "properties.attackComplexity.$ref"
-    "properties.attackVector" -> "properties.attackVector.$ref"
-    "properties.availabilityImpact" -> "properties.availabilityImpact.$ref"
-    "properties.availabilityRequirement" -> "properties.availabilityRequirement.$ref"
-    "properties.baseScore" -> "properties.baseScore.$ref"
-    "properties.baseSeverity" -> "properties.baseSeverity.$ref"
-    "properties.confidentialityImpact" -> "properties.confidentialityImpact.$ref"
-    "properties.confidentialityRequirement" -> "properties.confidentialityRequirement.$ref"
-    "properties.environmentalScore" -> "properties.environmentalScore.$ref"
-    "properties.environmentalSeverity" -> "properties.environmentalSeverity.$ref"
-    "properties.exploitCodeMaturity" -> "properties.exploitCodeMaturity.$ref"
-    "properties.integrityImpact" -> "properties.integrityImpact.$ref"
-    "properties.integrityRequirement" -> "properties.integrityRequirement.$ref"
-    "properties.modifiedAttackComplexity" -> "properties.modifiedAttackComplexity.$ref"
-    "properties.modifiedAttackVector" -> "properties.modifiedAttackVector.$ref"
-    "properties.modifiedAvailabilityImpact" -> "properties.modifiedAvailabilityImpact.$ref"
-    "properties.modifiedConfidentialityImpact" -> "properties.modifiedConfidentialityImpact.$ref"
-    "properties.modifiedIntegrityImpact" -> "properties.modifiedIntegrityImpact.$ref"
-    "properties.modifiedPrivilegesRequired" -> "properties.modifiedPrivilegesRequired.$ref"
-    "properties.modifiedScope" -> "properties.modifiedScope.$ref"
-    "properties.modifiedUserInteraction" -> "properties.modifiedUserInteraction.$ref"
-    "properties.privilegesRequired" -> "properties.privilegesRequired.$ref"
-    "properties.remediationLevel" -> "properties.remediationLevel.$ref"
-    "properties.reportConfidence" -> "properties.reportConfidence.$ref"
-    "properties.scope" -> "properties.scope.$ref"
-    "properties.temporalScore" -> "properties.temporalScore.$ref"
-    "properties.temporalSeverity" -> "properties.temporalSeverity.$ref"
-    "properties.userInteraction" -> "properties.userInteraction.$ref"
-    "properties.vectorString" -> "properties.vectorString.pattern"
-    "properties.vectorString" -> "properties.vectorString.type"
-    "properties.version" -> "properties.version.description"
-    "properties.version" -> "properties.version.enum[]"
-    "properties.version" -> "properties.version.type"
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" -> "$schema";
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" -> "definitions";
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" -> "license";
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" -> "properties";
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" -> "required";
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" -> "title";
+    "3ec483a3-5109-4b6a-8de5-a439592675b0" -> "type";
+
+    "definitions" -> "definitions.attackComplexityType";
+    "definitions" -> "definitions.attackVectorType";
+    "definitions" -> "definitions.ciaRequirementType";
+    "definitions" -> "definitions.ciaType";
+    "definitions" -> "definitions.confidenceType";
+    "definitions" -> "definitions.exploitCodeMaturityType";
+    "definitions" -> "definitions.modifiedAttackComplexityType";
+    "definitions" -> "definitions.modifiedAttackVectorType";
+    "definitions" -> "definitions.modifiedCiaType";
+    "definitions" -> "definitions.modifiedPrivilegesRequiredType";
+    "definitions" -> "definitions.modifiedScopeType";
+    "definitions" -> "definitions.modifiedUserInteractionType";
+    "definitions" -> "definitions.privilegesRequiredType";
+    "definitions" -> "definitions.remediationLevelType";
+    "definitions" -> "definitions.scopeType";
+    "definitions" -> "definitions.scoreType";
+    "definitions" -> "definitions.severityType";
+    "definitions" -> "definitions.userInteractionType";
+    "definitions.attackComplexityType" -> "definitions.attackComplexityType.enum";
+    "definitions.attackComplexityType" -> "definitions.attackComplexityType.type";
+    "definitions.attackVectorType" -> "definitions.attackVectorType.enum";
+    "definitions.attackVectorType" -> "definitions.attackVectorType.type";
+    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.enum";
+    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.type";
+    "definitions.ciaType" -> "definitions.ciaType.enum";
+    "definitions.ciaType" -> "definitions.ciaType.type";
+    "definitions.confidenceType" -> "definitions.confidenceType.enum";
+    "definitions.confidenceType" -> "definitions.confidenceType.type";
+    "definitions.exploitCodeMaturityType" -> "definitions.exploitCodeMaturityType.enum";
+    "definitions.exploitCodeMaturityType" -> "definitions.exploitCodeMaturityType.type";
+    "definitions.modifiedAttackComplexityType" -> "definitions.modifiedAttackComplexityType.enum";
+    "definitions.modifiedAttackComplexityType" -> "definitions.modifiedAttackComplexityType.type";
+    "definitions.modifiedAttackVectorType" -> "definitions.modifiedAttackVectorType.enum";
+    "definitions.modifiedAttackVectorType" -> "definitions.modifiedAttackVectorType.type";
+    "definitions.modifiedCiaType" -> "definitions.modifiedCiaType.enum";
+    "definitions.modifiedCiaType" -> "definitions.modifiedCiaType.type";
+    "definitions.modifiedPrivilegesRequiredType" -> "definitions.modifiedPrivilegesRequiredType.enum";
+    "definitions.modifiedPrivilegesRequiredType" -> "definitions.modifiedPrivilegesRequiredType.type";
+    "definitions.modifiedScopeType" -> "definitions.modifiedScopeType.enum";
+    "definitions.modifiedScopeType" -> "definitions.modifiedScopeType.type";
+    "definitions.modifiedUserInteractionType" -> "definitions.modifiedUserInteractionType.enum";
+    "definitions.modifiedUserInteractionType" -> "definitions.modifiedUserInteractionType.type";
+    "definitions.privilegesRequiredType" -> "definitions.privilegesRequiredType.enum";
+    "definitions.privilegesRequiredType" -> "definitions.privilegesRequiredType.type";
+    "definitions.remediationLevelType" -> "definitions.remediationLevelType.enum";
+    "definitions.remediationLevelType" -> "definitions.remediationLevelType.type";
+    "definitions.scopeType" -> "definitions.scopeType.enum";
+    "definitions.scopeType" -> "definitions.scopeType.type";
+    "definitions.scoreType" -> "definitions.scoreType.maximum";
+    "definitions.scoreType" -> "definitions.scoreType.minimum";
+    "definitions.scoreType" -> "definitions.scoreType.type";
+    "definitions.severityType" -> "definitions.severityType.enum";
+    "definitions.severityType" -> "definitions.severityType.type";
+    "definitions.userInteractionType" -> "definitions.userInteractionType.enum";
+    "definitions.userInteractionType" -> "definitions.userInteractionType.type";
+    "properties" -> "properties.attackComplexity";
+    "properties" -> "properties.attackVector";
+    "properties" -> "properties.availabilityImpact";
+    "properties" -> "properties.availabilityRequirement";
+    "properties" -> "properties.baseScore";
+    "properties" -> "properties.baseSeverity";
+    "properties" -> "properties.confidentialityImpact";
+    "properties" -> "properties.confidentialityRequirement";
+    "properties" -> "properties.environmentalScore";
+    "properties" -> "properties.environmentalSeverity";
+    "properties" -> "properties.exploitCodeMaturity";
+    "properties" -> "properties.integrityImpact";
+    "properties" -> "properties.integrityRequirement";
+    "properties" -> "properties.modifiedAttackComplexity";
+    "properties" -> "properties.modifiedAttackVector";
+    "properties" -> "properties.modifiedAvailabilityImpact";
+    "properties" -> "properties.modifiedConfidentialityImpact";
+    "properties" -> "properties.modifiedIntegrityImpact";
+    "properties" -> "properties.modifiedPrivilegesRequired";
+    "properties" -> "properties.modifiedScope";
+    "properties" -> "properties.modifiedUserInteraction";
+    "properties" -> "properties.privilegesRequired";
+    "properties" -> "properties.remediationLevel";
+    "properties" -> "properties.reportConfidence";
+    "properties" -> "properties.scope";
+    "properties" -> "properties.temporalScore";
+    "properties" -> "properties.temporalSeverity";
+    "properties" -> "properties.userInteraction";
+    "properties" -> "properties.vectorString";
+    "properties" -> "properties.version";
+    "properties.attackComplexity" -> "properties.attackComplexity.$ref";
+    "properties.attackVector" -> "properties.attackVector.$ref";
+    "properties.availabilityImpact" -> "properties.availabilityImpact.$ref";
+    "properties.availabilityRequirement" -> "properties.availabilityRequirement.$ref";
+    "properties.baseScore" -> "properties.baseScore.$ref";
+    "properties.baseSeverity" -> "properties.baseSeverity.$ref";
+    "properties.confidentialityImpact" -> "properties.confidentialityImpact.$ref";
+    "properties.confidentialityRequirement" -> "properties.confidentialityRequirement.$ref";
+    "properties.environmentalScore" -> "properties.environmentalScore.$ref";
+    "properties.environmentalSeverity" -> "properties.environmentalSeverity.$ref";
+    "properties.exploitCodeMaturity" -> "properties.exploitCodeMaturity.$ref";
+    "properties.integrityImpact" -> "properties.integrityImpact.$ref";
+    "properties.integrityRequirement" -> "properties.integrityRequirement.$ref";
+    "properties.modifiedAttackComplexity" -> "properties.modifiedAttackComplexity.$ref";
+    "properties.modifiedAttackVector" -> "properties.modifiedAttackVector.$ref";
+    "properties.modifiedAvailabilityImpact" -> "properties.modifiedAvailabilityImpact.$ref";
+    "properties.modifiedConfidentialityImpact" -> "properties.modifiedConfidentialityImpact.$ref";
+    "properties.modifiedIntegrityImpact" -> "properties.modifiedIntegrityImpact.$ref";
+    "properties.modifiedPrivilegesRequired" -> "properties.modifiedPrivilegesRequired.$ref";
+    "properties.modifiedScope" -> "properties.modifiedScope.$ref";
+    "properties.modifiedUserInteraction" -> "properties.modifiedUserInteraction.$ref";
+    "properties.privilegesRequired" -> "properties.privilegesRequired.$ref";
+    "properties.remediationLevel" -> "properties.remediationLevel.$ref";
+    "properties.reportConfidence" -> "properties.reportConfidence.$ref";
+    "properties.scope" -> "properties.scope.$ref";
+    "properties.temporalScore" -> "properties.temporalScore.$ref";
+    "properties.temporalSeverity" -> "properties.temporalSeverity.$ref";
+    "properties.userInteraction" -> "properties.userInteraction.$ref";
+    "properties.vectorString" -> "properties.vectorString.pattern";
+    "properties.vectorString" -> "properties.vectorString.type";
+    "properties.version" -> "properties.version.description";
+    "properties.version" -> "properties.version.enum";
+    "properties.version" -> "properties.version.type";
 }
