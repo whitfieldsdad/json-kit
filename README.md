@@ -14,15 +14,15 @@ For example, we can visualize the [structure](https://www.cisa.gov/sites/default
 
 ![CISA KEV](examples/cisa-kev/known_exploited_vulnerabilities.png)
 
-Comparatively, the JSON Schema can be visualized as follows:
-
-![CISA KEV JSON Schema](examples/cisa-kev/known_exploited_vulnerabilities_schema.png)
-
 ## Usage
 
-- [List the keys in one or more JSON files](#list-keys-in-a-json-file)
-- [Generate a JSON Schema from one or more JSON files](#generate-a-json-schema-from-a-json-file)
-- [Render JSON documents as directed graphs with NetworkX and GraphViz](#visualize-json-files-as-directed-graphs-with-graphviz)
+- [json-kit](#json-kit)
+  - [Features](#features)
+  - [Usage](#usage)
+    - [Command line](#command-line)
+      - [List keys in a JSON file](#list-keys-in-a-json-file)
+      - [Generate a JSON Schema from a JSON file](#generate-a-json-schema-from-a-json-file)
+      - [Visualize JSON files as directed graphs with GraphViz](#visualize-json-files-as-directed-graphs-with-graphviz)
 
 ### Command line
 
@@ -34,22 +34,24 @@ To list the keys in a particular JSON file:
 poetry run json-kit keys examples/cisa-kev/known_exploited_vulnerabilities.json
 ```
 
-```
-catalogVersion
-count
-dateReleased
-title
-vulnerabilities[]
-vulnerabilities[].cveID
-vulnerabilities[].dateAdded
-vulnerabilities[].dueDate
-vulnerabilities[].knownRansomwareCampaignUse
-vulnerabilities[].notes
-vulnerabilities[].product
-vulnerabilities[].requiredAction
-vulnerabilities[].shortDescription
-vulnerabilities[].vendorProject
-vulnerabilities[].vulnerabilityName
+```json
+[
+    "catalogVersion",
+    "count",
+    "dateReleased",
+    "title",
+    "vulnerabilities[]",
+    "vulnerabilities[].cveID",
+    "vulnerabilities[].dateAdded",
+    "vulnerabilities[].dueDate",
+    "vulnerabilities[].knownRansomwareCampaignUse",
+    "vulnerabilities[].notes",
+    "vulnerabilities[].product",
+    "vulnerabilities[].requiredAction",
+    "vulnerabilities[].shortDescription",
+    "vulnerabilities[].vendorProject",
+    "vulnerabilities[].vulnerabilityName"
+]
 ```
 
 #### Generate a JSON Schema from a JSON file
@@ -62,7 +64,6 @@ poetry run json-kit json-schema examples/cisa-kev/known_exploited_vulnerabilitie
 
 ```json
 {
-    "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
         "title": {
@@ -143,7 +144,49 @@ poetry run json-kit json-schema examples/cisa-kev/known_exploited_vulnerabilitie
 To convert a JSON file to [DOT format](examples/cisa-kev/known_exploited_vulnerabilities.dot):
 
 ```bash
-poetry run json-kit draw examples/cisa-kev/known_exploited_vulnerabilities.json -o examples/cisa-kev/known_exploited_vulnerabilities.dot
+poetry run json-kit draw-keys examples/cisa-kev/known_exploited_vulnerabilities.json
+```
+
+```dot
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "7a7f3156-caa7-47a0-a7fa-d4a29015abe7" [label="."];
+    "catalogVersion" [label="catalogVersion"];
+    "count" [label="count"];
+    "dateReleased" [label="dateReleased"];
+    "title" [label="title"];
+    "vulnerabilities[]" [label="vulnerabilities[]"];
+    "vulnerabilities[].cveID" [label="cveID"];
+    "vulnerabilities[].dateAdded" [label="dateAdded"];
+    "vulnerabilities[].dueDate" [label="dueDate"];
+    "vulnerabilities[].knownRansomwareCampaignUse" [label="knownRansomwareCampaignUse"];
+    "vulnerabilities[].notes" [label="notes"];
+    "vulnerabilities[].product" [label="product"];
+    "vulnerabilities[].requiredAction" [label="requiredAction"];
+    "vulnerabilities[].shortDescription" [label="shortDescription"];
+    "vulnerabilities[].vendorProject" [label="vendorProject"];
+    "vulnerabilities[].vulnerabilityName" [label="vulnerabilityName"];
+
+    "7a7f3156-caa7-47a0-a7fa-d4a29015abe7" -> "catalogVersion";
+    "7a7f3156-caa7-47a0-a7fa-d4a29015abe7" -> "count";
+    "7a7f3156-caa7-47a0-a7fa-d4a29015abe7" -> "dateReleased";
+    "7a7f3156-caa7-47a0-a7fa-d4a29015abe7" -> "title";
+    "7a7f3156-caa7-47a0-a7fa-d4a29015abe7" -> "vulnerabilities[]";
+
+    "vulnerabilities[]" -> "vulnerabilities[].cveID";
+    "vulnerabilities[]" -> "vulnerabilities[].dateAdded";
+    "vulnerabilities[]" -> "vulnerabilities[].dueDate";
+    "vulnerabilities[]" -> "vulnerabilities[].knownRansomwareCampaignUse";
+    "vulnerabilities[]" -> "vulnerabilities[].notes";
+    "vulnerabilities[]" -> "vulnerabilities[].product";
+    "vulnerabilities[]" -> "vulnerabilities[].requiredAction";
+    "vulnerabilities[]" -> "vulnerabilities[].shortDescription";
+    "vulnerabilities[]" -> "vulnerabilities[].vendorProject";
+    "vulnerabilities[]" -> "vulnerabilities[].vulnerabilityName";
+}
 ```
 
 To convert a JSON file to an [image in PNG format](examples/cisa-kev/known_exploited_vulnerabilities.png):
@@ -151,6 +194,8 @@ To convert a JSON file to an [image in PNG format](examples/cisa-kev/known_explo
 ```bash
 poetry run json-kit draw examples/cisa-kev/known_exploited_vulnerabilities.json -o examples/cisa-kev/known_exploited_vulnerabilities.png
 ```
+
+![CISA KEV](examples/cisa-kev/known_exploited_vulnerabilities.png)
 
 To convert a JSON file to an [image in SVG format](examples/cisa-kev/known_exploited_vulnerabilities.svg):
 

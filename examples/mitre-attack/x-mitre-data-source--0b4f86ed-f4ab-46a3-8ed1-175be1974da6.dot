@@ -1,0 +1,51 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "description" [label="description"];
+    "external_references[]" [label="external_references[]"];
+    "external_references[].external_id" [label="external_id"];
+    "external_references[].source_name" [label="source_name"];
+    "external_references[].url" [label="url"];
+    "id" [label="id"];
+    "modified" [label="modified"];
+    "name" [label="name"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "revoked" [label="revoked"];
+    "type" [label="type"];
+    "x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"];
+    "x_mitre_collection_layers" [label="x_mitre_collection_layers"];
+    "x_mitre_contributors" [label="x_mitre_contributors"];
+    "x_mitre_deprecated" [label="x_mitre_deprecated"];
+    "x_mitre_domains" [label="x_mitre_domains"];
+    "x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"];
+    "x_mitre_platforms" [label="x_mitre_platforms"];
+    "x_mitre_version" [label="x_mitre_version"];
+
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "created";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "created_by_ref";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "description";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "external_references[]";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "id";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "modified";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "name";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "object_marking_refs";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "revoked";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "type";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_attack_spec_version";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_collection_layers";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_contributors";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_deprecated";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_domains";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_modified_by_ref";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_platforms";
+    "aaaebca6-60aa-44c7-b7b0-52b184d920f4" -> "x_mitre_version";
+
+    "external_references[]" -> "external_references[].external_id";
+    "external_references[]" -> "external_references[].source_name";
+    "external_references[]" -> "external_references[].url";
+}

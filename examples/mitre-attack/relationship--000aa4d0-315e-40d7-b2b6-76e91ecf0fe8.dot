@@ -1,0 +1,41 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "3453c05f-59be-4e51-982c-b67b4619dba4" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "description" [label="description"];
+    "external_references[]" [label="external_references[]"];
+    "external_references[].description" [label="description"];
+    "external_references[].source_name" [label="source_name"];
+    "external_references[].url" [label="url"];
+    "id" [label="id"];
+    "modified" [label="modified"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "relationship_type" [label="relationship_type"];
+    "source_ref" [label="source_ref"];
+    "target_ref" [label="target_ref"];
+    "type" [label="type"];
+    "x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"];
+    "x_mitre_version" [label="x_mitre_version"];
+
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "created";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "created_by_ref";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "description";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "external_references[]";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "id";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "modified";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "object_marking_refs";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "relationship_type";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "source_ref";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "target_ref";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "type";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "x_mitre_modified_by_ref";
+    "3453c05f-59be-4e51-982c-b67b4619dba4" -> "x_mitre_version";
+
+    "external_references[]" -> "external_references[].description";
+    "external_references[]" -> "external_references[].source_name";
+    "external_references[]" -> "external_references[].url";
+}

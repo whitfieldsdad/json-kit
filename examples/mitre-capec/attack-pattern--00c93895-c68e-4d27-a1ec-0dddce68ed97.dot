@@ -1,0 +1,49 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "description" [label="description"];
+    "external_references[]" [label="external_references[]"];
+    "external_references[].description" [label="description"];
+    "external_references[].external_id" [label="external_id"];
+    "external_references[].source_name" [label="source_name"];
+    "external_references[].url" [label="url"];
+    "id" [label="id"];
+    "modified" [label="modified"];
+    "name" [label="name"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "spec_version" [label="spec_version"];
+    "type" [label="type"];
+    "x_capec_abstraction" [label="x_capec_abstraction"];
+    "x_capec_child_of_refs" [label="x_capec_child_of_refs"];
+    "x_capec_domains" [label="x_capec_domains"];
+    "x_capec_parent_of_refs" [label="x_capec_parent_of_refs"];
+    "x_capec_status" [label="x_capec_status"];
+    "x_capec_version" [label="x_capec_version"];
+
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "created";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "created_by_ref";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "description";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "external_references[]";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "id";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "modified";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "name";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "object_marking_refs";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "spec_version";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "type";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "x_capec_abstraction";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "x_capec_child_of_refs";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "x_capec_domains";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "x_capec_parent_of_refs";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "x_capec_status";
+    "90ee417d-9868-4292-bbf6-b057339cf4ae" -> "x_capec_version";
+
+    "external_references[]" -> "external_references[].description";
+    "external_references[]" -> "external_references[].external_id";
+    "external_references[]" -> "external_references[].source_name";
+    "external_references[]" -> "external_references[].url";
+}

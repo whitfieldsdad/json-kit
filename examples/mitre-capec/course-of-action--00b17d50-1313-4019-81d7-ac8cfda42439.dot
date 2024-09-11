@@ -1,0 +1,29 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "c46187e2-938e-4fcc-bd21-f2437319f763" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "description" [label="description"];
+    "id" [label="id"];
+    "modified" [label="modified"];
+    "name" [label="name"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "spec_version" [label="spec_version"];
+    "type" [label="type"];
+    "x_capec_version" [label="x_capec_version"];
+
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "created";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "created_by_ref";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "description";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "id";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "modified";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "name";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "object_marking_refs";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "spec_version";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "type";
+    "c46187e2-938e-4fcc-bd21-f2437319f763" -> "x_capec_version";
+
+}

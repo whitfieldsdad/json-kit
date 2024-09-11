@@ -1,0 +1,57 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" [label="."];
+    "aliases" [label="aliases"];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "description" [label="description"];
+    "external_references[]" [label="external_references[]"];
+    "external_references[].description" [label="description"];
+    "external_references[].external_id" [label="external_id"];
+    "external_references[].source_name" [label="source_name"];
+    "external_references[].url" [label="url"];
+    "first_seen" [label="first_seen"];
+    "id" [label="id"];
+    "last_seen" [label="last_seen"];
+    "modified" [label="modified"];
+    "name" [label="name"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "revoked" [label="revoked"];
+    "type" [label="type"];
+    "x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"];
+    "x_mitre_deprecated" [label="x_mitre_deprecated"];
+    "x_mitre_domains" [label="x_mitre_domains"];
+    "x_mitre_first_seen_citation" [label="x_mitre_first_seen_citation"];
+    "x_mitre_last_seen_citation" [label="x_mitre_last_seen_citation"];
+    "x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"];
+    "x_mitre_version" [label="x_mitre_version"];
+
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "aliases";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "created";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "created_by_ref";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "description";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "external_references[]";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "first_seen";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "id";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "last_seen";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "modified";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "name";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "object_marking_refs";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "revoked";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "type";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "x_mitre_attack_spec_version";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "x_mitre_deprecated";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "x_mitre_domains";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "x_mitre_first_seen_citation";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "x_mitre_last_seen_citation";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "x_mitre_modified_by_ref";
+    "cc94ba62-cc75-4622-bd02-851bdbe9625a" -> "x_mitre_version";
+
+    "external_references[]" -> "external_references[].description";
+    "external_references[]" -> "external_references[].external_id";
+    "external_references[]" -> "external_references[].source_name";
+    "external_references[]" -> "external_references[].url";
+}

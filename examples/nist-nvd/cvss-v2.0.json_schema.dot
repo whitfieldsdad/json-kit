@@ -1,175 +1,173 @@
 digraph G {
-    node [shape=box, style=rounded]
-    layout=dot
-    rankdir=LR
-    splines=true
-    ranksep=0.5
-    nodesep=0.1
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
 
-    "$schema"
-    "."
-    "definitions"
-    "definitions.accessComplexityType" [label="accessComplexityType"]
-    "definitions.accessComplexityType.enum[]" [label="enum[]"]
-    "definitions.accessComplexityType.type" [label="type"]
-    "definitions.accessVectorType" [label="accessVectorType"]
-    "definitions.accessVectorType.enum[]" [label="enum[]"]
-    "definitions.accessVectorType.type" [label="type"]
-    "definitions.authenticationType" [label="authenticationType"]
-    "definitions.authenticationType.enum[]" [label="enum[]"]
-    "definitions.authenticationType.type" [label="type"]
-    "definitions.ciaRequirementType" [label="ciaRequirementType"]
-    "definitions.ciaRequirementType.enum[]" [label="enum[]"]
-    "definitions.ciaRequirementType.type" [label="type"]
-    "definitions.ciaType" [label="ciaType"]
-    "definitions.ciaType.enum[]" [label="enum[]"]
-    "definitions.ciaType.type" [label="type"]
-    "definitions.collateralDamagePotentialType" [label="collateralDamagePotentialType"]
-    "definitions.collateralDamagePotentialType.enum[]" [label="enum[]"]
-    "definitions.collateralDamagePotentialType.type" [label="type"]
-    "definitions.exploitabilityType" [label="exploitabilityType"]
-    "definitions.exploitabilityType.enum[]" [label="enum[]"]
-    "definitions.exploitabilityType.type" [label="type"]
-    "definitions.remediationLevelType" [label="remediationLevelType"]
-    "definitions.remediationLevelType.enum[]" [label="enum[]"]
-    "definitions.remediationLevelType.type" [label="type"]
-    "definitions.reportConfidenceType" [label="reportConfidenceType"]
-    "definitions.reportConfidenceType.enum[]" [label="enum[]"]
-    "definitions.reportConfidenceType.type" [label="type"]
-    "definitions.scoreType" [label="scoreType"]
-    "definitions.scoreType.maximum" [label="maximum"]
-    "definitions.scoreType.minimum" [label="minimum"]
-    "definitions.scoreType.type" [label="type"]
-    "definitions.targetDistributionType" [label="targetDistributionType"]
-    "definitions.targetDistributionType.enum[]" [label="enum[]"]
-    "definitions.targetDistributionType.type" [label="type"]
-    "license[]"
-    "properties"
-    "properties.accessComplexity" [label="accessComplexity"]
-    "properties.accessComplexity.$ref" [label="$ref"]
-    "properties.accessVector" [label="accessVector"]
-    "properties.accessVector.$ref" [label="$ref"]
-    "properties.authentication" [label="authentication"]
-    "properties.authentication.$ref" [label="$ref"]
-    "properties.availabilityImpact" [label="availabilityImpact"]
-    "properties.availabilityImpact.$ref" [label="$ref"]
-    "properties.availabilityRequirement" [label="availabilityRequirement"]
-    "properties.availabilityRequirement.$ref" [label="$ref"]
-    "properties.baseScore" [label="baseScore"]
-    "properties.baseScore.$ref" [label="$ref"]
-    "properties.collateralDamagePotential" [label="collateralDamagePotential"]
-    "properties.collateralDamagePotential.$ref" [label="$ref"]
-    "properties.confidentialityImpact" [label="confidentialityImpact"]
-    "properties.confidentialityImpact.$ref" [label="$ref"]
-    "properties.confidentialityRequirement" [label="confidentialityRequirement"]
-    "properties.confidentialityRequirement.$ref" [label="$ref"]
-    "properties.environmentalScore" [label="environmentalScore"]
-    "properties.environmentalScore.$ref" [label="$ref"]
-    "properties.exploitability" [label="exploitability"]
-    "properties.exploitability.$ref" [label="$ref"]
-    "properties.integrityImpact" [label="integrityImpact"]
-    "properties.integrityImpact.$ref" [label="$ref"]
-    "properties.integrityRequirement" [label="integrityRequirement"]
-    "properties.integrityRequirement.$ref" [label="$ref"]
-    "properties.remediationLevel" [label="remediationLevel"]
-    "properties.remediationLevel.$ref" [label="$ref"]
-    "properties.reportConfidence" [label="reportConfidence"]
-    "properties.reportConfidence.$ref" [label="$ref"]
-    "properties.targetDistribution" [label="targetDistribution"]
-    "properties.targetDistribution.$ref" [label="$ref"]
-    "properties.temporalScore" [label="temporalScore"]
-    "properties.temporalScore.$ref" [label="$ref"]
-    "properties.vectorString" [label="vectorString"]
-    "properties.vectorString.pattern" [label="pattern"]
-    "properties.vectorString.type" [label="type"]
-    "properties.version" [label="version"]
-    "properties.version.description" [label="description"]
-    "properties.version.enum[]" [label="enum[]"]
-    "properties.version.type" [label="type"]
-    "required[]"
-    "title"
-    "type"
+    "372c634e-f49e-4452-af5c-027a2c256d56" [label="."];
+    "$schema" [label="$schema"];
+    "definitions" [label="definitions"];
+    "definitions.accessComplexityType" [label="accessComplexityType"];
+    "definitions.accessComplexityType.enum" [label="enum"];
+    "definitions.accessComplexityType.type" [label="type"];
+    "definitions.accessVectorType" [label="accessVectorType"];
+    "definitions.accessVectorType.enum" [label="enum"];
+    "definitions.accessVectorType.type" [label="type"];
+    "definitions.authenticationType" [label="authenticationType"];
+    "definitions.authenticationType.enum" [label="enum"];
+    "definitions.authenticationType.type" [label="type"];
+    "definitions.ciaRequirementType" [label="ciaRequirementType"];
+    "definitions.ciaRequirementType.enum" [label="enum"];
+    "definitions.ciaRequirementType.type" [label="type"];
+    "definitions.ciaType" [label="ciaType"];
+    "definitions.ciaType.enum" [label="enum"];
+    "definitions.ciaType.type" [label="type"];
+    "definitions.collateralDamagePotentialType" [label="collateralDamagePotentialType"];
+    "definitions.collateralDamagePotentialType.enum" [label="enum"];
+    "definitions.collateralDamagePotentialType.type" [label="type"];
+    "definitions.exploitabilityType" [label="exploitabilityType"];
+    "definitions.exploitabilityType.enum" [label="enum"];
+    "definitions.exploitabilityType.type" [label="type"];
+    "definitions.remediationLevelType" [label="remediationLevelType"];
+    "definitions.remediationLevelType.enum" [label="enum"];
+    "definitions.remediationLevelType.type" [label="type"];
+    "definitions.reportConfidenceType" [label="reportConfidenceType"];
+    "definitions.reportConfidenceType.enum" [label="enum"];
+    "definitions.reportConfidenceType.type" [label="type"];
+    "definitions.scoreType" [label="scoreType"];
+    "definitions.scoreType.maximum" [label="maximum"];
+    "definitions.scoreType.minimum" [label="minimum"];
+    "definitions.scoreType.type" [label="type"];
+    "definitions.targetDistributionType" [label="targetDistributionType"];
+    "definitions.targetDistributionType.enum" [label="enum"];
+    "definitions.targetDistributionType.type" [label="type"];
+    "license" [label="license"];
+    "properties" [label="properties"];
+    "properties.accessComplexity" [label="accessComplexity"];
+    "properties.accessComplexity.$ref" [label="$ref"];
+    "properties.accessVector" [label="accessVector"];
+    "properties.accessVector.$ref" [label="$ref"];
+    "properties.authentication" [label="authentication"];
+    "properties.authentication.$ref" [label="$ref"];
+    "properties.availabilityImpact" [label="availabilityImpact"];
+    "properties.availabilityImpact.$ref" [label="$ref"];
+    "properties.availabilityRequirement" [label="availabilityRequirement"];
+    "properties.availabilityRequirement.$ref" [label="$ref"];
+    "properties.baseScore" [label="baseScore"];
+    "properties.baseScore.$ref" [label="$ref"];
+    "properties.collateralDamagePotential" [label="collateralDamagePotential"];
+    "properties.collateralDamagePotential.$ref" [label="$ref"];
+    "properties.confidentialityImpact" [label="confidentialityImpact"];
+    "properties.confidentialityImpact.$ref" [label="$ref"];
+    "properties.confidentialityRequirement" [label="confidentialityRequirement"];
+    "properties.confidentialityRequirement.$ref" [label="$ref"];
+    "properties.environmentalScore" [label="environmentalScore"];
+    "properties.environmentalScore.$ref" [label="$ref"];
+    "properties.exploitability" [label="exploitability"];
+    "properties.exploitability.$ref" [label="$ref"];
+    "properties.integrityImpact" [label="integrityImpact"];
+    "properties.integrityImpact.$ref" [label="$ref"];
+    "properties.integrityRequirement" [label="integrityRequirement"];
+    "properties.integrityRequirement.$ref" [label="$ref"];
+    "properties.remediationLevel" [label="remediationLevel"];
+    "properties.remediationLevel.$ref" [label="$ref"];
+    "properties.reportConfidence" [label="reportConfidence"];
+    "properties.reportConfidence.$ref" [label="$ref"];
+    "properties.targetDistribution" [label="targetDistribution"];
+    "properties.targetDistribution.$ref" [label="$ref"];
+    "properties.temporalScore" [label="temporalScore"];
+    "properties.temporalScore.$ref" [label="$ref"];
+    "properties.vectorString" [label="vectorString"];
+    "properties.vectorString.pattern" [label="pattern"];
+    "properties.vectorString.type" [label="type"];
+    "properties.version" [label="version"];
+    "properties.version.description" [label="description"];
+    "properties.version.enum" [label="enum"];
+    "properties.version.type" [label="type"];
+    "required" [label="required"];
+    "title" [label="title"];
+    "type" [label="type"];
 
-    "." -> "$schema"
-    "." -> "definitions"
-    "." -> "license[]"
-    "." -> "properties"
-    "." -> "required[]"
-    "." -> "title"
-    "." -> "type"
-    "definitions" -> "definitions.accessComplexityType"
-    "definitions" -> "definitions.accessVectorType"
-    "definitions" -> "definitions.authenticationType"
-    "definitions" -> "definitions.ciaRequirementType"
-    "definitions" -> "definitions.ciaType"
-    "definitions" -> "definitions.collateralDamagePotentialType"
-    "definitions" -> "definitions.exploitabilityType"
-    "definitions" -> "definitions.remediationLevelType"
-    "definitions" -> "definitions.reportConfidenceType"
-    "definitions" -> "definitions.scoreType"
-    "definitions" -> "definitions.targetDistributionType"
-    "definitions.accessComplexityType" -> "definitions.accessComplexityType.enum[]"
-    "definitions.accessComplexityType" -> "definitions.accessComplexityType.type"
-    "definitions.accessVectorType" -> "definitions.accessVectorType.enum[]"
-    "definitions.accessVectorType" -> "definitions.accessVectorType.type"
-    "definitions.authenticationType" -> "definitions.authenticationType.enum[]"
-    "definitions.authenticationType" -> "definitions.authenticationType.type"
-    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.enum[]"
-    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.type"
-    "definitions.ciaType" -> "definitions.ciaType.enum[]"
-    "definitions.ciaType" -> "definitions.ciaType.type"
-    "definitions.collateralDamagePotentialType" -> "definitions.collateralDamagePotentialType.enum[]"
-    "definitions.collateralDamagePotentialType" -> "definitions.collateralDamagePotentialType.type"
-    "definitions.exploitabilityType" -> "definitions.exploitabilityType.enum[]"
-    "definitions.exploitabilityType" -> "definitions.exploitabilityType.type"
-    "definitions.remediationLevelType" -> "definitions.remediationLevelType.enum[]"
-    "definitions.remediationLevelType" -> "definitions.remediationLevelType.type"
-    "definitions.reportConfidenceType" -> "definitions.reportConfidenceType.enum[]"
-    "definitions.reportConfidenceType" -> "definitions.reportConfidenceType.type"
-    "definitions.scoreType" -> "definitions.scoreType.maximum"
-    "definitions.scoreType" -> "definitions.scoreType.minimum"
-    "definitions.scoreType" -> "definitions.scoreType.type"
-    "definitions.targetDistributionType" -> "definitions.targetDistributionType.enum[]"
-    "definitions.targetDistributionType" -> "definitions.targetDistributionType.type"
-    "properties" -> "properties.accessComplexity"
-    "properties" -> "properties.accessVector"
-    "properties" -> "properties.authentication"
-    "properties" -> "properties.availabilityImpact"
-    "properties" -> "properties.availabilityRequirement"
-    "properties" -> "properties.baseScore"
-    "properties" -> "properties.collateralDamagePotential"
-    "properties" -> "properties.confidentialityImpact"
-    "properties" -> "properties.confidentialityRequirement"
-    "properties" -> "properties.environmentalScore"
-    "properties" -> "properties.exploitability"
-    "properties" -> "properties.integrityImpact"
-    "properties" -> "properties.integrityRequirement"
-    "properties" -> "properties.remediationLevel"
-    "properties" -> "properties.reportConfidence"
-    "properties" -> "properties.targetDistribution"
-    "properties" -> "properties.temporalScore"
-    "properties" -> "properties.vectorString"
-    "properties" -> "properties.version"
-    "properties.accessComplexity" -> "properties.accessComplexity.$ref"
-    "properties.accessVector" -> "properties.accessVector.$ref"
-    "properties.authentication" -> "properties.authentication.$ref"
-    "properties.availabilityImpact" -> "properties.availabilityImpact.$ref"
-    "properties.availabilityRequirement" -> "properties.availabilityRequirement.$ref"
-    "properties.baseScore" -> "properties.baseScore.$ref"
-    "properties.collateralDamagePotential" -> "properties.collateralDamagePotential.$ref"
-    "properties.confidentialityImpact" -> "properties.confidentialityImpact.$ref"
-    "properties.confidentialityRequirement" -> "properties.confidentialityRequirement.$ref"
-    "properties.environmentalScore" -> "properties.environmentalScore.$ref"
-    "properties.exploitability" -> "properties.exploitability.$ref"
-    "properties.integrityImpact" -> "properties.integrityImpact.$ref"
-    "properties.integrityRequirement" -> "properties.integrityRequirement.$ref"
-    "properties.remediationLevel" -> "properties.remediationLevel.$ref"
-    "properties.reportConfidence" -> "properties.reportConfidence.$ref"
-    "properties.targetDistribution" -> "properties.targetDistribution.$ref"
-    "properties.temporalScore" -> "properties.temporalScore.$ref"
-    "properties.vectorString" -> "properties.vectorString.pattern"
-    "properties.vectorString" -> "properties.vectorString.type"
-    "properties.version" -> "properties.version.description"
-    "properties.version" -> "properties.version.enum[]"
-    "properties.version" -> "properties.version.type"
+    "372c634e-f49e-4452-af5c-027a2c256d56" -> "$schema";
+    "372c634e-f49e-4452-af5c-027a2c256d56" -> "definitions";
+    "372c634e-f49e-4452-af5c-027a2c256d56" -> "license";
+    "372c634e-f49e-4452-af5c-027a2c256d56" -> "properties";
+    "372c634e-f49e-4452-af5c-027a2c256d56" -> "required";
+    "372c634e-f49e-4452-af5c-027a2c256d56" -> "title";
+    "372c634e-f49e-4452-af5c-027a2c256d56" -> "type";
+
+    "definitions" -> "definitions.accessComplexityType";
+    "definitions" -> "definitions.accessVectorType";
+    "definitions" -> "definitions.authenticationType";
+    "definitions" -> "definitions.ciaRequirementType";
+    "definitions" -> "definitions.ciaType";
+    "definitions" -> "definitions.collateralDamagePotentialType";
+    "definitions" -> "definitions.exploitabilityType";
+    "definitions" -> "definitions.remediationLevelType";
+    "definitions" -> "definitions.reportConfidenceType";
+    "definitions" -> "definitions.scoreType";
+    "definitions" -> "definitions.targetDistributionType";
+    "definitions.accessComplexityType" -> "definitions.accessComplexityType.enum";
+    "definitions.accessComplexityType" -> "definitions.accessComplexityType.type";
+    "definitions.accessVectorType" -> "definitions.accessVectorType.enum";
+    "definitions.accessVectorType" -> "definitions.accessVectorType.type";
+    "definitions.authenticationType" -> "definitions.authenticationType.enum";
+    "definitions.authenticationType" -> "definitions.authenticationType.type";
+    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.enum";
+    "definitions.ciaRequirementType" -> "definitions.ciaRequirementType.type";
+    "definitions.ciaType" -> "definitions.ciaType.enum";
+    "definitions.ciaType" -> "definitions.ciaType.type";
+    "definitions.collateralDamagePotentialType" -> "definitions.collateralDamagePotentialType.enum";
+    "definitions.collateralDamagePotentialType" -> "definitions.collateralDamagePotentialType.type";
+    "definitions.exploitabilityType" -> "definitions.exploitabilityType.enum";
+    "definitions.exploitabilityType" -> "definitions.exploitabilityType.type";
+    "definitions.remediationLevelType" -> "definitions.remediationLevelType.enum";
+    "definitions.remediationLevelType" -> "definitions.remediationLevelType.type";
+    "definitions.reportConfidenceType" -> "definitions.reportConfidenceType.enum";
+    "definitions.reportConfidenceType" -> "definitions.reportConfidenceType.type";
+    "definitions.scoreType" -> "definitions.scoreType.maximum";
+    "definitions.scoreType" -> "definitions.scoreType.minimum";
+    "definitions.scoreType" -> "definitions.scoreType.type";
+    "definitions.targetDistributionType" -> "definitions.targetDistributionType.enum";
+    "definitions.targetDistributionType" -> "definitions.targetDistributionType.type";
+    "properties" -> "properties.accessComplexity";
+    "properties" -> "properties.accessVector";
+    "properties" -> "properties.authentication";
+    "properties" -> "properties.availabilityImpact";
+    "properties" -> "properties.availabilityRequirement";
+    "properties" -> "properties.baseScore";
+    "properties" -> "properties.collateralDamagePotential";
+    "properties" -> "properties.confidentialityImpact";
+    "properties" -> "properties.confidentialityRequirement";
+    "properties" -> "properties.environmentalScore";
+    "properties" -> "properties.exploitability";
+    "properties" -> "properties.integrityImpact";
+    "properties" -> "properties.integrityRequirement";
+    "properties" -> "properties.remediationLevel";
+    "properties" -> "properties.reportConfidence";
+    "properties" -> "properties.targetDistribution";
+    "properties" -> "properties.temporalScore";
+    "properties" -> "properties.vectorString";
+    "properties" -> "properties.version";
+    "properties.accessComplexity" -> "properties.accessComplexity.$ref";
+    "properties.accessVector" -> "properties.accessVector.$ref";
+    "properties.authentication" -> "properties.authentication.$ref";
+    "properties.availabilityImpact" -> "properties.availabilityImpact.$ref";
+    "properties.availabilityRequirement" -> "properties.availabilityRequirement.$ref";
+    "properties.baseScore" -> "properties.baseScore.$ref";
+    "properties.collateralDamagePotential" -> "properties.collateralDamagePotential.$ref";
+    "properties.confidentialityImpact" -> "properties.confidentialityImpact.$ref";
+    "properties.confidentialityRequirement" -> "properties.confidentialityRequirement.$ref";
+    "properties.environmentalScore" -> "properties.environmentalScore.$ref";
+    "properties.exploitability" -> "properties.exploitability.$ref";
+    "properties.integrityImpact" -> "properties.integrityImpact.$ref";
+    "properties.integrityRequirement" -> "properties.integrityRequirement.$ref";
+    "properties.remediationLevel" -> "properties.remediationLevel.$ref";
+    "properties.reportConfidence" -> "properties.reportConfidence.$ref";
+    "properties.targetDistribution" -> "properties.targetDistribution.$ref";
+    "properties.temporalScore" -> "properties.temporalScore.$ref";
+    "properties.vectorString" -> "properties.vectorString.pattern";
+    "properties.vectorString" -> "properties.vectorString.type";
+    "properties.version" -> "properties.version.description";
+    "properties.version" -> "properties.version.enum";
+    "properties.version" -> "properties.version.type";
 }

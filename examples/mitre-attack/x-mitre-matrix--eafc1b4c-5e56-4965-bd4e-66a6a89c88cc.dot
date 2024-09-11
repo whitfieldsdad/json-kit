@@ -1,0 +1,41 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "description" [label="description"];
+    "external_references[]" [label="external_references[]"];
+    "external_references[].external_id" [label="external_id"];
+    "external_references[].source_name" [label="source_name"];
+    "external_references[].url" [label="url"];
+    "id" [label="id"];
+    "modified" [label="modified"];
+    "name" [label="name"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "tactic_refs" [label="tactic_refs"];
+    "type" [label="type"];
+    "x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"];
+    "x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"];
+    "x_mitre_version" [label="x_mitre_version"];
+
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "created";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "created_by_ref";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "description";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "external_references[]";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "id";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "modified";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "name";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "object_marking_refs";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "tactic_refs";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "type";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "x_mitre_attack_spec_version";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "x_mitre_modified_by_ref";
+    "adb1a537-4e8b-4d47-b6cc-88ac49aab5d2" -> "x_mitre_version";
+
+    "external_references[]" -> "external_references[].external_id";
+    "external_references[]" -> "external_references[].source_name";
+    "external_references[]" -> "external_references[].url";
+}

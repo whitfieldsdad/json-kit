@@ -1,4 +1,4 @@
-default: update lock requirements.txt
+default: update lock requirements.txt	
 
 update:
 	poetry update
@@ -12,4 +12,7 @@ requirements.txt:
 docs:
 	make -C docs
 
-.PHONY: requirements.txt docs
+examples:
+	make -C examples
+
+.PHONY: requirements.txt docs examples

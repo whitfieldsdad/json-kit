@@ -1,0 +1,31 @@
+digraph G {
+    node [shape=box];
+    edge [dir=forward];
+    rankdir=LR;
+
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" [label="."];
+    "created" [label="created"];
+    "created_by_ref" [label="created_by_ref"];
+    "id" [label="id"];
+    "modified" [label="modified"];
+    "object_marking_refs" [label="object_marking_refs"];
+    "relationship_type" [label="relationship_type"];
+    "source_ref" [label="source_ref"];
+    "spec_version" [label="spec_version"];
+    "target_ref" [label="target_ref"];
+    "type" [label="type"];
+    "x_capec_version" [label="x_capec_version"];
+
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "created";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "created_by_ref";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "id";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "modified";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "object_marking_refs";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "relationship_type";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "source_ref";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "spec_version";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "target_ref";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "type";
+    "8053bd4b-f36b-497a-bd18-16b8f0ae25ee" -> "x_capec_version";
+
+}
