@@ -30,5 +30,4 @@ digraph G {
     jsonl -> dot [color="lightgray"; style="dashed"];
     jsonl -> image [color="lightgray"; style="dashed"];
     json_schema -> image [color="lightgray"; style="dashed"];
-
 }

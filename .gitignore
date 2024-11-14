@@ -8,3 +8,6 @@ json-kit.spec
 
 # macOS
 .DS_Store
+
+# General
+test*

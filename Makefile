@@ -16,7 +16,10 @@ release:
 	poetry build
 	poetry publish
 
-docs:
+docs: examples
 	make -C docs
 
-.PHONY: requirements.txt docs
+examples:
+	make -C examples
+
+.PHONY: requirements.txt docs examples

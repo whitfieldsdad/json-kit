@@ -1,0 +1,33 @@
+digraph G {
+    node [shape=box, style=rounded]
+    layout=dot
+    rankdir=LR
+    splines=true
+    ranksep=0.5
+    nodesep=0.1
+
+    "id"
+    "."
+    "objects[]"
+    "objects[].created" [label="created"]
+    "objects[].id" [label="id"]
+    "objects[].identity_class" [label="identity_class"]
+    "objects[].modified" [label="modified"]
+    "objects[].name" [label="name"]
+    "objects[].object_marking_refs[]" [label="object_marking_refs[]"]
+    "objects[].type" [label="type"]
+    "spec_version"
+    "type"
+
+    "." -> "id"
+    "." -> "objects[]"
+    "." -> "spec_version"
+    "." -> "type"
+    "objects[]" -> "objects[].created"
+    "objects[]" -> "objects[].id"
+    "objects[]" -> "objects[].identity_class"
+    "objects[]" -> "objects[].modified"
+    "objects[]" -> "objects[].name"
+    "objects[]" -> "objects[].object_marking_refs[]"
+    "objects[]" -> "objects[].type"
+}

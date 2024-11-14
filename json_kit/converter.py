@@ -1,3 +1,7 @@
+import fnmatch
+import functools
+import glob
+import gzip
 import itertools
 import os
 import subprocess
@@ -27,7 +31,7 @@ def get_json_schema_from_dicts(docs: Iterable[Any]) -> dict:
 def get_json_schema_from_json_files(paths: Iterable[str]) -> dict:
     schemas = []
     for path in paths:
-        docs = read_docs_from_json_file(path)
+        docs = read_records_from_json_file(path)
         schema = get_json_schema_from_dicts(docs)
         if schema not in schemas:
             schemas.append(schema)
@@ -36,18 +40,33 @@ def get_json_schema_from_json_files(paths: Iterable[str]) -> dict:
 
 def read_docs_from_json_files(paths: Iterable[str]) -> Iterator[Any]:
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        yield from itertools.chain.from_iterable(executor.map(read_docs_from_json_file, paths))
+        yield from itertools.chain.from_iterable(executor.map(read_records_from_json_file, paths))
 
 
-def read_docs_from_json_file(path: str) -> Iterator[Any]:
-    if path.endswith('.jsonl'):
-        with open(path) as file:
-            lines = filter(bool, map(lambda line: line.strip(), file))
-            yield from map(json.loads, lines)
+def read_records_from_json_file(path: str) -> Iterator[Any]:
+    if path.endswith('.gz'):
+        f = functools.partial(gzip.open)
     else:
-        with open(path) as file:
-            doc = json.load(file)
-        yield doc
+        f = open
+    
+    with f(path) as file:
+        if path.endswith(('.json', '.json.gz')):
+            data = json.load(fp=file)
+            if isinstance(data, dict):
+                yield data
+            elif isinstance(data, list):
+                yield from data
+            else:
+                raise ValueError(f'Cannot unpack records from JSON file: {path}')
+
+        elif path.endswith(('.jsonl', '.jsonl.gz')):
+            for line in file:
+                if line:
+                    yield json.loads(line)
+        else:
+            raise ValueError(f'Unsupported file extension: {path}')
+    
+    
 
 
 def merge_json_schemas(schemas: Iterable[dict]) -> dict:
@@ -187,3 +206,69 @@ def get_keys_from_json_schema(schema: dict) -> Iterator[str]:
         yield from keys
 
     return sorted(set(generator(schema)))
+
+
+def find(
+        roots: Union[str, Iterable[str]], 
+        files_only: bool = True,
+        filename_patterns: Optional[Iterable[str]] = None) -> Iterator[str]:
+
+    roots = [roots] if isinstance(roots, str) else roots
+    if len(roots) > 1:
+        roots = get_non_overlapping_paths(roots)
+    
+    for root in roots:
+        for path in _find(root):
+            if files_only and os.path.isdir(path):
+                continue
+                
+            if filename_patterns:
+                found = {
+                    path,
+                    os.path.basename(path),
+                }
+                if not any(fnmatch.fnmatch(f, pattern) for f in found for pattern in filename_patterns):
+                    continue
+            
+            yield path
+
+
+def _find(root: str) -> Iterator[str]:
+    root = get_real_path(root)
+    if "*" in root:
+        paths = glob.glob(root)
+    else:
+        paths = [root]
+
+    for path in paths:
+        yield path
+        if os.path.isdir(path):
+            for directory, _, filenames in os.walk(path):
+                for filename in filenames:
+                    yield os.path.join(directory, filename)
+
+
+def get_non_overlapping_paths(paths: Iterable[str]) -> Set[str]:
+    paths = sorted(set(paths))
+    non_overlapping_paths = set()
+    for path in paths:
+        if not any(overlaps(path, other) for other in non_overlapping_paths):
+            non_overlapping_paths.add(path)
+    return non_overlapping_paths
+
+
+def overlaps(a: str, b: str) -> bool:
+    a = os.path.join(get_real_path(a), '')
+    b = os.path.join(get_real_path(b), '')
+    return a.startswith(b) or b.startswith(a)
+
+
+
+def get_real_path(path: str) -> str:
+    for f in [
+        os.path.expanduser,
+        os.path.expandvars,
+        os.path.realpath,
+    ]:
+        path = f(path)
+    return path

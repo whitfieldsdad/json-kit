@@ -1,0 +1,51 @@
+digraph G {
+    node [shape=box, style=rounded]
+    layout=dot
+    rankdir=LR
+    splines=true
+    ranksep=0.5
+    nodesep=0.1
+
+    "id"
+    "."
+    "objects[]"
+    "objects[].created" [label="created"]
+    "objects[].created_by_ref" [label="created_by_ref"]
+    "objects[].description" [label="description"]
+    "objects[].external_references[]" [label="external_references[]"]
+    "objects[].external_references[].external_id" [label="external_id"]
+    "objects[].external_references[].source_name" [label="source_name"]
+    "objects[].external_references[].url" [label="url"]
+    "objects[].id" [label="id"]
+    "objects[].modified" [label="modified"]
+    "objects[].name" [label="name"]
+    "objects[].object_marking_refs[]" [label="object_marking_refs[]"]
+    "objects[].tactic_refs[]" [label="tactic_refs[]"]
+    "objects[].type" [label="type"]
+    "objects[].x_mitre_attack_spec_version" [label="x_mitre_attack_spec_version"]
+    "objects[].x_mitre_modified_by_ref" [label="x_mitre_modified_by_ref"]
+    "objects[].x_mitre_version" [label="x_mitre_version"]
+    "spec_version"
+    "type"
+
+    "." -> "id"
+    "." -> "objects[]"
+    "." -> "spec_version"
+    "." -> "type"
+    "objects[]" -> "objects[].created"
+    "objects[]" -> "objects[].created_by_ref"
+    "objects[]" -> "objects[].description"
+    "objects[]" -> "objects[].external_references[]"
+    "objects[]" -> "objects[].id"
+    "objects[]" -> "objects[].modified"
+    "objects[]" -> "objects[].name"
+    "objects[]" -> "objects[].object_marking_refs[]"
+    "objects[]" -> "objects[].tactic_refs[]"
+    "objects[]" -> "objects[].type"
+    "objects[]" -> "objects[].x_mitre_attack_spec_version"
+    "objects[]" -> "objects[].x_mitre_modified_by_ref"
+    "objects[]" -> "objects[].x_mitre_version"
+    "objects[].external_references[]" -> "objects[].external_references[].external_id"
+    "objects[].external_references[]" -> "objects[].external_references[].source_name"
+    "objects[].external_references[]" -> "objects[].external_references[].url"
+}
